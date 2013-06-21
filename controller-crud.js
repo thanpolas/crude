@@ -30,12 +30,20 @@ var CrudCtrl = module.exports = function(Model, baseUrl){
   this.createView = [this._createView.bind(this)];
   this.readList = [
     paginationMidd.paginate(Model),
-    this._read.bind(this),
+    this._readList.bind(this),
   ];
   this.readOne = [this._readOne.bind(this)];
   this.update = [this._update.bind(this)];
   this.updateView = [this._updateView.bind(this)];
   this.delete = [this._delete.bind(this)];
+
+  // set default view template locations
+  this.view = {
+    add: __dirname + '/views/add.jade',
+    view: __dirname + '/views/view.jade',
+    list: __dirname + '/views/list.jade',
+    edit: __dirname + '/views/edit.jade',
+  };
 
 };
 util.inherits(CrudCtrl, Controller);
@@ -48,10 +56,8 @@ util.inherits(CrudCtrl, Controller);
  * @protected
  */
 CrudCtrl.prototype._create = function(req, res) {
-  var cust = new this.Model(req.body);
-  cust.creatorId = req.user._id;
-
-  cust.save(this._createCallback.bind(this, req, res));
+  var item = new this.Model(req.body);
+  item.save(this._createCallback.bind(this, req, res));
 };
 
 /**
@@ -80,8 +86,8 @@ CrudCtrl.prototype._createCallback = function(req, res, err, optDoc){
  * @param {Object} res The response Object.
  * @protected
  */
-CrudCtrl.prototype._read = function(req, res){
-  res.render('admin/customer/list');
+CrudCtrl.prototype._readList = function(req, res){
+  res.render(this.view.list);
 };
 
 /**
@@ -96,10 +102,10 @@ CrudCtrl.prototype._readOne = function(req, res){
   this.Model.findOne({id: req.params.id}, function(err, doc){
     if (err) {
       this.addError(res, err);
-      return res.render('admin/customer/view');
+      return res.render(this.view.view);
     }
 
-    res.render('admin/customer/view', {cust: doc});
+    res.render(this.view.view, {item: doc});
   });
 };
 
@@ -115,7 +121,7 @@ CrudCtrl.prototype._update = function(req, res) {
   this.Model.findById(req.params.id, function(err, doc){
     if (err) {
       this.addFlashError(req, err);
-      // log.fine('_update() :: Fetch customer fail:', err.type, err.message);
+      // log.fine('_update() :: Fetch item fail:', err.type, err.message);
       return res.redirect(req.header('Referer'));
     }
     this.Model.update({ id: req.params.id },
@@ -153,11 +159,11 @@ CrudCtrl.prototype._updateCallback = function(req, res, doc, err, optUpdateCount
   if (doc._localUrl !== req.url) {
     // log.fine('_updateCallback() :: Changed url. Old:', req.url, 'New:', doc);
     this.addFlashSuccess();
-    return res.redirect('/customer/' + doc._localUrl);
+    return res.redirect(this.baseUrl + doc._localUrl);
   }
 
   this.addSuccess(res);
-  res.render('admin/customer/view', {cust: doc});
+  res.render(this.view.view, {item: doc});
 };
 
 /**
@@ -172,11 +178,11 @@ CrudCtrl.prototype._updateView = function(req, res) {
   this.Model.findOne({_localUrl: req.params.localUrl}, function(err, data){
     if (err) {
       this.addError(res, err);
-      return res.render('admin/customer/edit');
+      return res.render(this.view.edit);
     }
 
     this.checkFlashError(req, res);
-    res.render('admin/customer/edit', {cust: data});
+    res.render(this.view.edit, {item: data});
   }.bind(this));
 };
 
