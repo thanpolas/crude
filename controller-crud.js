@@ -30,7 +30,6 @@ var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
     urlField: '_localUrl',
     nameField: 'name',
     idField: 'id',
-    jadeLayout: null,
     // A jade view
     layoutView: null,
   };
