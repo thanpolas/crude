@@ -207,5 +207,7 @@ CrudCtrl.prototype._delete = function(req, res){
  * @protected
  */
 CrudCtrl.prototype._createView = function(req, res){
-  res.send('NOT YET');
+  this.checkFlashError(req);
+  this.checkFlashSuccess(req);
+  res.render(this.view.add);
 };
