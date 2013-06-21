@@ -6,7 +6,7 @@ var util = require('util');
 
 var Controller = require('./controller');
 
-var PaginationMidd = require('../../middleware/pagination.midd');
+var PaginationMidd = require('./pagination.midd');
 
 /**
  * The CRUD Controller
@@ -106,7 +106,7 @@ CrudCtrl.prototype._readOne = function(req, res){
     }
 
     res.render(this.view.view, {item: doc});
-  });
+  }.bind(this));
 };
 
 /**
