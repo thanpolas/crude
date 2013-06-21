@@ -112,8 +112,6 @@ CrudCtrl.prototype._readOne = function(req, res){
   var query = new Object(null);
   query[this.opts.urlField] = req.params.id;
 
-  console.log('req.params.id', query);
-
   this.Model.findOne(query, function(err, doc){
     if (err) {
       this.addError(res, err);

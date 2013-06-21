@@ -5,6 +5,7 @@
 // @param {boolean=} success
 // @param {Object=} successObj
 
+include helpers.jade
 
 //
 // A single item.
@@ -17,6 +18,14 @@ mixin viewItem(item, schema,opts)
   h4
     a(href="/customer/#{item[opts.urlField]}", title="#{item[opts.nameField]}")
       | #{item[opts.nameField]}
+
+
+  table.table.table-bordered
+    -for schemaItem in schema
+      tr
+        th #{getName(schemaItem.path)}
+        td #{getValue(item, schemaItem)}
+
   .row-fluid
     .span12
       //- a(href="/customer/#{cust._localUrl}/edit").btn.btn-small.btn-primary Edit
