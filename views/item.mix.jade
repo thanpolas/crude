@@ -1,0 +1,22 @@
+// Item mixins
+// @param {boolean=} error If an error occured.
+// @param {string=} errorMsg
+// @param {Object|Error=} errorObj
+// @param {boolean=} success
+// @param {Object=} successObj
+
+
+//
+// A single item.
+//
+// @param {mongoose.Document} item
+// @param {mongoose.Model.schema.path} schema
+// @param {Object=} opts Options for rendering.
+//
+mixin viewItem(item, schema,opts)
+  h4
+    a(href="/customer/#{item[opts.urlField]}", title="#{item[opts.nameField]}")
+      | #{item[opts.nameField]}
+  .row-fluid
+    .span12
+      //- a(href="/customer/#{cust._localUrl}/edit").btn.btn-small.btn-primary Edit

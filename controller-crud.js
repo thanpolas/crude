@@ -4,6 +4,8 @@
 
 var util = require('util');
 
+var __ = require('lodash');
+
 var Controller = require('./controller');
 
 var PaginationMidd = require('./pagination.midd');
@@ -13,14 +15,22 @@ var PaginationMidd = require('./pagination.midd');
  *
  * @param {mongoose.Model} Model The mongoose model.
  * @param {string} baseUrl The base url.
+ * @param {Object=} optOpts Optionally define options.
  * @contructor
  * @extends {crude.Controller}
  */
-var CrudCtrl = module.exports = function(Model, baseUrl){
+var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
   Controller.apply(this, arguments);
 
   this.Model = Model;
   this.baseUrl = baseUrl;
+  var defaultOpts = {
+    baseUrl: baseUrl,
+    urlField: '_localUrl',
+    nameField: 'name',
+    idField: 'id',
+  };
+  this.opts = __.extend(defaultOpts, optOpts || {});
 
   // prep pagination
   var paginationMidd = new PaginationMidd();
@@ -76,7 +86,7 @@ CrudCtrl.prototype._createCallback = function(req, res, err, optDoc){
   }
 
   this.addFlashSuccess(req, optDoc);
-  res.redirect(this.baseUrl + '/' + optDoc.id);
+  res.redirect(this.baseUrl + '/' + optDoc[this.opts.idField]);
 };
 
 /**
@@ -99,13 +109,27 @@ CrudCtrl.prototype._readList = function(req, res){
  */
 CrudCtrl.prototype._readOne = function(req, res){
   // attempt to fetch the record...
-  this.Model.findOne({id: req.params.id}, function(err, doc){
+  var query = new Object(null);
+  query[this.opts.urlField] = req.params.id;
+
+  console.log('req.params.id', query);
+
+  this.Model.findOne(query, function(err, doc){
     if (err) {
       this.addError(res, err);
       return res.render(this.view.view);
     }
 
-    res.render(this.view.view, {item: doc});
+    if (!doc) {
+      var error = new Error('No results');
+      this.addError(res, error);
+      return res.render(this.view.view);
+    }
+    res.render(this.view.view, {
+      item: doc,
+      schema: this.Model.schema.paths,
+      opts: this.opts,
+    });
   }.bind(this));
 };
 
@@ -124,8 +148,11 @@ CrudCtrl.prototype._update = function(req, res) {
       // log.fine('_update() :: Fetch item fail:', err.type, err.message);
       return res.redirect(req.header('Referer'));
     }
-    this.Model.update({ id: req.params.id },
-      { $set: req.body }, this._updateCallback.bind(this, req, res, doc));
+
+    var query = new Object(null);
+    query[this.opts.idField] = req.params.id;
+    this.Model.update(query, { $set: req.body },
+      this._updateCallback.bind(this, req, res, doc));
   }.bind(this));
 };
 
@@ -175,7 +202,9 @@ CrudCtrl.prototype._updateCallback = function(req, res, doc, err, optUpdateCount
  */
 CrudCtrl.prototype._updateView = function(req, res) {
   // attempt to fetch the record...
-  this.Model.findOne({_localUrl: req.params.localUrl}, function(err, data){
+  var query = new Object(null);
+  query[this.opts.urlField] = req.params.localUrl;
+  this.Model.findOne(query, function(err, data){
     if (err) {
       this.addError(res, err);
       return res.render(this.view.edit);
