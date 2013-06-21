@@ -12,7 +12,16 @@ npm install crude --save
 
 ## Documentation
 
+### Stack
 
+This package assumes you have the following stack:
+
+* Mongoose
+* Express
+* connect-flash
+* Jade
+
+It's a main goal to expand the stack and make Crude more flexible.
 
 
 ## Authors
@@ -20,7 +29,7 @@ npm install crude --save
 * [@thanpolas][thanpolas]
 
 ## Release History
-- **v0.0.1**, *11 Apr 2013*
+- **v0.0.1**, *21 Jun 2013*
   - Big Bang
 
 ## License
