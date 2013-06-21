@@ -29,6 +29,7 @@ var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
     urlField: '_localUrl',
     nameField: 'name',
     idField: 'id',
+    jadeLayout: null,
   };
   this.opts = __.extend(defaultOpts, optOpts || {});
 
@@ -123,11 +124,16 @@ CrudCtrl.prototype._readOne = function(req, res){
       this.addError(res, error);
       return res.render(this.view.view);
     }
-    res.render(this.view.view, {
+    var viewVars = {
       item: doc,
       schema: this.Model.schema.paths,
       opts: this.opts,
-    });
+    };
+
+    if (this.opts.jadeLayout) {
+      viewVars.layout = this.opts.jadeLayout;
+    }
+    res.render(this.view.view, viewVars);
   }.bind(this));
 };
 
