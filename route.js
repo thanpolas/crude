@@ -14,9 +14,15 @@ var route = module.exports = {};
  * @param {express} app The express instance.
  * @param {mongoose.Model} Model The mongoose model.
  * @param {string} baseUrl The base URL to attach the routes.
+ * @param {crude.ControllerCrud=} optsCtrl an instance of crud controller.
  */
-route.add = function(app, Model, baseUrl) {
-  var crudCtrl = new CrudCtrl(Model, baseUrl);
+route.add = function(app, Model, baseUrl, optCtrl) {
+  var crudCtrl;
+  if (optCtrl instanceof CrudCtrl) {
+    crudCtrl = optCtrl;
+  } else {
+    crudCtrl = new CrudCtrl(Model, baseUrl);
+  }
 
   app.get(baseUrl, crudCtrl.readList);
   app.post(baseUrl, crudCtrl.create);
