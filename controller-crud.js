@@ -1,10 +1,11 @@
 /**
  * @fileOverview CRUD controller.
  */
-
+var fs = require('fs');
 var util = require('util');
 
 var __ = require('lodash');
+var jade = require('jade');
 
 var Controller = require('./controller');
 
@@ -30,6 +31,8 @@ var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
     nameField: 'name',
     idField: 'id',
     jadeLayout: null,
+    // A jade view
+    layoutView: null,
   };
   this.opts = __.extend(defaultOpts, optOpts || {});
 
@@ -49,15 +52,32 @@ var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
   this.delete = [this._delete.bind(this)];
 
   // set default view template locations
-  this.view = {
+  this.views = {
     add: __dirname + '/views/add.jade',
     view: __dirname + '/views/view.jade',
     list: __dirname + '/views/list.jade',
     edit: __dirname + '/views/edit.jade',
   };
 
+  this.compiled = {};
+
+  __.forOwn(this.views, function(tpl, key) {
+    fs.readFile(tpl, function(err, data){
+      if (err) {
+        console.error('Error Reading file "' + tpl + '", error:', err);
+        return;
+      }
+      this.compiled[key] = jade.compile(data, {
+        filename: tpl
+      });
+
+    }.bind(this));
+  }, this);
 };
 util.inherits(CrudCtrl, Controller);
+
+/** @define {string} The view key in which the output will be available.  */
+CrudCtrl.VIEW_OUTPUT_KEY = 'crudView';
 
 /**
  * Handle new item creation
@@ -98,7 +118,7 @@ CrudCtrl.prototype._createCallback = function(req, res, err, optDoc){
  * @protected
  */
 CrudCtrl.prototype._readList = function(req, res){
-  res.render(this.view.list);
+  res.render(this.views.list);
 };
 
 /**
@@ -116,13 +136,13 @@ CrudCtrl.prototype._readOne = function(req, res){
   this.Model.findOne(query, function(err, doc){
     if (err) {
       this.addError(res, err);
-      return res.render(this.view.view);
+      return res.render(this.views.view);
     }
 
     if (!doc) {
       var error = new Error('No results');
       this.addError(res, error);
-      return res.render(this.view.view);
+      return res.render(this.views.view);
     }
     var viewVars = {
       item: doc,
@@ -133,7 +153,14 @@ CrudCtrl.prototype._readOne = function(req, res){
     if (this.opts.jadeLayout) {
       viewVars.layout = this.opts.jadeLayout;
     }
-    res.render(this.view.view, viewVars);
+
+    res.locals[CrudCtrl.VIEW_OUTPUT_KEY] = this.compiled.view(viewVars);
+
+    if (!this.opts.layoutView) {
+      res.send(res.locals[CrudCtrl.VIEW_OUTPUT_KEY]);
+    } else {
+      res.render(this.opts.layoutView, viewVars);
+    }
   }.bind(this));
 };
 
@@ -194,7 +221,7 @@ CrudCtrl.prototype._updateCallback = function(req, res, doc, err, optUpdateCount
   }
 
   this.addSuccess(res);
-  res.render(this.view.view, {item: doc});
+  res.render(this.views.view, {item: doc});
 };
 
 /**
@@ -211,11 +238,11 @@ CrudCtrl.prototype._updateView = function(req, res) {
   this.Model.findOne(query, function(err, data){
     if (err) {
       this.addError(res, err);
-      return res.render(this.view.edit);
+      return res.render(this.views.edit);
     }
 
     this.checkFlashError(req, res);
-    res.render(this.view.edit, {item: data});
+    res.render(this.views.edit, {item: data});
   }.bind(this));
 };
 
@@ -242,5 +269,5 @@ CrudCtrl.prototype._delete = function(req, res){
 CrudCtrl.prototype._createView = function(req, res){
   this.checkFlashError(req);
   this.checkFlashSuccess(req);
-  res.render(this.view.add);
+  res.render(this.views.add);
 };

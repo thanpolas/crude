@@ -8,20 +8,18 @@
 
 include item.mix.jade
 
-extends layout
-
 block crudcontent
   .row-fluid.item-list
     .span12
       - if (error)
         .alert.alert-error
-          button.close(type="button",data-dismiss="alert") &times;
+          button(type="button",data-dismiss="alert").close &times;
           strong Error!
           | #{errorMsg}
       - else
         - if (success)
           .alert.alert-success
-            button.close(type="button",data-dismiss="alert") &times;
+            button(type="button",data-dismiss="alert").close &times;
             strong Success!
             | Item was successfully edited!
         h3 #{item[opts.nameField]}
