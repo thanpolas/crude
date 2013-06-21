@@ -1,0 +1,43 @@
+{
+  "name": "crude",
+  "description": "Seamless CRUD control operations for node.",
+  "version": "0.0.1",
+  "homepage": "https://github.com/talksession/node-crude",
+  "author": {
+    "name": "Thanasis Polychronakis",
+    "url": "http://thanpol.as"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/talksession/node-crude.git"
+  },
+  "bugs": {
+    "url": "https://github.com/talksession/node-crude/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/talksession/node-crude/blob/master/LICENSE-MIT"
+    }
+  ],
+  "contributors": [{}],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test:console"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "keywords": [
+    "crud",
+    "create",
+    "read",
+    "update",
+    "delete",
+    "express",
+    "controller"
+  ]
+}
