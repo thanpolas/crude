@@ -54,7 +54,10 @@ var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
     this._prepResponse.bind(this),
     this._readOne.bind(this),
   ];
-  this.update = [this._update.bind(this)];
+  this.update = [
+    this._prepResponse.bind(this),
+    this._update.bind(this),
+  ];
   this.updateView = [
     this._prepResponse.bind(this),
     this._updateView.bind(this),
@@ -227,8 +230,15 @@ CrudCtrl.prototype._readOne = function(req, res){
  * @protected
  */
 CrudCtrl.prototype._update = function(req, res) {
+  if (!req.body.id) {
+    return res.send('Not implemented. No "id" field passed');
+  }
+  if (!this.opts.editView) {
+    return res.send('Not implemented. Define "editView" parameter.');
+  }
+
   // attempt to fetch the record...
-  this.Model.findById(req.params.id, function(err, doc){
+  this.Model.findById(req.body.id, function(err, doc){
     if (err) {
       this.addFlashError(req, err);
       // log.fine('_update() :: Fetch item fail:', err.type, err.message);
@@ -236,7 +246,7 @@ CrudCtrl.prototype._update = function(req, res) {
     }
 
     var query = new Object(null);
-    query[this.opts.idField] = req.params.id;
+    query[this.opts.idField] = req.body.id;
     this.Model.update(query, { $set: req.body },
       this._updateCallback.bind(this, req, res, doc));
   }.bind(this));
@@ -269,14 +279,23 @@ CrudCtrl.prototype._updateCallback = function(req, res, doc, err, optUpdateCount
     return res.redirect(req.header('Referer'));
   }
 
-  if (doc._localUrl !== req.url) {
+  var finalPath = req.url.split('/').pop();
+  if (doc[this.opts.urlField] !== finalPath) {
     // log.fine('_updateCallback() :: Changed url. Old:', req.url, 'New:', doc);
-    this.addFlashSuccess();
-    return res.redirect(this.baseUrl + doc._localUrl);
+    this.addFlashSuccess(req, doc);
+    return res.redirect(this.baseUrl + '/' + doc._localUrl);
   }
 
-  this.addSuccess(res);
-  res.render(this.views.view, {item: doc});
+  this.addSuccess(res, doc);
+  res.locals.item = doc;
+
+  // render the template and store in response locals.
+  res.locals[CrudCtrl.VIEW_OUTPUT_KEY] = this.compiled.view(res.locals);
+  if (!this.opts.layoutView) {
+    res.send(res.locals[CrudCtrl.VIEW_OUTPUT_KEY]);
+  } else {
+    res.render(this.opts.layoutView);
+  }
 };
 
 /**
