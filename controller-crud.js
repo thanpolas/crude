@@ -163,7 +163,20 @@ CrudCtrl.prototype._createCallback = function(req, res, err, optDoc){
   }
 
   this.addFlashSuccess(req, optDoc);
-  res.redirect(this.baseUrl + '/' + optDoc[this.opts.idField]);
+  res.redirect(this.baseUrl + '/' + optDoc[this.opts.urlField]);
+};
+
+/**
+ * Create an item view.
+ *
+ * @param {Object} req The request Object.
+ * @param {Object} res The response Object.
+ * @protected
+ */
+CrudCtrl.prototype._createView = function(req, res){
+  this.checkFlashError(req, res);
+  this.checkFlashSuccess(req, res);
+  res.render(this.opts.editView);
 };
 
 /**
@@ -210,6 +223,8 @@ CrudCtrl.prototype._readOne = function(req, res){
 
     // assign the item to the tpl vars.
     res.locals.item = doc;
+
+    this.checkFlashSuccess(req, res);
 
     // render the template and store in response locals.
     res.locals[CrudCtrl.VIEW_OUTPUT_KEY] = this.compiled.view(res.locals);
@@ -347,15 +362,4 @@ CrudCtrl.prototype._delete = function(req, res){
 };
 
 
-/**
- * Create an item view.
- *
- * @param {Object} req The request Object.
- * @param {Object} res The response Object.
- * @protected
- */
-CrudCtrl.prototype._createView = function(req, res){
-  this.checkFlashError(req);
-  this.checkFlashSuccess(req);
-  res.render(this.views.add);
-};
+
