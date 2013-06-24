@@ -22,11 +22,22 @@ mixin viewItem(item, schema, opts)
 
   table.table.table-bordered
     -for schemaItem in schema
-      - if(fn.canShow(schemaItem))
+      - if(schemaItem._viewData.canShow)
         tr
-          th #{fn.getName(schemaItem.path)}
+          th #{schemaItem._viewData.name}
           td #{fn.getValue(item, schemaItem)}
 
   .row-fluid
     .span12
       a(href="#{opts.baseUrl}/#{item[opts.urlField]}/edit").btn.btn-small.btn-primary Edit
+
+
+mixin editItem(item)
+  - var edit = !!item
+    form(method="post", action=(edit ? "/customer/" + item[opts.urlField] : "/customer" ))
+      fieldset
+        label(for="admin-newcust-name") Company Name
+        input(type="text", maxlength="120", placeholder="Company Name",
+          name="companyName", id="admin-newcust-name")
+        div
+          button.btn(type="submit")=(edit ? "Update" : "Create")

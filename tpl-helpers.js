@@ -1,5 +1,7 @@
 /**
  * @fileOverview Template helpers.
+ *   Warning, every key exported here will be exposed on the global var 'fn' in
+ *   the templates using the lodash 'extend' method.
  */
 
 var tplHelpers = module.exports = {};
@@ -35,4 +37,11 @@ tplHelpers.canShow = function(schemaItem) {
   } else {
     return true;
   }
+};
+
+tplHelpers.formAttrs = function() {
+  return {
+    method: 'GET',
+    action: 'zong'
+  };
 };

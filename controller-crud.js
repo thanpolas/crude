@@ -26,6 +26,7 @@ var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
 
   this.Model = Model;
   this.baseUrl = baseUrl;
+  this._schemaViews = null;
   var defaultOpts = {
     baseUrl: baseUrl,
     urlField: '_localUrl',
@@ -53,7 +54,10 @@ var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
     this._readOne.bind(this),
   ];
   this.update = [this._update.bind(this)];
-  this.updateView = [this._updateView.bind(this)];
+  this.updateView = [
+    this._prepResponse.bind(this),
+    this._updateView.bind(this),
+  ];
   this.delete = [this._delete.bind(this)];
 
   // set default view template locations
@@ -94,13 +98,37 @@ CrudCtrl.VIEW_OUTPUT_KEY = 'crudView';
  */
 CrudCtrl.prototype._prepResponse = function(req, res, next) {
   res.locals.opts = this.opts;
-  res.locals.schema = this.Model.schema.paths;
+  res.locals.schema = this._getSchema();
 
   // all template functions
   res.locals.fn = {};
   __.extend(res.locals.fn, tplHelpers);
 
   next();
+};
+
+/**
+ * Add fields required for the views to render properly.
+ *
+ * Render at first runtime and serve cached afterwards.
+ *
+ * @return {Object} An extended mongoose schema.
+ */
+CrudCtrl.prototype._getSchema = function() {
+  if (this._schemaViews) {
+    return this._schemaViews;
+  }
+
+  var schemaViews = this._schemaViews = Object.create(this.Model.schema.paths);
+
+  __.forIn(schemaViews, function(schemaItem, path) {
+    schemaViews[path]._viewData = {
+      canShow: tplHelpers.canShow(schemaItem),
+      name: tplHelpers.getName(path),
+    };
+  }, this);
+
+  return schemaViews;
 };
 
 /**
@@ -142,12 +170,6 @@ CrudCtrl.prototype._createCallback = function(req, res, err, optDoc){
  * @protected
  */
 CrudCtrl.prototype._readList = function(req, res){
-  res.locals.opts = this.opts;
-  res.locals.schema = this.Model.schema.paths;
-
-  res.locals.getValue = tplHelpers.getValue;
-  res.locals.getName = tplHelpers.getName;
-
   // render the template and store in response locals.
   res.locals[CrudCtrl.VIEW_OUTPUT_KEY] = this.compiled.list(res.locals);
 
