@@ -59,6 +59,11 @@ Pagination.prototype._paginateMiddleware = function(Model, opts, req, res, next)
       return next(err);
     }
 
+    if (!items || !__.isArray(items) || 0 === items.length) {
+      // TODO handle this better
+      return next('no results');
+    }
+
     var paginator = pagination.create('search', {
       prelink: url.parse(req.url).pathname,
       current: page,

@@ -22,8 +22,4 @@ block crudcontent
             button(type="button",data-dismiss="alert").close &times;
             strong Success!
             | Item was successfully edited!
-        h3 #{item[opts.nameField]}
-        hr
-        ul
-          li
-            mixin viewItem(item, schema, opts)
+        mixin viewItem(item, schema, opts)

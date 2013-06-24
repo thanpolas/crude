@@ -14,7 +14,7 @@ include helpers.jade
 // @param {mongoose.Model.schema.path} schema
 // @param {Object=} opts Options for rendering.
 //
-mixin viewItem(item, schema,opts)
+mixin viewItem(item, schema, opts)
   h4
     a(href="#{item[opts.baseUrl]}/#{item[opts.urlField]}", title="#{item[opts.nameField]}")
       | #{item[opts.nameField]}

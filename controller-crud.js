@@ -32,6 +32,7 @@ var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
     idField: 'id',
     // A jade view
     layoutView: null,
+    jadeLayout: null,
   };
   this.opts = __.extend(defaultOpts, optOpts || {});
 
@@ -117,7 +118,17 @@ CrudCtrl.prototype._createCallback = function(req, res, err, optDoc){
  * @protected
  */
 CrudCtrl.prototype._readList = function(req, res){
-  res.render(this.views.list);
+  res.locals.opts = this.opts;
+  res.locals.schema = this.Model.schema.paths;
+
+  // render the template and store in response locals.
+  res.locals[CrudCtrl.VIEW_OUTPUT_KEY] = this.compiled.list(res.locals);
+
+  // if (!this.opts.layoutView) {
+    // res.send(res.locals[CrudCtrl.VIEW_OUTPUT_KEY]);
+  // } else {
+    res.render(this.opts.layoutView);
+  // }
 };
 
 /**
@@ -149,10 +160,7 @@ CrudCtrl.prototype._readOne = function(req, res){
       opts: this.opts,
     };
 
-    if (this.opts.jadeLayout) {
-      viewVars.layout = this.opts.jadeLayout;
-    }
-
+    // render the template and store in response locals.
     res.locals[CrudCtrl.VIEW_OUTPUT_KEY] = this.compiled.view(viewVars);
 
     if (!this.opts.layoutView) {

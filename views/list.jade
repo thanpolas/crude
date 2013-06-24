@@ -1,0 +1,32 @@
+// Items listing view.
+// @param {boolean} error If an error occured.
+// @param {Array.<Object>=} items The items to show.
+// @param {string=} errorMsg.
+// @param {Object|Error=} errorObj.
+// @param {string=} pagination HTML string.
+// @param {number=} count Record count.
+// @param {Object=} schema The item Schema.
+// @param {Object=} opts Options for rendering.
+
+
+include item.mix.jade
+
+block crudcontent
+  .row-fluid.items-list
+    .span12
+      h3 Items List
+      - if (error)
+        .alert.alert-error
+          button.close(type="button",data-dismiss="alert") &times;
+          strong Error!
+          | #{errorMsg}
+      - else
+        small Total Items: #{count}
+        hr
+        ul
+          each item in items
+            li
+              mixin viewItem(item, schema, opts)
+
+        .row-fluid.pagination
+          .span8.offset2 !{pagination}
