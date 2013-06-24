@@ -34,7 +34,8 @@ var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
     idField: 'id',
     // A jade view
     layoutView: null,
-    jadeLayout: null,
+    // The edit / create view.
+    editView: null,
   };
   this.opts = __.extend(defaultOpts, optOpts || {});
 
@@ -286,17 +287,31 @@ CrudCtrl.prototype._updateCallback = function(req, res, doc, err, optUpdateCount
  * @protected
  */
 CrudCtrl.prototype._updateView = function(req, res) {
+  if (!this.opts.editView) {
+    return res.send('Not implemented. Define "editView" parameter.');
+  }
+
   // attempt to fetch the record...
   var query = new Object(null);
-  query[this.opts.urlField] = req.params.localUrl;
-  this.Model.findOne(query, function(err, data){
+  query[this.opts.urlField] = req.params.id;
+  this.Model.findOne(query, function(err, doc){
     if (err) {
       this.addError(res, err);
-      return res.render(this.views.edit);
+      return res.render(this.opts.editView);
     }
 
+    if (!doc) {
+      var error = new Error('No results');
+      this.addError(res, error);
+      return res.render(this.opts.editView);
+    }
+
+    // assign the item to the tpl vars.
+    res.locals.item = doc;
+
     this.checkFlashError(req, res);
-    res.render(this.views.edit, {item: data});
+
+    res.render(this.opts.editView);
   }.bind(this));
 };
 

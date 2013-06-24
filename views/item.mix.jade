@@ -7,13 +7,11 @@
 
 //- include helpers.jade
 
-//
-// A single item.
+// Show a single item.
 //
 // @param {mongoose.Document} item
 // @param {mongoose.Model.schema.path} schema
 // @param {Object=} opts Options for rendering.
-//
 mixin viewItem(item, schema, opts)
   h4
     a(href="#{opts.baseUrl}/#{item[opts.urlField]}", title="#{item[opts.nameField]}")
@@ -30,14 +28,3 @@ mixin viewItem(item, schema, opts)
   .row-fluid
     .span12
       a(href="#{opts.baseUrl}/#{item[opts.urlField]}/edit").btn.btn-small.btn-primary Edit
-
-
-mixin editItem(item)
-  - var edit = !!item
-    form(method="post", action=(edit ? "/customer/" + item[opts.urlField] : "/customer" ))
-      fieldset
-        label(for="admin-newcust-name") Company Name
-        input(type="text", maxlength="120", placeholder="Company Name",
-          name="companyName", id="admin-newcust-name")
-        div
-          button.btn(type="submit")=(edit ? "Update" : "Create")
