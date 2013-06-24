@@ -8,6 +8,7 @@ var __ = require('lodash');
 var jade = require('jade');
 
 var Controller = require('./controller');
+var tplHelpers = require('./tpl-helpers.js');
 
 var PaginationMidd = require('./pagination.midd');
 
@@ -43,10 +44,14 @@ var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
   this.create = [this._create.bind(this)];
   this.createView = [this._createView.bind(this)];
   this.readList = [
+    this._prepResponse.bind(this),
     paginationMidd.paginate(Model),
     this._readList.bind(this),
   ];
-  this.readOne = [this._readOne.bind(this)];
+  this.readOne = [
+    this._prepResponse.bind(this),
+    this._readOne.bind(this),
+  ];
   this.update = [this._update.bind(this)];
   this.updateView = [this._updateView.bind(this)];
   this.delete = [this._delete.bind(this)];
@@ -78,6 +83,25 @@ util.inherits(CrudCtrl, Controller);
 
 /** @define {string} The view key in which the output will be available.  */
 CrudCtrl.VIEW_OUTPUT_KEY = 'crudView';
+
+/**
+ * Prepare the response object for each request, an internal middleware.
+ *
+ * @param {Object} req The request Object.
+ * @param {Object} res The response Object.
+ * @param {Function} next callback.
+ * @protected
+ */
+CrudCtrl.prototype._prepResponse = function(req, res, next) {
+  res.locals.opts = this.opts;
+  res.locals.schema = this.Model.schema.paths;
+
+  // all template functions
+  res.locals.fn = {};
+  __.extend(res.locals.fn, tplHelpers);
+
+  next();
+};
 
 /**
  * Handle new item creation
@@ -121,6 +145,9 @@ CrudCtrl.prototype._readList = function(req, res){
   res.locals.opts = this.opts;
   res.locals.schema = this.Model.schema.paths;
 
+  res.locals.getValue = tplHelpers.getValue;
+  res.locals.getName = tplHelpers.getName;
+
   // render the template and store in response locals.
   res.locals[CrudCtrl.VIEW_OUTPUT_KEY] = this.compiled.list(res.locals);
 
@@ -154,19 +181,17 @@ CrudCtrl.prototype._readOne = function(req, res){
       this.addError(res, error);
       return res.render(this.views.view);
     }
-    var viewVars = {
-      item: doc,
-      schema: this.Model.schema.paths,
-      opts: this.opts,
-    };
+
+    // assign the item to the tpl vars.
+    res.locals.item = doc;
 
     // render the template and store in response locals.
-    res.locals[CrudCtrl.VIEW_OUTPUT_KEY] = this.compiled.view(viewVars);
+    res.locals[CrudCtrl.VIEW_OUTPUT_KEY] = this.compiled.view(res.locals);
 
     if (!this.opts.layoutView) {
       res.send(res.locals[CrudCtrl.VIEW_OUTPUT_KEY]);
     } else {
-      res.render(this.opts.layoutView, viewVars);
+      res.render(this.opts.layoutView);
     }
   }.bind(this));
 };

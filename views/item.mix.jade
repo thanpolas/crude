@@ -5,7 +5,7 @@
 // @param {boolean=} success
 // @param {Object=} successObj
 
-include helpers.jade
+//- include helpers.jade
 
 //
 // A single item.
@@ -22,9 +22,10 @@ mixin viewItem(item, schema, opts)
 
   table.table.table-bordered
     -for schemaItem in schema
-      tr
-        th #{getName(schemaItem.path)}
-        td #{getValue(item, schemaItem)}
+      - if(fn.canShow(schemaItem))
+        tr
+          th #{fn.getName(schemaItem.path)}
+          td #{fn.getValue(item, schemaItem)}
 
   .row-fluid
     .span12
