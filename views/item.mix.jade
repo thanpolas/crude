@@ -16,7 +16,7 @@ include helpers.jade
 //
 mixin viewItem(item, schema, opts)
   h4
-    a(href="#{item[opts.baseUrl]}/#{item[opts.urlField]}", title="#{item[opts.nameField]}")
+    a(href="#{opts.baseUrl}/#{item[opts.urlField]}", title="#{item[opts.nameField]}")
       | #{item[opts.nameField]}
 
 
@@ -28,4 +28,4 @@ mixin viewItem(item, schema, opts)
 
   .row-fluid
     .span12
-      a(href="#{item[opts.baseUrl]}/#{item[opts.urlField]}/edit").btn.btn-small.btn-primary Edit
+      a(href="#{opts.baseUrl}/#{item[opts.urlField]}/edit").btn.btn-small.btn-primary Edit

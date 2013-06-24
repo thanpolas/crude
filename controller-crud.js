@@ -124,11 +124,11 @@ CrudCtrl.prototype._readList = function(req, res){
   // render the template and store in response locals.
   res.locals[CrudCtrl.VIEW_OUTPUT_KEY] = this.compiled.list(res.locals);
 
-  // if (!this.opts.layoutView) {
-    // res.send(res.locals[CrudCtrl.VIEW_OUTPUT_KEY]);
-  // } else {
+  if (!this.opts.layoutView) {
+    res.send(res.locals[CrudCtrl.VIEW_OUTPUT_KEY]);
+  } else {
     res.render(this.opts.layoutView);
-  // }
+  }
 };
 
 /**
