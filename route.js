@@ -28,6 +28,17 @@ route.add = function(app, Model, baseUrl, optCtrl) {
     crudCtrl = new CrudCtrl(Model, baseUrl);
   }
 
+  route.addRaw(app, baseUrl, crudCtrl);
+};
+
+/**
+ * The actual route add operation, decoupled from add to skip instanceof checks.
+ *
+ * @param {express} app The express instance.
+ * @param {string} baseUrl The base URL to attach the routes.
+ * @param {crude.ControllerCrud} crudCtrl an instance implementind the CRUD ctrl.
+ */
+route.addRaw = function(app, baseUrl, crudCtrl) {
   app.get(baseUrl, crudCtrl.readList);
   app.post(baseUrl, crudCtrl.create);
   app.get(baseUrl + '/add', crudCtrl.createView);
