@@ -18,9 +18,13 @@ var route = module.exports = {};
  */
 route.add = function(app, Model, baseUrl, optCtrl) {
   var crudCtrl;
-  if (optCtrl instanceof CrudCtrl) {
-    crudCtrl = optCtrl;
-  } else {
+  if (optCtrl) {
+    if (optCtrl instanceof CrudCtrl || true === optCtrl._isCrude) {
+      crudCtrl = optCtrl;
+    }
+  }
+
+  if (!crudCtrl) {
     crudCtrl = new CrudCtrl(Model, baseUrl);
   }
 

@@ -93,6 +93,15 @@ util.inherits(CrudCtrl, Controller);
 CrudCtrl.VIEW_OUTPUT_KEY = 'crudView';
 
 /**
+ * Mark the proto to check for proper inheritance of methods,
+ * we do this so we can lax comparison by not relying 100% on "instanceof".
+ *
+ * @type {boolean}
+ * @protected
+ */
+CrudCtrl.prototype._isCrude = true;
+
+/**
  * Prepare the response object for each request, an internal middleware.
  *
  * @param {Object} req The request Object.
