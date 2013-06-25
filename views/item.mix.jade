@@ -1,17 +1,14 @@
-// Item mixins
-// @param {boolean=} error If an error occured.
-// @param {string=} errorMsg
-// @param {Object|Error=} errorObj
-// @param {boolean=} success
-// @param {Object=} successObj
+//- Item mixins
+//- @param {boolean=} error If an error occured.
+//- @param {string=} errorMsg
+//- @param {Object|Error=} errorObj
+//- @param {boolean=} success
+//- @param {Object=} successObj
 
-//- include helpers.jade
-
-// Show a single item.
-//
-// @param {mongoose.Document} item
-// @param {mongoose.Model.schema.path} schema
-// @param {Object=} opts Options for rendering.
+//- Show a single item.
+//- @param {mongoose.Document} item
+//- @param {mongoose.Model.schema.path} schema
+//- @param {Object=} opts Options for rendering.
 mixin viewItem(item, schema, opts)
   h4
     a(href="#{opts.baseUrl}/#{item[opts.urlField]}", title="#{item[opts.nameField]}")
