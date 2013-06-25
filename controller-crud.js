@@ -36,6 +36,8 @@ var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
     layoutView: null,
     // The edit / create view.
     editView: null,
+    // show the doc id
+    showId: false,
   };
   this.opts = __.extend(defaultOpts, optOpts || {});
 
@@ -136,7 +138,7 @@ CrudCtrl.prototype._getSchema = function() {
 
   __.forIn(schemaViews, function(schemaItem, path) {
     schemaViews[path]._viewData = {
-      canShow: tplHelpers.canShow(schemaItem),
+      canShow: tplHelpers.canShow(schemaItem, this.opts),
       name: tplHelpers.getName(path),
     };
   }, this);

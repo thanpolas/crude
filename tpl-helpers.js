@@ -29,10 +29,14 @@ tplHelpers.getName = function(path) {
  * Determine if this schema item should be publicly displayed.
  *
  * @param  {Object} schemaItem A single schema item (a column).
+ * @param {Object} opts The CRUD-controller options object.
  * @return {boolean} true to show.
  */
-tplHelpers.canShow = function(schemaItem) {
+tplHelpers.canShow = function(schemaItem, opts) {
   if ('_' === schemaItem.path.charAt(0)) {
+    if (opts.showId && '_id' === schemaItem.path) {
+      return true;
+    }
     return false;
   } else {
     return true;
