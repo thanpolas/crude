@@ -169,7 +169,7 @@ CrudCtrl.prototype._create = function(req, res) {
  */
 CrudCtrl.prototype._createCallback = function(req, res, err, optDoc){
   if (err) {
-    this.addFlashError(req);
+    this.addFlashError(req, err);
     return res.redirect(this.baseUrl + '/add');
   }
 
