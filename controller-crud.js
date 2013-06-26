@@ -271,6 +271,8 @@ CrudCtrl.prototype._update = function(req, res) {
       return res.redirect(req.header('Referer'));
     }
 
+    var processedVars = this.process(req.body);
+
     var query = new Object(null);
     query[this.opts.idField] = req.body.id;
     this.Model.update(query, { $set: req.body },
@@ -372,5 +374,24 @@ CrudCtrl.prototype._delete = function(req, res){
   res.send('NOT IMPLEMENTED');
 };
 
+/**
+ * Process incoming POST vars, we will:
+ *  * Remove all vars starting with underscore ( _ ).
+ *
+ *
+ * This is not a validation step, just forbit "private" keys from passing.
+ *
+ * @param  {Object} params Hash with key / value pairs
+ * @return {Object} a processed object.
+ */
+CrudCtrl.prototype.process = function(params) {
+  var outObj = {};
+  __.forOwn(params, function(key, value){
+    if ('_' !== key.indexOf(0)) {
+      outObj[key] = value;
+    }
+  });
 
+  return outObj;
+};
 
