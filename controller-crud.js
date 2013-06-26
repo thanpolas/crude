@@ -272,38 +272,30 @@ CrudCtrl.prototype._update = function(req, res) {
     }
 
     var processedVars = this.process(req.body);
+    __.forOwn(processedVars, function(value, key) {
+      this[key] = value;
+    }, this);
 
-    var query = new Object(null);
-    query[this.opts.idField] = req.body.id;
-    this.Model.update(query, { $set: req.body },
-      this._updateCallback.bind(this, req, res, doc));
+    this.save(this._updateCallback.bind(this, req, res, doc));
+
   }.bind(this));
 };
 
 
 /**
- * Handle an update callback, this is the Model Update callback.
+ * Handle an update callback, this is the Model save callback.
  *
  * @param {Object} req The request Object.
  * @param {Object} res The response Object.
  * @param {mongoose.Document} doc The mongoose document.
  * @param {Error=} err Operation failed.
- * @param {number=} optUpdateCount How many records were updated.
  * @protected
  */
-CrudCtrl.prototype._updateCallback = function(req, res, doc, err, optUpdateCount){
+CrudCtrl.prototype._updateCallback = function(req, res, doc, err){
 
   if (err) {
     this.addFlashError(req, err);
     // log.fine('_updateCallback() :: Edit item fail:', err.message);
-    return res.redirect(req.header('Referer'));
-  }
-
-  if (1 !== optUpdateCount) {
-    var error = new error.Database('No record was updated');
-    error.count = optUpdateCount;
-    this.addFlashError(req, error);
-    // log.fine('_updateCallback() :: Fail, no record was updated. Update Count:', optUpdateCount);
     return res.redirect(req.header('Referer'));
   }
 
