@@ -40,6 +40,8 @@ var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
     showId: false,
     // show full path for netsted paths
     expandPaths: false,
+    // paths to exclude when displaying
+    viewExcludePaths: [],
   };
   this.opts = __.extend(defaultOpts, optOpts || {});
 

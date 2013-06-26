@@ -45,6 +45,14 @@ tplHelpers.getName = function(path, opts) {
  * @return {boolean} true to show.
  */
 tplHelpers.canShow = function(schemaItem, opts) {
+  // check for custom excluded paths
+  if (opts.viewExcludePaths.length) {
+    if (0 <= opts.viewExcludePaths.indexOf(schemaItem.path)) {
+      return false;
+    }
+  }
+
+  // check for private vars (starting with underscore)
   if ('_' === schemaItem.path.charAt(0)) {
     if (opts.showId && '_id' === schemaItem.path) {
       return true;
