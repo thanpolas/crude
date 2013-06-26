@@ -35,7 +35,10 @@
     "lodash": "~1.3.1",
     "jade": "~0.31.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "sinon": "~1.7.3",
+    "mocha": "~1.11.0"
+  },
   "keywords": [
     "crud",
     "create",
