@@ -273,10 +273,10 @@ CrudCtrl.prototype._update = function(req, res) {
 
     var processedVars = this.process(req.body);
     __.forOwn(processedVars, function(value, key) {
-      this[key] = value;
+      doc[key] = value;
     }, this);
 
-    this.save(this._updateCallback.bind(this, req, res, doc));
+    doc.save(this._updateCallback.bind(this, req, res, doc));
 
   }.bind(this));
 };
