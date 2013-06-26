@@ -20,8 +20,20 @@ tplHelpers.getValue = function(item, schemaItem) {
   return val;
 };
 
-tplHelpers.getName = function(path) {
-  var name = path.split('.').pop();
+/**
+ * Return a proper label for the path.
+ *
+ * @param {string} path The full path name.
+ * @param {Object} opts The CRUD-controller options object.
+ * @return {[type]}      [description]
+ */
+tplHelpers.getName = function(path, opts) {
+  var name;
+  if (opts.expandPaths) {
+    name = path;
+  } else {
+    name = path.split('.').pop();
+  }
   return name.charAt(0).toUpperCase() + name.slice(1);
 };
 

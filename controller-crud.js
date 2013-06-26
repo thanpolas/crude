@@ -38,6 +38,8 @@ var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
     editView: null,
     // show the doc id
     showId: false,
+    // show full path for netsted paths
+    expandPaths: false,
   };
   this.opts = __.extend(defaultOpts, optOpts || {});
 
@@ -139,7 +141,7 @@ CrudCtrl.prototype._getSchema = function() {
   __.forIn(schemaViews, function(schemaItem, path) {
     schemaViews[path]._viewData = {
       canShow: tplHelpers.canShow(schemaItem, this.opts),
-      name: tplHelpers.getName(path),
+      name: tplHelpers.getName(path, this.opts),
     };
   }, this);
 
