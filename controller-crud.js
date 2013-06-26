@@ -49,8 +49,14 @@ var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
   var paginationMidd = new PaginationMidd();
 
   // define CRUD handlers
-  this.create = [this._create.bind(this)];
-  this.createView = [this._createView.bind(this)];
+  this.create = [
+    this._prepResponse.bind(this),
+    this._create.bind(this),
+  ];
+  this.createView = [
+    this._prepResponse.bind(this),
+    this._createView.bind(this),
+  ];
   this.readList = [
     this._prepResponse.bind(this),
     paginationMidd.paginate(Model),
@@ -118,7 +124,7 @@ CrudCtrl.prototype._isCrude = true;
 CrudCtrl.prototype._prepResponse = function(req, res, next) {
   res.locals.opts = this.opts;
   res.locals.schema = this._getSchema();
-
+  res.locals.currentUser = req.user;
   // all template functions
   res.locals.fn = {};
   __.extend(res.locals.fn, tplHelpers);
