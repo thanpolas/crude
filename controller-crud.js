@@ -386,8 +386,8 @@ CrudCtrl.prototype._delete = function(req, res){
  */
 CrudCtrl.prototype.process = function(params) {
   var outObj = {};
-  __.forOwn(params, function(key, value){
-    if ('_' !== key.indexOf(0)) {
+  __.forOwn(params, function(value, key){
+    if ('_' !== key.charAt(0)) {
       outObj[key] = value;
     }
   });

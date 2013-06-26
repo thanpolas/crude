@@ -73,6 +73,7 @@
   "predef": [
     "setup",
     "teardown",
-    "test"
+    "test",
+    "suite"
   ]
 }
