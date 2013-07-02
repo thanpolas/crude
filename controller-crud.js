@@ -114,6 +114,36 @@ CrudCtrl.VIEW_OUTPUT_KEY = 'crudView';
 CrudCtrl.prototype._isCrude = true;
 
 /**
+ * Insert at the beginning of all routes the provided middleware.
+ *
+ * @param  {Function} middleware The middleware to insert.
+ */
+CrudCtrl.prototype.unshiftAllRoutes = function(middleware) {
+  this.create.unshift(middleware);
+  this.createView.unshift(middleware);
+  this.readList.unshift(middleware);
+  this.readList.unshift(middleware);
+  this.update.unshift(middleware);
+  this.updateView.unshift(middleware);
+  this.delete.unshift(middleware);
+};
+
+/**
+ * Insert at the end of all routes the provided middleware.
+ *
+ * @param  {Function} middleware The middleware to insert.
+ */
+CrudCtrl.prototype.pushAllRoutes = function(middleware) {
+  this.create.push(middleware);
+  this.createView.push(middleware);
+  this.readList.push(middleware);
+  this.readList.push(middleware);
+  this.update.push(middleware);
+  this.updateView.push(middleware);
+  this.delete.push(middleware);
+};
+
+/**
  * Getter for baseUrl variable, overwrite if custom routing is required.
  *
  * @param {Object} req The request Object.
