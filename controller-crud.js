@@ -393,7 +393,7 @@ CrudCtrl.prototype._delete = function(req, res){
  *  * Remove all vars starting with underscore ( _ ).
  *
  *
- * This is not a validation step, just forbit "private" keys from passing.
+ * This is not a validation step, just forbid "private" keys from passing.
  *
  * @param  {Object} params Hash with key / value pairs
  * @return {Object} a processed object.
