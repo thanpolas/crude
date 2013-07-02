@@ -114,6 +114,15 @@ CrudCtrl.VIEW_OUTPUT_KEY = 'crudView';
 CrudCtrl.prototype._isCrude = true;
 
 /**
+ * Getter for baseUrl variable, overwrite if custom routing is required.
+ *
+ * @return {string} The baseUrl.
+ */
+CrudCtrl.prototype.getBaseUrl = function() {
+  return this.baseUrl;
+};
+
+/**
  * Prepare the response object for each request, an internal middleware.
  *
  * @param {Object} req The request Object.
@@ -180,11 +189,11 @@ CrudCtrl.prototype._create = function(req, res) {
 CrudCtrl.prototype._createCallback = function(req, res, err, optDoc){
   if (err) {
     this.addFlashError(req, err);
-    return res.redirect(this.baseUrl + '/add');
+    return res.redirect(this.getBaseUrl + '/add');
   }
 
   this.addFlashSuccess(req, optDoc);
-  res.redirect(this.baseUrl + '/' + optDoc[this.opts.urlField]);
+  res.redirect(this.getBaseUrl + '/' + optDoc[this.opts.urlField]);
 };
 
 /**
@@ -313,7 +322,7 @@ CrudCtrl.prototype._updateCallback = function(req, res, doc, err){
   if (doc[this.opts.urlField] !== finalPath) {
     // log.fine('_updateCallback() :: Changed url. Old:', req.url, 'New:', doc);
     this.addFlashSuccess(req, doc);
-    return res.redirect(this.baseUrl + '/' + doc._localUrl);
+    return res.redirect(this.getBaseUrl + '/' + doc._localUrl);
   }
 
   this.addSuccess(res, doc);
