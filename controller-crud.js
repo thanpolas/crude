@@ -248,8 +248,6 @@ CrudCtrl.prototype._createView = function(req, res){
  * @protected
  */
 CrudCtrl.prototype._readList = function(req, res){
-  console.log('URL:', req.url);
-
   // render the template and store in response locals.
   res.locals[CrudCtrl.VIEW_OUTPUT_KEY] = this.compiled.list(res.locals);
 
