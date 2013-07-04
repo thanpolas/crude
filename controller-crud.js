@@ -15,16 +15,16 @@ var PaginationMidd = require('./pagination.midd');
 /**
  * The CRUD Controller
  *
- * @param {mongoose.Model} Model The mongoose model.
+ * @param {crude.Entity} Entity an instance of the Entity class.
  * @param {string} baseUrl The base url.
  * @param {Object=} optOpts Optionally define options.
  * @contructor
  * @extends {crude.Controller}
  */
-var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
+var CrudCtrl = module.exports = function(Entity, baseUrl, optOpts){
   Controller.apply(this, arguments);
 
-  this.Model = Model;
+  this.Entity = Entity;
   this.baseUrl = baseUrl;
   this._schemaViews = null;
   var defaultOpts = {
@@ -59,7 +59,7 @@ var CrudCtrl = module.exports = function(Model, baseUrl, optOpts){
   ];
   this.readList = [
     this._prepResponse.bind(this),
-    paginationMidd.paginate(Model),
+    paginationMidd.paginate(Entity),
     this._readList.bind(this),
   ];
   this.readOne = [
@@ -184,7 +184,7 @@ CrudCtrl.prototype._getSchema = function() {
     return this._schemaViews;
   }
 
-  var schemaViews = this._schemaViews = Object.create(this.Model.schema.paths);
+  var schemaViews = this._schemaViews = Object.create(this.Entity.Model.schema.paths);
 
   __.forIn(schemaViews, function(schemaItem, path) {
     schemaViews[path]._viewData = {
@@ -204,12 +204,11 @@ CrudCtrl.prototype._getSchema = function() {
  * @protected
  */
 CrudCtrl.prototype._create = function(req, res) {
-  var item = new this.Model(req.body);
-  item.save(this._createCallback.bind(this, req, res));
+  this.Entity.create(req.body, this._createCallback.bind(this, req, res));
 };
 
 /**
- * Handle a new item save, this is the CrudCtrl Model Save callback.
+ * Handle a new item save, this is the CrudCtrl Entity Save callback.
  *
  * @param {Object} req The request Object.
  * @param {Object} res The response Object.
@@ -270,7 +269,7 @@ CrudCtrl.prototype._readOne = function(req, res){
   var query = new Object(null);
   query[this.opts.urlField] = req.params.id;
 
-  this.Model.findOne(query, function(err, doc){
+  this.Entity.readOne(query, function(err, doc){
     if (err) {
       this.addError(res, err);
       return res.render(this.views.view);
@@ -313,35 +312,21 @@ CrudCtrl.prototype._update = function(req, res) {
     return res.send('Not implemented. Define "editView" parameter.');
   }
 
-  // attempt to fetch the record...
-  this.Model.findById(req.body.id, function(err, doc){
-    if (err) {
-      this.addFlashError(req, err);
-      // log.fine('_update() :: Fetch item fail:', err.type, err.message);
-      return res.redirect(req.header('Referer'));
-    }
-
-    var processedVars = this.process(req.body);
-    __.forOwn(processedVars, function(value, key) {
-      doc[key] = value;
-    }, this);
-
-    doc.save(this._updateCallback.bind(this, req, res, doc));
-
-  }.bind(this));
+  this.Entity.update(req.body.id, this.process(req.body),
+    this._updateCallback.bind(this, req, res));
 };
 
 
 /**
- * Handle an update callback, this is the Model save callback.
+ * Handle an update callback, this is the Entity save callback.
  *
  * @param {Object} req The request Object.
  * @param {Object} res The response Object.
- * @param {mongoose.Document} doc The mongoose document.
  * @param {Error=} err Operation failed.
+ * @param {mongoose.Document} doc The mongoose document.
  * @protected
  */
-CrudCtrl.prototype._updateCallback = function(req, res, doc, err){
+CrudCtrl.prototype._updateCallback = function(req, res, err, doc){
 
   if (err) {
     this.addFlashError(req, err);
@@ -383,7 +368,7 @@ CrudCtrl.prototype._updateView = function(req, res) {
   // attempt to fetch the record...
   var query = new Object(null);
   query[this.opts.urlField] = req.params.id;
-  this.Model.findOne(query, function(err, doc){
+  this.Entity.readOne(query, function(err, doc){
     if (err) {
       this.addError(res, err);
       return res.render(this.opts.editView);
