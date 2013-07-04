@@ -99,8 +99,6 @@ Pagination.prototype.getLimitAndCount = function(query, skip, limit, done) {
     if (err) {
       return done(err);
     }
-
-    console.log('RES', typeof res[0], typeof res[1], typeof res[2]);
     done(null, res[0], res[1]);
   });
 };
