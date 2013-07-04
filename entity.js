@@ -43,6 +43,28 @@ Entity.prototype.readAll = function(done) {
 };
 
 /**
+ * Read a limited set of items.
+ *
+ * @param {?Object} query Narrow down the set, set to null for all.
+ * @param {number} skip starting position.
+ * @param {number} limit how many records to fetch.
+ * @param {Function(ts.error.Abstract=, Array.<mongoose.Document>=)} done callback.
+ */
+Entity.prototype.readLimit = function(query, skip, limit, done) {
+  throw new Error('Not Implemented');
+};
+
+/**
+ * Get the count of items.
+ *
+ * @param {?Object} query Narrow down the set, set to null for all.
+ * @param {Function(ts.error.Abstract=, number=)} done callback.
+ */
+Entity.prototype.count = function(query, done) {
+  throw new Error('Not Implemented');
+};
+
+/**
  * Update an entity item.
  *
  * @param {string} id the item id.
