@@ -29,7 +29,7 @@ var CrudCtrl = module.exports = function(Entity, baseUrl, optOpts){
   this._schemaViews = null;
   var defaultOpts = {
     baseUrl: baseUrl,
-    urlField: '_localUrl',
+    urlField: 'localUrl',
     nameField: 'name',
     idField: 'id',
     // A jade view
