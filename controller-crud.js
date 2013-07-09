@@ -222,6 +222,16 @@ CrudCtrl.prototype._createCallback = function(req, res, err, optDoc){
     return res.redirect(this.getBaseUrl(req) + '/add');
   }
 
+  if (!__.isObject(optDoc)) {
+    this.addFlashError(req, 'An error occured, please try again. #200');
+    return res.redirect(this.getBaseUrl(req) + '/add');
+  }
+
+  if (!__.isString(optDoc[this.opts.urlField])) {
+    this.addFlashError(req, 'An error occured, please try again. #201');
+    return res.redirect(this.getBaseUrl(req) + '/add');
+  }
+
   this.addFlashSuccess(req, optDoc);
   res.redirect(this.getBaseUrl(req) + '/' + optDoc[this.opts.urlField]);
 };
