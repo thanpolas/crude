@@ -4,6 +4,7 @@
 var fs = require('fs');
 var util = require('util');
 
+var mime = require('mime');
 var __ = require('lodash');
 var jade = require('jade');
 
@@ -217,19 +218,20 @@ CrudCtrl.prototype._create = function(req, res) {
  * @protected
  */
 CrudCtrl.prototype._createCallback = function(req, res, err, optDoc){
+  var rdrUrl = this.getBaseUrl(req) + '/add';
+
   if (err) {
-    this.addFlashError(req, err);
-    return res.redirect(this.getBaseUrl(req) + '/add');
+    return this.handleError(req, res, err, rdrUrl);
   }
 
   if (!__.isObject(optDoc)) {
-    this.addFlashError(req, 'An error occured, please try again. #200');
-    return res.redirect(this.getBaseUrl(req) + '/add');
+    return this.handleError(req, res, new Error('An error occured, please' +
+      ' try again. #200'), rdrUrl);
   }
 
   if (!__.isString(optDoc[this.opts.urlField])) {
-    this.addFlashError(req, 'An error occured, please try again. #201');
-    return res.redirect(this.getBaseUrl(req) + '/add');
+    return this.handleError(req, res, new Error('An error occured, please' +
+      ' try again. #201'), rdrUrl);
   }
 
   this.addFlashSuccess(req, optDoc);
@@ -339,9 +341,7 @@ CrudCtrl.prototype._update = function(req, res) {
 CrudCtrl.prototype._updateCallback = function(req, res, err, doc){
 
   if (err) {
-    this.addFlashError(req, err);
-    // log.fine('_updateCallback() :: Edit item fail:', err.message);
-    return res.redirect(req.header('Referer'));
+    return this.handleError(req, res, err, req.header('Referer'));
   }
 
   var finalPath = req.url.split('/').pop();
@@ -432,3 +432,25 @@ CrudCtrl.prototype.process = function(params) {
   return outObj;
 };
 
+/**
+ * Handle an error properly depending on request Content-Type
+ * 
+ * @param {Object} req The request Object.
+ * @param {Object} res The response Object.
+ * @param {Error=} err Operation failed.
+ * @param {string} redirectUrl Define a redirect url.
+ */
+CrudCtrl.prototype.handleError = function(req, res, err, redirectUrl) {
+  switch(mime.extension(req.header('Accept'))) {
+  case 'json':
+    res.statusCode = 400;
+    res.contentType('json');
+    res.write(JSON.stringify(err));
+    res.end();
+    break;
+  default:
+    this.addFlashError(req, err);
+    res.redirect(redirectUrl);
+    break;
+  }
+};
