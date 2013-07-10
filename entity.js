@@ -6,11 +6,15 @@
  * The base Entity Class all entities extend from.
  *
  * @param {mongoose.Model} Model the model that this entity relates to.
+ * @param {Object=} optUdo Optionally define the current handling user.
  * @constructor
  */
-var Entity = module.exports = function(Model) {
+var Entity = module.exports = function(Model, optUdo) {
   /** @type {mongoose.Model} The mongoose model */
   this.Model = Model;
+
+  /** @type {?Object} The current user or null for anonymous */
+  this.udo = optUdo || null;
 };
 
 /**
