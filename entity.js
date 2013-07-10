@@ -46,11 +46,13 @@ Entity.prototype.readOne = function(id, done) {
 };
 
 /**
- * Read all items, do practice common sense!
+ * Read items based on query or if not defined, read all items. 
+ * Do practice common sense!
  *
+ * @param {Object|string=} optQuery Optionally define a query to limit results.
  * @param {Function(ts.error.Abstract=, mongoose.Document=)} done callback.
  */
-Entity.prototype.readAll = function(done) {
+Entity.prototype.read = function(optQuery, done) {
   throw new Error('Not Implemented');
 };
 
