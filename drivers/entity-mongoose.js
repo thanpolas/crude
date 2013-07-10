@@ -49,7 +49,8 @@ Entity.prototype.readOne = function(id, done) {
 };
 
 /**
- * Read all items, do practice common sense!
+ * Read items based on query or if not defined, read all items. 
+ * Do practice common sense!
  *
  * @param {Object=} optQuery Limit the results.
  * @param {Function(ts.error.Abstract=, mongoose.Document=)} done callback.
