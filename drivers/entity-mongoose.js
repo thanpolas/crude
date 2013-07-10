@@ -4,7 +4,7 @@
 var util = require('util');
 
 var __ = require('lodash');
-var Entity = require('../entity');
+var EntityCrud = require('../entity');
 
 /**
  * The base Entity Class all entities extend from.
@@ -15,9 +15,9 @@ var Entity = require('../entity');
  * @extends {crude.Entity}
  */
 var Entity = module.exports = function(Model, optUdo) {
-  Entity.call(this, Model, optUdo);
+  EntityCrud.call(this, Model, optUdo);
 };
-util.inherits(Entity, Entity);
+util.inherits(Entity, EntityCrud);
 
 /**
  * Create an entity item.
