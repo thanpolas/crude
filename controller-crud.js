@@ -40,9 +40,10 @@ var CrudCtrl = module.exports = function(Entity, baseUrl, optOpts){
     expandPaths: false,
     // paths to exclude when displaying
     viewExcludePaths: [],
+    // define if there's a creator id field
+    creatorField: null,
   };
-  this.opts = __.extend(defaultOpts, optOpts || {});
-
+  this.opts = __.defaults(optOpts, defaultOpts);
   // set default view template locations
   this.views = {
     add: __dirname + '/views/add.jade',
@@ -67,9 +68,6 @@ var CrudCtrl = module.exports = function(Entity, baseUrl, optOpts){
   }, this);
 };
 util.inherits(CrudCtrl, CrudCmd);
-
-/** @define {string} The view key in which the output will be available.  */
-CrudCtrl.VIEW_OUTPUT_KEY = 'crudView';
 
 /**
  * Mark the proto to check for proper inheritance of methods,
