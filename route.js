@@ -3,30 +3,24 @@
  */
 
 var CrudCtrl = require('./controller-crud');
+var EntityCrud = require('./entity');
 
 var route = module.exports = {};
-
-
 
 /**
  * Create CRUD routes.
  *
  * @param {express} app The express instance.
- * @param {mongoose.Model} Model The mongoose model.
  * @param {string} baseUrl The base URL to attach the routes.
- * @param {crude.ControllerCrud=} optsCtrl an instance of crud controller.
+ * @param {crude.Entity=} Entity an instance of the Entity class.
  */
-route.add = function(app, Model, baseUrl, optCtrl) {
-  var crudCtrl;
-  if (optCtrl) {
-    if (optCtrl instanceof CrudCtrl || true === optCtrl._isCrude) {
-      crudCtrl = optCtrl;
-    }
+route.add = function(app, baseUrl, Entity) {
+
+  if (!(Entity instanceof EntityCrud)) {
+    throw new Error('Entity argument not instance of crude.Entity');
   }
 
-  if (!crudCtrl) {
-    crudCtrl = new CrudCtrl(Model, baseUrl);
-  }
+  var crudCtrl = new CrudCtrl(Entity, baseUrl);
 
   route.addRaw(app, baseUrl, crudCtrl);
 };
