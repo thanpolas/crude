@@ -14,7 +14,7 @@ var tplHelpers = require('./tpl-helpers.js');
 /**
  * The CRUD Controller
  *
- * @param {crude.Entity} Entity an instance of the Entity class.
+ * @param {crude.Entity} Entity The Entity class Ctor.
  * @param {string} baseUrl The base url.
  * @param {Object=} optOpts Optionally define options.
  * @contructor
@@ -23,7 +23,6 @@ var tplHelpers = require('./tpl-helpers.js');
 var CrudCtrl = module.exports = function(Entity, baseUrl, optOpts){
   CrudCmd.apply(this, arguments);
 
-  this.Entity = Entity;
   this.baseUrl = baseUrl;
   this._schemaViews = null;
   var defaultOpts = {
@@ -151,8 +150,8 @@ CrudCtrl.prototype._getSchema = function() {
   if (this._schemaViews) {
     return this._schemaViews;
   }
-
-  var schemaViews = this._schemaViews = Object.create(this.Entity.Model.schema.paths);
+  var entity = new this.Entity();
+  var schemaViews = this._schemaViews = Object.create(entity.Model.schema.paths);
 
   __.forIn(schemaViews, function(schemaItem, path) {
     schemaViews[path]._viewData = {

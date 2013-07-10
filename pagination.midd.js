@@ -23,11 +23,11 @@ var Pagination = module.exports = function(){
 /**
  * Prepare and configure a pagination middleware.
  *
- * @param {crude.Entity} entity An instance of the Entity class.
+ * @param {crude.Entity} Entity The Entity class Ctor.
  * @param {Object=} optObj a hash with options.
  * @return {Function} The middleware.
  */
-Pagination.prototype.paginate = function(entity, optOpts) {
+Pagination.prototype.paginate = function(Entity, optOpts) {
 
   var defaultOpts = {
     limit: 6,
@@ -35,7 +35,7 @@ Pagination.prototype.paginate = function(entity, optOpts) {
   };
   var opts = __.extend(defaultOpts, optOpts || {});
 
-  this.entity = entity;
+  this.Entity = Entity;
 
   return this._paginateMiddleware.bind(this, opts);
 
@@ -55,8 +55,9 @@ Pagination.prototype._paginateMiddleware = function(opts, req, res, next) {
   var page = sanitize(req.query.page).toInt() || 1;
   var limit = sanitize(req.query.show).toInt() || opts.limit;
   var skip = (page - 1) * limit;
+  var entity = new this.Entity(req.user);
 
-  this.getLimitAndCount(opts.query, skip, limit, function(err, items, count){
+  this.getLimitAndCount(opts.query, skip, limit, entity, function(err, items, count){
     if (err) {
       // TODO handle this better
       return next(err);
@@ -88,13 +89,14 @@ Pagination.prototype._paginateMiddleware = function(opts, req, res, next) {
  * @param {?Object} query Narrow down the set, set to null for all.
  * @param {number} skip starting position.
  * @param {number} limit how many records to fetch.
+ * @param {crude.Entity} entity an entity instance.
  * @param {Function(Error=, Array, number)} done Callback will contain an
  *   Array of mongoose documents and the total count.
  */
-Pagination.prototype.getLimitAndCount = function(query, skip, limit, done) {
+Pagination.prototype.getLimitAndCount = function(query, skip, limit, entity, done) {
   async.parallel([
-    this.entity.readLimit.bind(this.entity, query, skip, limit),
-    this.entity.count.bind(this.entity),
+    entity.readLimit.bind(this.entity, query, skip, limit),
+    entity.count.bind(this.entity),
   ], function(err, res){
     if (err) {
       return done(err);
