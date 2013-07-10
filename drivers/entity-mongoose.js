@@ -51,10 +51,18 @@ Entity.prototype.readOne = function(id, done) {
 /**
  * Read all items, do practice common sense!
  *
+ * @param {Object=} optQuery Limit the results.
  * @param {Function(ts.error.Abstract=, mongoose.Document=)} done callback.
  */
-Entity.prototype.readAll = function(done) {
-  this.Model.find(done);
+Entity.prototype.read = function(optQuery, done) {
+  var query = {};
+  if (__.isFunction(optQuery)) {
+    done = optQuery;
+  } else if (__.isObject(optQuery)) {
+    query = optQuery;
+  }
+
+  this.Model.find(query).exec(done);
 };
 
 /**
