@@ -18,6 +18,14 @@ var Entity = module.exports = function(Model, optUdo) {
 };
 
 /**
+ * Set the current user data object
+ * @param {Object} udo A User Data Object.
+ */
+Entity.prototype.setUdo = function(udo) {
+  this.udo = udo;
+};
+
+/**
  * Create an entity item.
  *
  * @param {Object} itemData The data to use for creating.
