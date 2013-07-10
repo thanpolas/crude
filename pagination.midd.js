@@ -95,8 +95,8 @@ Pagination.prototype._paginateMiddleware = function(opts, req, res, next) {
  */
 Pagination.prototype.getLimitAndCount = function(query, skip, limit, entity, done) {
   async.parallel([
-    entity.readLimit.bind(this.entity, query, skip, limit),
-    entity.count.bind(this.entity),
+    entity.readLimit.bind(entity, query, skip, limit),
+    entity.count.bind(entity),
   ], function(err, res){
     if (err) {
       return done(err);
