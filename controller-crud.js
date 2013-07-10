@@ -40,8 +40,6 @@ var CrudCtrl = module.exports = function(Entity, baseUrl, optOpts){
     expandPaths: false,
     // paths to exclude when displaying
     viewExcludePaths: [],
-    // define if there's a creator id field
-    creatorField: null,
   };
   this.opts = __.defaults(optOpts, defaultOpts);
   // set default view template locations
