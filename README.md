@@ -23,7 +23,6 @@ This package assumes you have the following stack:
 
 It's a main goal to expand the stack and make Crude more flexible.
 
-
 ## Authors
 
 * [@thanpolas][thanpolas]
