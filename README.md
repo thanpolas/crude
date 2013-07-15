@@ -28,7 +28,11 @@ It's a main goal to expand the stack and make Crude more flexible.
 * [@thanpolas][thanpolas]
 
 ## Release History
-- **v0.0.1**, *21 Jun 2013*
+
+- **v0.0.3**, *15 Jul 2013*
+  - Integrated [Middlewarify](https://github.com/thanpolas/middlewarify) and made all Entity primitive methods middleware.
+  - Added Entity tests
+- **v0.0.2**, *21 Jun 2013*
   - Big Bang
 
 ## License
