@@ -24,7 +24,7 @@ var Entity = module.exports = function(Model, optUdo) {
   midd.make(this, 'readOne', this._readOne);
   midd.make(this, 'readLimit', this._readLimit);
   midd.make(this, 'update', this._update);
-  midd.make(this, 'delete  ', this._delete  );
+  midd.make(this, 'delete', this._delete  );
   midd.make(this, 'count', this._count);
 };
 
