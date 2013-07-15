@@ -81,8 +81,6 @@ suite('2. Entity', function() {
       assert.equal(spyUpdate.args[0][0].message, message, 'Error Message of "update" should be "Not Implemented"');
       assert.equal(spyDelete.args[0][0].message, message, 'Error Message of "delete" should be "Not Implemented"');
       assert.equal(spyCount.args[0][0].message, message, 'Error Message of "count" should be "Not Implemented"');
-
-
     });
   });
 });
