@@ -1,5 +1,5 @@
 /**
- * @fileOverview Testing the model validators.
+ * @fileOverview Testing the Entity interface.
  */
 
 // var sinon  = require('sinon');
