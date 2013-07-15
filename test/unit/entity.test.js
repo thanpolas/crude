@@ -48,8 +48,6 @@ suite('2. Entity', function() {
       assert.isFunction(ent.delete.use, 'Entity should have a "delete.use" method');
       assert.isFunction(ent.count.use, 'Entity should have a "count.use" method');
     });
-
-
     test('2.1.4 Primitive methods are not implemented', function(){
       var spyCreate = sinon.spy();
       var spyRead = sinon.spy();
@@ -67,24 +65,22 @@ suite('2. Entity', function() {
       ent.delete(spyDelete);
       ent.count(spyCount);
 
-      console.log('create:', spyCreate.args[0]);
+      assert.instanceOf(spyCreate.args[0][0], Error, 'first arg should be instanceOf Error');
+      assert.instanceOf(spyRead.args[0][0], Error, 'first arg should be instanceOf Error');
+      assert.instanceOf(spyReadOne.args[0][0], Error, 'first arg should be instanceOf Error');
+      assert.instanceOf(spyReadLimit.args[0][0], Error, 'first arg should be instanceOf Error');
+      assert.instanceOf(spyUpdate.args[0][0], Error, 'first arg should be instanceOf Error');
+      assert.instanceOf(spyDelete.args[0][0], Error, 'first arg should be instanceOf Error');
+      assert.instanceOf(spyCount.args[0][0], Error, 'first arg should be instanceOf Error');
 
-      assert.instanceOf(spyCreate.args[0], Error, 'first arg should be instanceOf Error');
-      assert.instanceOf(spyRead.args[0], Error, 'first arg should be instanceOf Error');
-      assert.instanceOf(spyReadOne.args[0], Error, 'first arg should be instanceOf Error');
-      assert.instanceOf(spyReadLimit.args[0], Error, 'first arg should be instanceOf Error');
-      assert.instanceOf(spyUpdate.args[0], Error, 'first arg should be instanceOf Error');
-      assert.instanceOf(spyDelete.args[0], Error, 'first arg should be instanceOf Error');
-      assert.instanceOf(spyCount.args[0], Error, 'first arg should be instanceOf Error');
-
-      var message = 'Not Implelemted';
-      assert.equal(message, spyCreate.args[0], 'Error Message should be "Not Implemented"');
-      assert.equal(message, spyRead.args[0], 'Error Message should be "Not Implemented"');
-      assert.equal(message, spyReadOne.args[0], 'Error Message should be "Not Implemented"');
-      assert.equal(message, spyReadLimit.args[0], 'Error Message should be "Not Implemented"');
-      assert.equal(message, spyUpdate.args[0], 'Error Message should be "Not Implemented"');
-      assert.equal(message, spyDelete.args[0], 'Error Message should be "Not Implemented"');
-      assert.equal(message, spyCount.args[0], 'Error Message should be "Not Implemented"');
+      var message = 'Not Implemented';
+      assert.equal(spyCreate.args[0][0].message, message, 'Error Message of "create" should be "Not Implemented"');
+      assert.equal(spyRead.args[0][0].message, message, 'Error Message of "read" should be "Not Implemented"');
+      assert.equal(spyReadOne.args[0][0].message, message, 'Error Message of "readOne" should be "Not Implemented"');
+      assert.equal(spyReadLimit.args[0][0].message, message, 'Error Message of "readLimit" should be "Not Implemented"');
+      assert.equal(spyUpdate.args[0][0].message, message, 'Error Message of "update" should be "Not Implemented"');
+      assert.equal(spyDelete.args[0][0].message, message, 'Error Message of "delete" should be "Not Implemented"');
+      assert.equal(spyCount.args[0][0].message, message, 'Error Message of "count" should be "Not Implemented"');
 
 
     });
