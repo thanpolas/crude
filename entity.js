@@ -19,13 +19,13 @@ var Entity = module.exports = function(Model, optUdo) {
   this.udo = optUdo || null;
 
   // Create primitive middlewares
-  midd.make(this, 'create', this._create);
-  midd.make(this, 'read', this._read);
-  midd.make(this, 'readOne', this._readOne);
-  midd.make(this, 'readLimit', this._readLimit);
-  midd.make(this, 'update', this._update);
-  midd.make(this, 'delete', this._delete  );
-  midd.make(this, 'count', this._count);
+  midd.make(this, 'create', this._create.bind(this));
+  midd.make(this, 'read', this._read.bind(this));
+  midd.make(this, 'readOne', this._readOne.bind(this));
+  midd.make(this, 'readLimit', this._readLimit.bind(this));
+  midd.make(this, 'update', this._update.bind(this));
+  midd.make(this, 'delete', this._delete.bind(this));
+  midd.make(this, 'count', this._count.bind(this));
 };
 
 /**
