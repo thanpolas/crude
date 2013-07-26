@@ -39,9 +39,13 @@ Entity.prototype._create = function(itemData, done) {
  * @override
  */
 Entity.prototype._readOne = function(id, done) {
-  var query = new Object(null);
-  var queryFn = (__.isObject(id)) ? this.Model.findOne : this.Model.findById;
-  queryFn(query, done);
+  var query;
+  if (__.isObject(id)) {
+    query = this.Model.findOne.bind(this.Model);
+  } else {
+    query = this.Model.findById.bind(this.Model);
+  }
+  query(id, done);
 };
 
 /**
@@ -99,11 +103,18 @@ Entity.prototype._count = function(query, done) {
  * @override
  */
 Entity.prototype._update = function(id, itemData, done) {
-  var query = (__.isObject(id)) ? this.Model.findOne : this.Model.findById;
+  var query;
+  if (__.isObject(id)) {
+    query = this.Model.findOne.bind(this.Model);
+  } else {
+    query = this.Model.findById.bind(this.Model);
+  }
 
   query(id, function(err, doc){
     if (err) { return done(err); }
-
+    if (!__.isObject(doc)) {
+      return done(new Error('record not found'));
+    }
     __.forOwn(itemData, function(value, key) {
       doc[key] = value;
     }, this);
