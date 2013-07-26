@@ -40,14 +40,8 @@ Entity.prototype._create = function(itemData, done) {
  */
 Entity.prototype._readOne = function(id, done) {
   var query = new Object(null);
-
-  if (__.isObject(id)) {
-    query = id;
-  } else {
-    query.id = id;
-  }
-
-  this.Model.findOne(query, done);
+  var queryFn = (__.isObject(id)) ? this.Model.findOne : this.Model.findById;
+  queryFn(query, done);
 };
 
 /**
@@ -99,16 +93,16 @@ Entity.prototype._count = function(query, done) {
 /**
  * Update an entity item.
  *
- * @param {string} id the item id.
+ * @param {string|Object} id the item id or query for item.
  * @param {Object} itemData The data to use for creating.
  * @param {Function(ts.error.Abstract=, mongoose.Document=)} done callback.
  * @override
  */
 Entity.prototype._update = function(id, itemData, done) {
-  this.Model.findById(id, function(err, doc){
-    if (err) {
-      return done(err);
-    }
+  var query = (__.isObject(id)) ? this.Model.findOne : this.Model.findById;
+
+  query(id, function(err, doc){
+    if (err) { return done(err); }
 
     __.forOwn(itemData, function(value, key) {
       doc[key] = value;
