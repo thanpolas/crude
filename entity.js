@@ -1,6 +1,8 @@
 /**
  * @fileOverview The Entity base class.
  */
+var EventEmitter = require('events').EventEmitter;
+var util = require('util');
 
 var midd = require('middlewarify');
 
@@ -10,8 +12,11 @@ var midd = require('middlewarify');
  * @param {mongoose.Model} Model the model that this entity relates to.
  * @param {Object=} optUdo Optionally define the current handling user.
  * @constructor
+ * @extends {events.EventEmitter}
  */
 var Entity = module.exports = function(Model, optUdo) {
+  EventEmitter.call(this);
+
   /** @type {mongoose.Model} The mongoose model */
   this.Model = Model;
 
@@ -27,6 +32,7 @@ var Entity = module.exports = function(Model, optUdo) {
   midd.make(this, 'delete', this._delete.bind(this));
   midd.make(this, 'count', this._count.bind(this));
 };
+util.inherits(Entity, EventEmitter);
 
 /**
  * Set the current user data object
