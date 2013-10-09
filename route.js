@@ -3,7 +3,7 @@
  */
 
 var CrudCtrl = require('./controller-crud');
-var EntityCrud = require('./entity');
+var Entity = require('node-entity');
 
 var route = module.exports = {};
 
@@ -12,12 +12,12 @@ var route = module.exports = {};
  *
  * @param {express} app The express instance.
  * @param {string} baseUrl The base URL to attach the routes.
- * @param {crude.Entity=} Entity an instance of the Entity class.
+ * @param {Entity} Ent an instance of the Entity class.
  */
-route.add = function(app, baseUrl, Entity) {
+route.add = function(app, baseUrl, Ent) {
 
-  if (!(Entity instanceof EntityCrud)) {
-    throw new Error('Entity argument not instance of crude.Entity');
+  if (!(Ent instanceof Entity)) {
+    throw new TypeError('Entity argument not instance of Entity (node-entity)');
   }
 
   var crudCtrl = new CrudCtrl(Entity, baseUrl);
