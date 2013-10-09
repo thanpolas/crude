@@ -36,7 +36,7 @@ It's a main goal to expand the stack and make Crude more flexible.
   - Big Bang
 
 ## License
-Copyright 2013 Talksession
+Copyright 2013 TalkSession
 
 Licensed under the [MIT License](LICENSE-MIT)
 
