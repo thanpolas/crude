@@ -2,7 +2,7 @@
 
 Seamless CRUD control operations for node.
 
-Currently works with Express and Mongoose.
+Currently works with Express and [Mongoose or Sequelize].
 
 ## Install
 
@@ -11,6 +11,8 @@ npm install crude --save
 ```
 
 ## Documentation
+
+Still in alpha
 
 ### Stack
 
@@ -21,7 +23,6 @@ This package assumes you have the following stack:
 * connect-flash
 * Jade
 
-It's a main goal to expand the stack and make Crude more flexible.
 
 ## Authors
 
@@ -29,6 +30,7 @@ It's a main goal to expand the stack and make Crude more flexible.
 
 ## Release History
 
+- **v0.0.4**, *10 Oct 2013* Entities moved to [their own repo](https://github.com/thanpolas/entity)
 - **v0.0.3**, *15 Jul 2013*
   - Integrated [Middlewarify](https://github.com/thanpolas/middlewarify) and made all Entity primitive methods middleware.
   - Added Entity tests
