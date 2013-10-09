@@ -30,7 +30,7 @@ This package assumes you have the following stack:
 
 ## Release History
 
-- **v0.0.10**, *10 Oct 2013* Entities moved to [their own repo](https://github.com/thanpolas/entity)
+- **v0.0.11**, *10 Oct 2013* Entities moved to [their own repo](https://github.com/thanpolas/entity)
 - **v0.0.3**, *15 Jul 2013*
   - Integrated [Middlewarify](https://github.com/thanpolas/middlewarify) and made all Entity primitive methods middleware.
   - Added Entity tests
