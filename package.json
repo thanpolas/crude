@@ -36,8 +36,8 @@
     "jade": "~0.31.2",
     "async": "~0.2.9",
     "mime": "~1.2.9",
-    "middlewarify": "~0.0.2",
-    "node-entity": "0.0.4"
+    "middlewarify": "~0.0.4",
+    "node-entity": "0.0.5"
   },
   "devDependencies": {
     "sinon": "~1.7.3",
