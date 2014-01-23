@@ -37,7 +37,8 @@
     "async": "~0.2.9",
     "mime": "~1.2.9",
     "middlewarify": "~0.0.4",
-    "node-entity": "0.0.7"
+    "node-entity": "0.0.7",
+    "mschema": "~0.5.2"
   },
   "devDependencies": {
     "sinon": "~1.7.3",
