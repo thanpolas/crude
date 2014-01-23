@@ -147,7 +147,7 @@ CrudCtrl.prototype._getSchema = function() {
     return this._schemaViews;
   }
   var entity = new this.Entity();
-  var schemaViews = this._schemaViews = Object.create(entity.Model.schema.paths);
+  var schemaViews = this._schemaViews = entity.getSchema();
 
   __.forIn(schemaViews, function(schemaItem, path) {
     schemaViews[path]._viewData = {
