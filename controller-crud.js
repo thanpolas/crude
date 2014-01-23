@@ -126,37 +126,14 @@ CrudCtrl.prototype.getBaseUrl = function(req) {
  */
 CrudCtrl.prototype._prepResponse = function(req, res, next) {
   res.locals.opts = this.opts;
-  res.locals.schema = this._getSchema();
+  var entity = new this.Entity();
+  res.locals.schema = entity.getSchema();
   res.locals.currentUser = req.user;
   // all template functions
   res.locals.fn = {};
   __.extend(res.locals.fn, tplHelpers);
 
   next();
-};
-
-/**
- * Add fields required for the views to render properly.
- *
- * Render at first runtime and serve cached afterwards.
- *
- * @return {Object} An extended mongoose schema.
- */
-CrudCtrl.prototype._getSchema = function() {
-  if (this._schemaViews) {
-    return this._schemaViews;
-  }
-  var entity = new this.Entity();
-  var schemaViews = this._schemaViews = entity.getSchema();
-
-  __.forIn(schemaViews, function(schemaItem, path) {
-    schemaViews[path]._viewData = {
-      canShow: tplHelpers.canShow(schemaItem, this.opts),
-      name: tplHelpers.getName(path, this.opts),
-    };
-  }, this);
-
-  return schemaViews;
 };
 
 /**
