@@ -12,6 +12,8 @@ var tplHelpers = module.exports = {};
 tplHelpers.getValue = function(item, schemaItem) {
   var paths = schemaItem.path.split('.');
   var val = item[paths.shift()];
+
+  // mongoose may have nested objects, take care of that
   if (0 < paths.length) {
     paths.forEach(function(p){
       val = val[p];
