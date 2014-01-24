@@ -20,7 +20,7 @@ route.add = function(app, baseUrl, Ent) {
     throw new TypeError('Entity argument not instance of Entity (node-entity)');
   }
 
-  var crudCtrl = new CrudCtrl(Entity, baseUrl);
+  var crudCtrl = new CrudCtrl(Ent, baseUrl);
 
   route.addRaw(app, baseUrl, crudCtrl);
 };
