@@ -101,7 +101,6 @@ Pagination.prototype.getLimitAndCount = function(query, skip, limit, entity, don
     if (err) {
       return done(err);
     }
-    console.log('RESULT:', res);
     done(null, res[0], res[1]);
   });
 };

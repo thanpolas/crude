@@ -17,9 +17,9 @@ mixin viewItem(item, schema, opts)
 
   table.table.table-bordered
     -for schemaItem in schema
-      - if(schemaItem._viewData.canShow)
+      - if(schemaItem.canShow)
         tr
-          th #{schemaItem._viewData.name}
+          th #{schemaItem.name}
           td #{fn.getValue(item, schemaItem)}
 
   .row-fluid
