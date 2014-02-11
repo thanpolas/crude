@@ -4,6 +4,6 @@
 
 var crude = module.exports = {};
 
-crude.route = require('./route');
-crude.Controller = require('./controller');
-crude.ControllerCrud = require('./controller-crud');
+crude.route = require('./lib/route');
+crude.Controller = require('./lib/controller');
+crude.ControllerCrud = require('./lib/controller-crud');
