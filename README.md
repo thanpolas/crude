@@ -30,6 +30,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.1.0**, *12 Feb 2014* 
+  - Updated to Entity 0.1.x
 - **v0.0.12**, *10 Oct 2013* Bug fixes.
 - **v0.0.11**, *10 Oct 2013* Entities moved to [their own repo](https://github.com/thanpolas/entity)
 - **v0.0.3**, *15 Jul 2013*

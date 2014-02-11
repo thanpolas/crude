@@ -2,8 +2,6 @@
  * @fileOverview bootstrap file for crude
  */
 
-var crude = module.exports = {};
+var crude = module.exports = require('./lib/controller-crud-export');
 
-crude.route = require('./route');
-crude.Controller = require('./controller');
-crude.ControllerCrud = require('./controller-crud');
+crude.route = require('./lib/route');
