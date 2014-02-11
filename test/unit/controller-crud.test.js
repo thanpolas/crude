@@ -7,9 +7,7 @@ var chai = require('chai');
 var assert = chai.assert;
 
 // module to test
-var CtrlCrud = require('../../controller-crud');
-
-// var noop = function(){};
+var Crude = require('../../');
 
 suite('10. Controller CRUD', function() {
 
@@ -24,7 +22,7 @@ suite('10. Controller CRUD', function() {
   suite('10.1 Helper funcs', function() {
     var ctrlCrud;
     setup(function() {
-      ctrlCrud = new CtrlCrud();
+      ctrlCrud = new Crude();
     });
 
     test('10.1.1 process', function() {
