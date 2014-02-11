@@ -37,7 +37,6 @@
     "jade": "~0.31.2",
     "mime": "~1.2.9",
     "node-entity": "~0.1.1",
-    "mschema": "~0.5.2",
     "middlewarify": "~0.3.2",
     "inher": "~0.1.0",
     "bluebird": "~1.0.4"
