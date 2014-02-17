@@ -46,7 +46,7 @@
     "mocha": "~1.11.0",
     "chai": "~1.7.1",
     "grunt": "~0.4.1",
-    "grunt-release": "~0.3.5"
+    "grunt-release": "~0.7.0"
   },
   "peerDependencies": {},
   "keywords": [
