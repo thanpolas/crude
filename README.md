@@ -29,6 +29,8 @@ This package assumes you have the following stack:
 * [@thanpolas][thanpolas]
 
 ## Release History
+- **v0.2.0**, *17 Feb 2014*
+    - Upgrade to 0.2.1 Entity and Cip packages.
 - **v0.1.1**, *12 Feb 2014*
     - Now accepts both an instance and a constructor for Entity DI.
     - Ctor optimizations.
