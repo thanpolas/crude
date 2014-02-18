@@ -29,6 +29,8 @@ This package assumes you have the following stack:
 * [@thanpolas][thanpolas]
 
 ## Release History
+- **v0.2.2**, *18 Feb 2014*
+    - Bug fixes.
 - **v0.2.1**, *17 Feb 2014*
     - Lazy instantiate Entities.
 - **v0.2.0**, *17 Feb 2014*
