@@ -29,6 +29,10 @@ This package assumes you have the following stack:
 * [@thanpolas][thanpolas]
 
 ## Release History
+- **v0.2.3**, *19 Feb 2014*
+    - Upgrade all dependencies to latest.
+    - Perform a READ after an UPDATE.
+    - Bug fixes.
 - **v0.2.2**, *18 Feb 2014*
     - Bug fixes.
 - **v0.2.1**, *17 Feb 2014*
