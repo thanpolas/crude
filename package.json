@@ -36,8 +36,8 @@
     "lodash": "~2.4.1",
     "jade": "~1.1.5",
     "mime": "~1.2.11",
-    "node-entity": "~0.2.1",
-    "middlewarify": "~0.3.3",
+    "node-entity": "~0.2.2",
+    "middlewarify": "~0.3.4",
     "cip": "~0.2.1",
     "bluebird": "~1.0.5"
   },
