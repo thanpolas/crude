@@ -22,4 +22,8 @@ block crudcontent
             button(type="button",data-dismiss="alert").close &times;
             strong Success!
             | Item was successfully edited!
-        mixin viewItem(item, schema, opts)
+
+        - if (item)
+          mixin viewItem(item, schema, opts)
+        - else
+          p No item set

@@ -26,6 +26,8 @@ block crudcontent
         ul
           each item in items
             li
+              p Goal: #{schema.id} #{schema.id.canShow}
+
               mixin viewItem(item, schema, opts)
 
         .row-fluid.pagination

@@ -10,17 +10,19 @@
 //- @param {mongoose.Model.schema.path} schema
 //- @param {Object=} opts Options for rendering.
 mixin viewItem(item, schema, opts)
-  h4
+  h4 OHOHOHOH #{schema.id}
     a(href="#{opts.baseUrl}/#{item[opts.urlField]}", title="#{item[opts.nameField]}")
-      | #{item[opts.nameField]}
+      | #{item[opts.nameField]} HEHEHEHE
 
+  each schemaKey in Object.keys(schema)
+    p Key: #{schemaKey}
 
   table.table.table-bordered
-    -for schemaItem in schema
-      - if(schemaItem.canShow)
-        tr
-          th #{schemaItem.name}
-          td #{fn.getValue(item, schemaItem)}
+    each schemaItem, key in schema
+      //- - if(schemaItem.canShow)
+      tr
+        th AAAAAAAAAAAAA #{schemaItem.name}
+        td #{fn.getValue(item, schemaItem)}
 
   .row-fluid
     .span12
