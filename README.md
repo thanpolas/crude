@@ -29,6 +29,8 @@ This package assumes you have the following stack:
 * [@thanpolas][thanpolas]
 
 ## Release History
+- **v0.3.5**, *23 Feb 2014*
+    - Implement DELETE, about time.
 - **v0.3.4**, *23 Feb 2014*
     - Fix symbol bug.
 - **v0.3.3**, *23 Feb 2014*
