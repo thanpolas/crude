@@ -29,6 +29,8 @@ This package assumes you have the following stack:
 * [@thanpolas][thanpolas]
 
 ## Release History
+- **v0.3.3**, *22 Feb 2014*
+    - Better handling of CRUD responses based on requested `accepts` header.
 - **v0.3.2**, *22 Feb 2014*
     - Update router module to new API.
 - **v0.3.1**, *22 Feb 2014*
