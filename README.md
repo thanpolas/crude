@@ -29,6 +29,8 @@ This package assumes you have the following stack:
 * [@thanpolas][thanpolas]
 
 ## Release History
+- **v0.3.1**, *22 Feb 2014*
+    - Removed all args from ctor, introduced `setEntity()` and `setOptions`() methods.
 - **v0.3.0**, *22 Feb 2014*
     - Changed constructor signature, now only accepts an Entity and optional options.
 - **v0.2.3**, *19 Feb 2014*
