@@ -39,7 +39,8 @@
     "node-entity": "~0.2.2",
     "middlewarify": "~0.3.4",
     "cip": "~0.2.1",
-    "bluebird": "~1.0.5"
+    "bluebird": "~1.0.5",
+    "httplink": "0.0.1"
   },
   "devDependencies": {
     "sinon": "~1.8.2",
