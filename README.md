@@ -29,6 +29,8 @@ This package assumes you have the following stack:
 * [@thanpolas][thanpolas]
 
 ## Release History
+- **v0.3.2**, *22 Feb 2014*
+    - Update router module to new API.
 - **v0.3.1**, *22 Feb 2014*
     - Removed all args from ctor, introduced `setEntity()` and `setOptions`() methods.
 - **v0.3.0**, *22 Feb 2014*
