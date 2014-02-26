@@ -16,7 +16,7 @@ mixin viewItem(item, schema, opts)
 
   table.table.table-bordered
     each schemaItem, key in schema
-      - if (schemaItem.canShow)
+      - if (schemaItem.canShow && opts.viewExcludePaths.indexOf(key) === -1)
         tr
           th #{schemaItem.name}
           td #{fn.getValue(item, schemaItem)}
