@@ -11,7 +11,7 @@
 //- @param {Object=} opts Options for rendering.
 mixin viewItem(item, schema, opts)
   h4
-    a(href="#{opts.baseUrl}/#{item[opts.urlField]}", title="#{item[opts.nameField]}")
+    a(href="/#{opts.renderedBaseUrl}#{item[opts.urlField]}", title="#{item[opts.nameField]}")
       | #{item[opts.nameField]}
 
   table.table.table-bordered
@@ -23,4 +23,4 @@ mixin viewItem(item, schema, opts)
 
   .row-fluid
     .span12
-      a(href="#{opts.baseUrl}/#{item[opts.urlField]}/edit").btn.btn-small.btn-primary Edit
+      a(href="/#{opts.renderedBaseUrl}#{item[opts.urlField]}/edit").btn.btn-small.btn-primary Edit
