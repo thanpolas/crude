@@ -29,6 +29,14 @@ This package assumes you have the following stack:
 * [@thanpolas][thanpolas]
 
 ## Release History
+- **v0.3.6**, *27 Feb 2014*
+    - Views piping fixes.
+    - Make the entity methods configurable
+    - honor excludePaths in item view
+    - refactor how baseUrl is produced
+    - rewire how update handles success
+    - inject query callback on pagination
+    - accept itemView and listView options
 - **v0.3.5**, *23 Feb 2014*
     - Implement DELETE, about time.
 - **v0.3.4**, *23 Feb 2014*
