@@ -29,6 +29,8 @@ This package assumes you have the following stack:
 * [@thanpolas][thanpolas]
 
 ## Release History
+- **v0.3.7**, *04 Mar 2014*
+    - Fix baseUrl() method for urls with no :id.
 - **v0.3.6**, *27 Feb 2014*
     - Views piping fixes.
     - Make the entity methods configurable
