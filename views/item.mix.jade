@@ -11,7 +11,7 @@
 //- @param {Object=} opts Options for rendering.
 mixin viewItem(item, schema, opts)
   h4
-    a(href="#{opts.itemUrl}", title="#{item[opts.nameField]}")
+    a(href="#{item[opts.urlField]}", title="#{item[opts.nameField]}")
       | #{item[opts.nameField]}
 
   table.table.table-bordered
