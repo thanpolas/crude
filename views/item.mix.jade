@@ -18,7 +18,11 @@ mixin viewItem(item, schema, opts)
     each schemaItem, key in schema
       - if (schemaItem.canShow && opts.viewExcludePaths.indexOf(key) === -1)
         tr
-          th #{schemaItem.name}
+          th
+            - if (opts.labels[schemaItem.name])
+              | #{opts.labels[schemaItem.name]}
+            - else
+              | #{schemaItem.name}
           td #{fn.getValue(item, schemaItem)}
 
   .row-fluid
