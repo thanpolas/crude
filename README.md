@@ -30,7 +30,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
-- **v0.3.8**, *11 Mar 2014*
+- **v0.3.9**, *11 Mar 2014*
+    - Fix list item link on default list view.
     - Allow Custom Labels for default views.
 - **v0.3.7**, *04 Mar 2014*
     - Fix baseUrl() method for urls with no :id.
