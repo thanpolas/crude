@@ -27,4 +27,4 @@ mixin viewItem(item, schema, opts)
 
   .row-fluid
     .span12
-      a(href="#{opts.itemUrl}edit").btn.btn-small.btn-primary Edit
+      a(href="#{item[opts.urlField]}/edit").btn.btn-small.btn-primary Edit
