@@ -30,6 +30,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.3.10**, *28 Mar 2014*
+    - Fix edit item bug for list view ONCE AND FOR ALL!!!! (ok maybe not).
 - **v0.3.9**, *11 Mar 2014*
     - Fix list item link on default list view.
     - Allow Custom Labels for default views.
