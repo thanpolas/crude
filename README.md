@@ -30,6 +30,11 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.4.0**, *12 Apr 2014*
+    - Added `ownUser` switch, will not enforce own user policy on CRUD ops.
+    - More customization options.
+    - Improved how errors are handled.
+    - Bug fixes
 - **v0.3.11**, *06 Apr 2014*
     - Create sanitizeResult option callback.
 - **v0.3.10**, *28 Mar 2014*
