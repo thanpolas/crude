@@ -30,6 +30,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.4.1**, *24 Apr 2014*
+    - Enable customizable entityCreate op.
 - **v0.4.0**, *12 Apr 2014*
     - Added `ownUser` switch, will not enforce own user policy on CRUD ops.
     - More customization options.
