@@ -30,6 +30,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.4.2**, *01 May 2014*
+    - Check for `req.body.id` first, `req.params.id` second on update.
 - **v0.4.1**, *24 Apr 2014*
     - Enable customizable entityCreate op.
 - **v0.4.0**, *12 Apr 2014*
