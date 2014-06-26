@@ -1,10 +1,9 @@
 /**
  * @fileOverview Will handle connectivity to the databases and alert on issues.
  */
-
 var EventEmitter = require('events').EventEmitter;
-var util = require('util');
 
+var cip = require('cip');
 var Promise = require('bluebird');
 var mongoose = require('mongoose');
 
@@ -12,6 +11,8 @@ var mongoose = require('mongoose');
 var userModel = require('./user.mongoose.model').getInstance();
 
 // var noop = function() {};
+
+var CeventEmitter = cip.cast(EventEmitter);
 
 /**
  * This module is an instance of EventEmitter.
@@ -24,8 +25,7 @@ var userModel = require('./user.mongoose.model').getInstance();
  * @constructor
  * @extends {events.EventEmitter}
  */
-var Conn = module.exports = function() {
-  EventEmitter.call(this);
+var Conn = module.exports = CeventEmitter.extendSingleton(function() {
 
   /** @type {boolean} In test mode use different connection settings */
   this._testMode = false;
@@ -42,8 +42,7 @@ var Conn = module.exports = function() {
 
   /** @type {?mongoose.connect} The mongoose connection object */
   this.db = null;
-};
-util.inherits(Conn, EventEmitter);
+});
 
 /**
  * Mongo ready states.
