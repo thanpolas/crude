@@ -48,7 +48,8 @@
     "chai": "~1.9.1",
     "grunt": "~0.4.5",
     "grunt-release": "~0.7.0",
-    "mongoose": "^3.8.12"
+    "mongoose": "^3.8.12",
+    "node-entity": "^0.2.4"
   },
   "peerDependencies": {},
   "keywords": [
