@@ -29,6 +29,7 @@ describe('Create OPs', function() {
         .expect(200)
         .end(function(err, res) {
           if (err) {
+            console.error('ERROR. Body:', res.body);
             done(err);
             return;
           }

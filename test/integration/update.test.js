@@ -1,5 +1,5 @@
 /**
- * @fileOverview Read OP tests.
+ * @fileOverview UPDATE OP tests.
  */
 var chai = require('chai');
 var expect = chai.expect;
@@ -7,15 +7,19 @@ var expect = chai.expect;
 var tester = require('../lib/tester.lib');
 var setupUsers = require('../lib/fixture-user.lib');
 
-describe('Read OPs', function() {
+describe('Update OPs', function() {
   this.timeout(5000);
 
   setupUsers.createUser();
 
-  describe('Read records', function () {
+  describe('Update records', function () {
     beforeEach(function(done) {
       var self = this;
-      this.req.get('/user')
+      this.req.post('/user/' + this.udo.id)
+        .send({
+          firstName: 'newFirst',
+          lastName: 'newLast',
+        })
         .expect(200)
         .end(function(err, res) {
           if (err) {
@@ -28,11 +32,8 @@ describe('Read OPs', function() {
           done();
         });
     });
-    it('Should have proper length', function() {
-      expect(this.body).to.have.length(2);
-    });
     it('Should have proper keys', function () {
-      expect(this.body[0]).to.have.keys([
+      expect(this.body).to.have.keys([
         'firstName',
         'lastName',
         'companyName',
@@ -45,15 +46,15 @@ describe('Read OPs', function() {
       ]);
     });
     it('Should have proper values', function () {
-      expect(this.body[0].firstName).to.equal('John');
-      expect(this.body[0].lastName).to.equal('Doe');
-      expect(this.body[0].companyName).to.equal('');
-      expect(this.body[0].email).to.equal('pleasant@hq.com');
-      expect(this.body[0].password).to.equal('123456');
-      expect(this.body[0].createdOn).to.match(tester.reIso8601);
-      expect(this.body[0].isVerified).to.equal(true);
-      expect(this.body[0].isDisabled).to.equal(false);
-      expect(this.body[0].isAdmin).to.equal(false);
+      expect(this.body.firstName).to.equal('newFirst');
+      expect(this.body.lastName).to.equal('newLast');
+      expect(this.body.companyName).to.equal('');
+      expect(this.body.email).to.equal('pleasant@hq.com');
+      expect(this.body.password).to.equal('123456');
+      expect(this.body.createdOn).to.match(tester.reIso8601);
+      expect(this.body.isVerified).to.equal(true);
+      expect(this.body.isDisabled).to.equal(false);
+      expect(this.body.isAdmin).to.equal(false);
     });
   });
 });
