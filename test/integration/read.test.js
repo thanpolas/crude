@@ -34,6 +34,7 @@ describe('Read OPs', function() {
     it('Should have proper keys', function () {
       expect(this.body[0]).to.have.keys([
         '_id',
+        'birthdate',
         'firstName',
         'lastName',
         'companyName',

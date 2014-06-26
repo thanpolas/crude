@@ -34,6 +34,8 @@ describe('Update OPs', function() {
     });
     it('Should have proper keys', function () {
       expect(this.body).to.have.keys([
+        '_id',
+        'birthdate',
         'firstName',
         'lastName',
         'companyName',

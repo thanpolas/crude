@@ -39,6 +39,7 @@ describe('Create OPs', function() {
     });
     it('Should have proper keys', function () {
       expect(this.body).to.have.keys([
+        '_id',
         'firstName',
         'lastName',
         'companyName',
