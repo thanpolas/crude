@@ -31,8 +31,9 @@ fixtures.createUser = function() {
   tester.setup(function(done) {
     Promise.all([
       this.userEnt.delete({email: userfix.one.email}),
-      this.userEnt.delete({email: 'new@demo.com'}),
+      this.userEnt.delete({email: userfix.two.email}),
       this.userEnt.delete({email: userfix.three.email}),
+      this.userEnt.delete({email: 'new@demo.com'}),
     ]).then(done.bind(null, null), done);
   });
 
@@ -41,6 +42,14 @@ fixtures.createUser = function() {
     this.userEnt.create(userfix.oneFull)
       .then(function(userDataObject) {
         self.udo = userDataObject;
+      }).then(done, done);
+  });
+
+  tester.setup(function(done) {
+    var self = this;
+    this.userEnt.create(userfix.two)
+      .then(function(userDataObject) {
+        self.udoTwo = userDataObject;
       }).then(done, done);
   });
 

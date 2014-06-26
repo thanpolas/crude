@@ -7,7 +7,7 @@ var expect = chai.expect;
 var tester = require('../lib/tester.lib');
 var setupUsers = require('../lib/fixture-user.lib');
 
-describe.only('Read OPs', function() {
+describe('Read OPs', function() {
   this.timeout(5000);
 
   setupUsers.createUser();
@@ -29,7 +29,7 @@ describe.only('Read OPs', function() {
         });
     });
     it('Should have proper length', function() {
-      expect(this.body).to.have.length(2);
+      expect(this.body).to.have.length(3);
     });
     it('Should have proper keys', function () {
       expect(this.body[0]).to.have.keys([
@@ -55,6 +55,38 @@ describe.only('Read OPs', function() {
       expect(this.body[0].isVerified).to.equal(true);
       expect(this.body[0].isDisabled).to.equal(false);
       expect(this.body[0].isAdmin).to.equal(false);
+    });
+  });
+
+  describe.only('Read filtered records', function () {
+    it('Email filter :: should have right results count', function(done) {
+      this.req.get('/user')
+        .query({email: 'pleasant@hq.com'})
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            console.error('ERROR. Body:', res.body);
+            done(err);
+            return;
+          }
+          expect(res.body).to.have.length(1);
+          done();
+        });
+    });
+    it('Date filter :: should have right results count', function(done) {
+      this.req.get('/user')
+        // .query({from: '1182850582748'})
+        .query({from: '2006-06-26T09:36:22.748Z'})
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            console.error('ERROR. Body:', res.body);
+            done(err);
+            return;
+          }
+          expect(res.body).to.have.length(2);
+          done();
+        });
     });
   });
 });

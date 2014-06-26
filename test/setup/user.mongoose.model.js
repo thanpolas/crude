@@ -43,6 +43,7 @@ User.Schema = {
   password: {type: String, required: true},
 
   createdOn: {type: Date, default: Date.now},
+  birthdate: {type: Date},
 
   // Roles and access
   isVerified: {type: Boolean, required: true, default: false},
