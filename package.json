@@ -28,7 +28,7 @@
   },
   "main": "./",
   "scripts": {
-    "test": "node_modules/.bin/mocha -u tdd -R spec test/unit"
+    "test": "node_modules/.bin/mocha -u tdd -R spec test/unit && node_modules/.bin/mocha -u bdd -R spec test/integration"
   },
   "dependencies": {
     "pagination": "~0.4.2",
