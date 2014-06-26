@@ -15,7 +15,7 @@ module.exports = crude.extendSingleton(function(){
   var opts = {
     baseUrl: '/user',
     idField: '_id',
-    noPagination: true,
+    pagination: false,
     showId: true,
     noViews: true,
   };
