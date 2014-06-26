@@ -58,7 +58,7 @@ describe('Read OPs', function() {
     });
   });
 
-  describe.only('Read filtered records', function () {
+  describe('Read filtered records', function () {
     it('Email filter :: should have right results count', function(done) {
       this.req.get('/user')
         .query({email: 'pleasant@hq.com'})
@@ -75,8 +75,8 @@ describe('Read OPs', function() {
     });
     it('Date filter :: should have right results count', function(done) {
       this.req.get('/user')
-        // .query({from: '1182850582748'})
-        .query({from: '2006-06-26T09:36:22.748Z'})
+        .query({from: '1182850582748'})
+        // .query({from: '2006-06-26T09:36:22.748Z'})
         .expect(200)
         .end(function(err, res) {
           if (err) {

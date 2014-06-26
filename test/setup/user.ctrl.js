@@ -19,6 +19,7 @@ module.exports = crude.extendSingleton(function(){
     pagination: false,
     showId: true,
     noViews: true,
+    dateField: 'birthdate'
   };
 
   this.setOptions(opts);
