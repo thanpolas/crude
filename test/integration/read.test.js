@@ -7,7 +7,7 @@ var expect = chai.expect;
 var tester = require('../lib/tester.lib');
 var setupUsers = require('../lib/fixture-user.lib');
 
-describe('Read OPs', function() {
+describe.only('Read OPs', function() {
   this.timeout(5000);
 
   setupUsers.createUser();
@@ -33,6 +33,7 @@ describe('Read OPs', function() {
     });
     it('Should have proper keys', function () {
       expect(this.body[0]).to.have.keys([
+        '_id',
         'firstName',
         'lastName',
         'companyName',
