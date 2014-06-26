@@ -2,8 +2,7 @@
  * @fileOverview Main testing helper lib, exporting fixtures, helper functions
  *   etc. All tests must require it.
  */
-var app = require('../..');
-var testdb = require('./test-db.lib');
+var app = require('../setup/bootstrap');
 
 var tester = module.exports = {};
 
@@ -30,14 +29,7 @@ tester.init = function() {
     if (init) {return done();}
     init = true;
 
-    testdb.stub();
-
-    app.init({
-      nolog: false,
-      stubMail: true,
-      nosecurity: true,
-      noClipWatch: true,
-    }).then(done.bind(null, null), done);
+    app.init().then(done.bind(null, null), done);
   });
 };
 

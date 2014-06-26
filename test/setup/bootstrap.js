@@ -22,7 +22,7 @@ var initialized = false;
  *
  * @return {Promise} A dissaster.
  */
-app.init = function() {
+app.init = Promise.method(function() {
   if (initialized) { return Promise.resolve(); }
   initialized = true;
 
@@ -32,7 +32,7 @@ app.init = function() {
   return database.init()
     .then(initdb.start.bind(initdb))
     .then(expressApp.init);
-};
+});
 
 /**
  * Catch-all for all unhandled exceptions
