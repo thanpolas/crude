@@ -2,22 +2,22 @@
   "name": "crude",
   "description": "Seamless CRUD control operations for node.",
   "version": "0.4.2",
-  "homepage": "https://github.com/talksession/node-crude",
+  "homepage": "https://github.com/thanpolas/node-crude",
   "author": {
     "name": "Thanasis Polychronakis",
     "url": "http://thanpol.as"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/talksession/node-crude.git"
+    "url": "git://github.com/thanpolas/node-crude.git"
   },
   "bugs": {
-    "url": "https://github.com/talksession/node-crude/issues"
+    "url": "https://github.com/thanpolas/node-crude/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/talksession/node-crude/blob/master/LICENSE-MIT"
+      "url": "https://github.com/thanpolas/node-crude/blob/master/LICENSE-MIT"
     }
   ],
   "contributors": [

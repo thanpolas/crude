@@ -93,7 +93,8 @@ This package assumes you have the following stack:
     - Big Bang
 
 ## License
-Copyright 2013 TalkSession
+
+Copyright 2014 Thanasis Polychronakis
 
 Licensed under the [MIT License](LICENSE-MIT)
 
