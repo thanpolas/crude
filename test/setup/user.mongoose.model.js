@@ -1,6 +1,7 @@
 /**
  * @fileOverview A user model in mongoose.
  */
+var cip = require('cip');
 var Promise = require('bluebird');
 var mongoose = require('mongoose');
 
@@ -9,7 +10,13 @@ var mongoose = require('mongoose');
  *
  * @constructor
  */
-var User = module.exports = function() {};
+var User = module.exports = cip.extendSingleton(function() {
+  /** @type {?mongoose.Schema} Instance of mongoose Schema */
+  this.schema = null;
+
+  /** @type {?mongoose.Model} The mongoose Model ctor */
+  this.Model = null;
+});
 
 /**
  * The supported user roles.
@@ -36,8 +43,6 @@ User.Schema = {
   password: {type: String, required: true},
 
   createdOn: {type: Date, default: Date.now},
-  lastLogin: {type: Date, default: Date.now},
-  lastIp: {type: String, default: ''},
 
   // Roles and access
   isVerified: {type: Boolean, required: true, default: false},
@@ -51,6 +56,8 @@ User.Schema = {
  * @return {Promise} A promise
  */
 User.prototype.init = Promise.method(function() {
+  console.log('userModel.init() :: Initializing...');
+
   this.schema = new mongoose.Schema(User.Schema);
 
   // define indexes

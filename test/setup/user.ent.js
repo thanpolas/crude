@@ -4,9 +4,7 @@
 
 var EntityCrudMongoose = require('node-entity').Mongoose;
 
-var UserModel = require('./user.mongoose.model');
-
-var userModel = new UserModel();
+var userModel = require('./user.mongoose.model').getInstance();
 
 /**
  * The User entity.
@@ -15,6 +13,7 @@ var userModel = new UserModel();
  * @extends {Entity.Mongoose}
  */
 var User = module.exports = EntityCrudMongoose.extendSingleton(function() {
+  console.log('userEnt.ctor() :: Initializing...');
   this.setModel(userModel.Model);
 });
 

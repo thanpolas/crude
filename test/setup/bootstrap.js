@@ -7,7 +7,8 @@ var util = require('util');
 var Promise = require('bluebird');
 
 var expressApp = require('./expressApp');
-var database = new require('./database');
+var Database = require('./database');
+var database = new Database();
 
 var app = module.exports = {};
 

@@ -9,7 +9,7 @@ var Promise = require('bluebird');
 var mongoose = require('mongoose');
 
 // models
-var userModel = new require('./user.mongoose.model');
+var userModel = require('./user.mongoose.model').getInstance();
 
 // var noop = function() {};
 
@@ -42,12 +42,6 @@ var Conn = module.exports = function() {
 
   /** @type {?mongoose.connect} The mongoose connection object */
   this.db = null;
-
-  /** @type {?kansas} The instance of Kansas */
-  this.kansas = null;
-
-  /** @type {?idify} The instance of idify */
-  this.resourceId = null;
 };
 util.inherits(Conn, EventEmitter);
 
