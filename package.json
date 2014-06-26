@@ -51,7 +51,8 @@
     "mongoose": "^3.8.12",
     "node-entity": "^0.2.4",
     "express": "^4.4.4",
-    "body-parser": "^1.4.3"
+    "body-parser": "^1.4.3",
+    "supertest": "^0.13.0"
   },
   "peerDependencies": {},
   "keywords": [
