@@ -8,7 +8,7 @@ var Promise = require('bluebird');
 var express = require('express');
 var bodyParser = require('body-parser');
 
-var UserCtrl = require('../controllers/user/forgot.ctrl');
+var UserCtrl = require('./user.ctrl');
 
 var expressApp = module.exports = {};
 

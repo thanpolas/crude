@@ -4,7 +4,7 @@
 
 var EntityCrudMongoose = require('node-entity').Mongoose;
 
-var UserModel = require('.user.mongoose.model');
+var UserModel = require('./user.mongoose.model');
 
 var userModel = new UserModel();
 

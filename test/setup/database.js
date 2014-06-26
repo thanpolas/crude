@@ -8,10 +8,8 @@ var util = require('util');
 var Promise = require('bluebird');
 var mongoose = require('mongoose');
 
-var helpers = require('../util/helpers');
-
 // models
-var userModel = require('../models/user.model').getInstance();
+var userModel = new require('./user.mongoose.model');
 
 // var noop = function() {};
 

@@ -6,9 +6,8 @@ var util = require('util');
 
 var Promise = require('bluebird');
 
-var initdb = require('./initdb');
 var expressApp = require('./expressApp');
-var database = require('./database').getInstance();
+var database = new require('./database');
 
 var app = module.exports = {};
 
@@ -30,7 +29,6 @@ app.init = Promise.method(function() {
   process.on('uncaughtException', app.onNodeFail);
 
   return database.init()
-    .then(initdb.start.bind(initdb))
     .then(expressApp.init);
 });
 
