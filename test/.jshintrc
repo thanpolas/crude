@@ -121,6 +121,12 @@
    *
    */
 
+  /**
+   * TEST ONLY OPTIONS
+   * ===================
+   */
+
+  "expr": true,
 
   /**
    * PROJECT GLOBALS
