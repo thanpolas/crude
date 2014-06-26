@@ -30,6 +30,11 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.5.0**, *26 Jun 2014*
+    - renamed option `noPagination` to `pagination`
+    - Decoupled all CRUD ops to separate modules
+    - Added query filtering options for Read OP
+    - Added `dateField` option
 - **v0.4.2**, *01 May 2014*
     - Check for `req.body.id` first, `req.params.id` second on update.
 - **v0.4.1**, *24 Apr 2014*
