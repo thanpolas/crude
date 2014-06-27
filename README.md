@@ -30,6 +30,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.5.1**, *26 Jun 2014*
+    - author test for more complex queries using `between` by means of `from` / `to`.
 - **v0.5.0**, *26 Jun 2014*
     - renamed option `noPagination` to `pagination`
     - Decoupled all CRUD ops to separate modules
