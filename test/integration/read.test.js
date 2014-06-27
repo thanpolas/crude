@@ -89,5 +89,22 @@ describe('Read OPs', function() {
           done();
         });
     });
+    it('Date range filter :: should have right results count', function(done) {
+      this.req.get('/user')
+        .query({from: '1182850582748'})
+        .query({to: '1246008982748'})
+        // .query({from: '2006-06-26T09:36:22.748Z'})
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            console.error('ERROR. Body:', res.body);
+            done(err);
+            return;
+          }
+          expect(res.body).to.have.length(1);
+          done();
+        });
+    });
+
   });
 });
