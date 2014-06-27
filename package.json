@@ -1,7 +1,7 @@
 {
   "name": "crude",
   "description": "Seamless CRUD control operations for node.",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "homepage": "https://github.com/thanpolas/node-crude",
   "author": {
     "name": "Thanasis Polychronakis",
