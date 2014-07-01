@@ -4,7 +4,7 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var Web = require('../../lib/web.lib');
+var testHelper = require('../test-helpers.lib');
 
 var destroy = module.exports = {};
 
@@ -12,28 +12,10 @@ destroy.test = function(params) {
   describe('Delete OPs', function() {
     this.timeout(5000);
 
-    beforeEach(function() {
-      var web = new Web();
-      this.req = web.req;
-    });
+    testHelper.setupReq();
 
     // create a record
-    beforeEach(function (done) {
-      var self = this;
-      this.req.post(params.endpoint)
-        .send(params.fixture)
-        .expect(200)
-        .end(function(err, res) {
-          if (err) {
-            console.error('Create ERROR. Body:', res.body);
-            done(err);
-            return;
-          }
-
-          self.item = res.body;
-          done();
-        });
-    });
+    testHelper.createItem(params);
 
     afterEach(function (done) {
       this.req.get(params.endpoint + '/' + this.item[params.idAttr])
