@@ -26,18 +26,13 @@ helpers.createItem = function(params) {
 
   beforeEach(function (done) {
     var self = this;
-    this.req.post(params.endpoint)
-      .send(params.fixture)
-      .expect(200)
-      .end(function(err, res) {
-        if (err) {
-          console.error('Create ERROR. Body:', res.body);
-          done(err);
-          return;
-        }
-
-        self.item = res.body;
+    params.entity.create(params.fixture)
+      .then(function(item) {
+        self.item = item;
         done();
+      }).catch(function(err) {
+        console.error('Create ERROR:', err);
+        done(err);
       });
   });
 };
@@ -50,8 +45,9 @@ helpers.createItem = function(params) {
  */
 helpers.deleteItem = function(params, isBefore) {
   function deleteHook(done) {
-    this.req.delete(params.endpoint + '/' + this.item[params.idAttr])
-      .expect(200, done);
+    var queryObj = {};
+    queryObj[params.uniqueAttr] = params.fixture[params.uniqueAttr];
+    params.entity.delete(queryObj).then(done.bind(null, null), done);
   }
 
   if (isBefore) {

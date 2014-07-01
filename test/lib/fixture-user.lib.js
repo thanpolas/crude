@@ -7,6 +7,7 @@ var tester = require('./tester.lib');
 var UserEnt = require('../setup/user.ent');
 var Web = require('./web.lib');
 var userfix = require('../fixtures/user.fix');
+var db = require('./db.lib');
 
 var fixtures = module.exports = {};
 
@@ -59,5 +60,9 @@ fixtures.createUser = function() {
       .then(function(userDataObject) {
         self.udoThree = userDataObject;
       }).then(done, done);
+  });
+
+  tester.teardown(function(done) {
+    db.nuke().then(done, done);
   });
 };

@@ -21,6 +21,10 @@ var noopCb = function(cb) {cb(null);};
  *    @param {Object} fixture the data fixture to use.
  *    @param {string} stringAttr A string attribute in the fixture to use
  *           for updating and query filtering.
+ *    @param {string} uniqueAttr An attribute that acts as a unique identifier
+ *           of the record, e.g. the email if the model is a user, in an empty
+ *           db this can be any field, not neccessarily an actually unique one.
+ *    @param {Entity} entity The entity instance of the model to be tested.
  *    @param {Object} create Create OP related parameters:
  *          @param {Function} response A node.js style callback with the tests res.
  *    @param {Object} readList Read List OP related parameters:
@@ -60,6 +64,10 @@ var Test = module.exports = function(optParams) {
     idAttr: params.idAttr || null,
 
     stringAttr: params.stringAttr || null,
+
+    uniqueAttr: params.uniqueAttr || null,
+
+    entity: params.entity || null,
 
     create: {
       response: params.create.response || noopCb,

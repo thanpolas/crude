@@ -14,6 +14,9 @@ create.test = function(params) {
 
     testHelper.setupReq();
 
+    // before delete record
+    testHelper.deleteItem(params, true);
+
     // after delete record
     testHelper.deleteItem(params);
 

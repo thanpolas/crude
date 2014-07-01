@@ -14,10 +14,15 @@ describe('Create OPs', function() {
 
   tester.init();
 
-  beforeEach(function(done) {
+  beforeEach(function() {
     var web = new Web();
     this.req = web.req;
+  });
 
+  beforeEach(function(done) {
+    db.nuke().then(done, done);
+  });
+  afterEach(function(done) {
     db.nuke().then(done, done);
   });
 
