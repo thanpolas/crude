@@ -30,12 +30,7 @@ fixtures.createUser = function() {
   });
 
   tester.setup(function(done) {
-    Promise.all([
-      this.userEnt.delete({email: userfix.one.email}),
-      this.userEnt.delete({email: userfix.two.email}),
-      this.userEnt.delete({email: userfix.three.email}),
-      this.userEnt.delete({email: 'new@demo.com'}),
-    ]).then(done.bind(null, null), done);
+    db.nuke().then(done, done);
   });
 
   tester.setup(function(done) {

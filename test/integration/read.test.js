@@ -63,12 +63,12 @@ describe('Read OPs', function() {
     it('should read a single record', function (done) {
       this.req.get('/user/' + this.udo._id)
         .expect(200)
-        .expect('Content-type', 'application/json; charset=utf-8', done);
+        .expect('Content-type', /application\/json/, done);
     });
     it('should return a 404 if record not found', function (done) {
       this.req.get('/user/bogus')
         .expect(404)
-        .expect('Content-type', 'application/json; charset=utf-8', done);
+        .expect('Content-type', /application\/json/, done);
     });
   });
 
