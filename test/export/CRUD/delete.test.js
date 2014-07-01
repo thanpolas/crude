@@ -12,7 +12,7 @@ destroy.test = function(params) {
   describe('Delete OPs', function() {
     this.timeout(5000);
 
-    testHelper.setupReq();
+    testHelper.setupReq(params);
 
     // create a record
     testHelper.createItem(params);
@@ -20,7 +20,7 @@ destroy.test = function(params) {
     afterEach(function (done) {
       this.req.get(params.endpoint + '/' + this.item[params.idAttr])
         .expect(404)
-        .end(function(err, res) {
+        .end(function(err) {
           done(err);
         });
     });

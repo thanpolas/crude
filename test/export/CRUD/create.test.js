@@ -12,7 +12,7 @@ create.test = function(params) {
   describe('Create OPs', function() {
     this.timeout(5000);
 
-    testHelper.setupReq();
+    testHelper.setupReq(params);
 
     // before delete record
     testHelper.deleteItem(params, true);
@@ -27,7 +27,7 @@ create.test = function(params) {
         .expect(200)
         .end(function(err, res) {
           if (err) {
-            console.error('ERROR. Body:', res.body);
+            console.error('ERROR. Body:', (res ? res.body : 'NO RES'));
             done(err);
             return;
           }

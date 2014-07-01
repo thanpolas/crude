@@ -12,7 +12,7 @@ read.test = function(params) {
   describe('Read OPs', function() {
     this.timeout(5000);
 
-    testHelper.setupReq();
+    testHelper.setupReq(params);
 
     // before create a record
     testHelper.createItem(params);

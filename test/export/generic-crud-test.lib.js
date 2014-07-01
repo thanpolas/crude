@@ -26,6 +26,7 @@ var noopCb = function(res, cb) {cb(null);};
  *           of the record, e.g. the email if the model is a user, in an empty
  *           db this can be any field, not neccessarily an actually unique one.
  *    @param {Entity} Entity The entity instance of the model to be tested.
+ *    @param {string} hostname The hostname to perform the tests against.
  *    @param {Object} create Create OP related parameters:
  *          @param {Function} response A node.js style callback with the tests res.
  *    @param {Object} readList Read List OP related parameters:
@@ -69,6 +70,8 @@ var Test = module.exports = function(optParams) {
     uniqueAttr: params.uniqueAttr || null,
 
     Entity: params.Entity || null,
+
+    hostname: params.hostname || null,
 
     create: {
       response: params.create.response || noopCb,

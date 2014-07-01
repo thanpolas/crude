@@ -8,10 +8,11 @@ var helpers = module.exports = {};
 /**
  * Setup a new supertest request object.
  *
+ * @param {Object} params Config parameters.
  */
-helpers.setupReq = function () {
+helpers.setupReq = function (params) {
   beforeEach(function() {
-    var web = new Web();
+    var web = new Web(params.hostname);
     this.req = web.req;
   });
 };
