@@ -30,6 +30,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.5.2**, *01 Jul 2014*
+    - Create and expose API Test Helper for easily testing API endpoints.
 - **v0.5.1**, *26 Jun 2014*
     - author test for more complex queries using `between` by means of `from` / `to`.
 - **v0.5.0**, *26 Jun 2014*
