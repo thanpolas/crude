@@ -21,7 +21,6 @@ destroy.test = function(params) {
       this.req.get(params.endpoint + '/' + this.item[params.idAttr])
         .expect(404)
         .end(function(err, res) {
-          console.log('RES:', res.status, res.body);
           done(err);
         });
     });

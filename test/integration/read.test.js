@@ -59,7 +59,7 @@ describe('Read OPs', function() {
     });
   });
 
-  describe.only('Read a single record', function () {
+  describe('Read a single record', function () {
     it('should read a single record', function (done) {
       this.req.get('/user/' + this.udo._id)
         .expect(200)
