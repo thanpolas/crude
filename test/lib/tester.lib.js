@@ -2,6 +2,8 @@
  * @fileOverview Main testing helper lib, exporting fixtures, helper functions
  *   etc. All tests must require it.
  */
+var Promise = require('bluebird');
+
 var app = require('../setup/bootstrap');
 
 var tester = module.exports = {};
@@ -26,12 +28,23 @@ var init = false;
  */
 tester.init = function() {
   tester.setup(function(done) {
-    if (init) {return done();}
-    init = true;
-
-    app.init().then(done.bind(null, null), done);
+    tester.initActual().then(done.bind(null, null), done);
   });
 };
+
+/**
+ * The actual app init method
+ *
+ * @return {Promise} A promise.
+ */
+tester.initActual = Promise.method(function() {
+  if (init) {
+    return;
+  }
+  init = true;
+
+  return app.init();
+});
 
 /**
  * Have a Cooldown period between tests.

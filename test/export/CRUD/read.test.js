@@ -32,7 +32,7 @@ read.test = function(params) {
             }
 
             expect(res.body).to.be.an('array');
-            expect(res.body).to.have.length(1);
+            expect(res.body.length).to.be.at.least(1);
             params.readList.response(res, done);
           });
       });

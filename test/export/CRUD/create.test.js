@@ -32,7 +32,7 @@ create.test = function(params) {
             return;
           }
 
-          expect(res.type).to.equal('JSON');
+          expect(res.type).to.equal('application/json');
           params.create.response(res, function(err) {
             self.item = res.body;
             done(err);

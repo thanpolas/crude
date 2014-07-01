@@ -26,6 +26,8 @@ app.init = Promise.method(function() {
   if (initialized) { return Promise.resolve(); }
   initialized = true;
 
+  console.log('app.init() :: Booting stub application...');
+
   // Global exception handler
   process.on('uncaughtException', app.onNodeFail);
 

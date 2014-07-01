@@ -19,7 +19,11 @@ destroy.test = function(params) {
 
     afterEach(function (done) {
       this.req.get(params.endpoint + '/' + this.item[params.idAttr])
-        .expect(404, done);
+        .expect(404)
+        .end(function(err, res) {
+          console.log('RES:', res.status, res.body);
+          done(err);
+        });
     });
 
     it('Should delete the record', function (done) {

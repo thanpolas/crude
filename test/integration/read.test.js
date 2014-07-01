@@ -59,6 +59,19 @@ describe('Read OPs', function() {
     });
   });
 
+  describe.only('Read a single record', function () {
+    it('should read a single record', function (done) {
+      this.req.get('/user/' + this.udo._id)
+        .expect(200)
+        .expect('Content-type', 'application/json; charset=utf-8', done);
+    });
+    it('should return a 404 if record not found', function (done) {
+      this.req.get('/user/bogus')
+        .expect(404)
+        .expect('Content-type', 'application/json; charset=utf-8', done);
+    });
+  });
+
   describe('Read filtered records', function () {
     it('Email filter :: should have right results count', function(done) {
       this.req.get('/user')

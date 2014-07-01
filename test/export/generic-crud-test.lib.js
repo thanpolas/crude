@@ -4,13 +4,14 @@
  */
 var __ = require('lodash');
 var Mocha = require('mocha');
+var Promise = require('bluebird');
 
 var createTest = require('./CRUD/create.test');
 var readTest = require('./CRUD/read.test');
 var updateTest = require('./CRUD/update.test');
 var deleteTest = require('./CRUD/delete.test');
 
-var noopCb = function(cb) {cb(null);};
+var noopCb = function(res, cb) {cb(null);};
 
 /**
  * Generic CRUD Test module
@@ -109,20 +110,32 @@ Test.prototype.setup = function() {
     return;
   }
   this.hasSetup = true;
-  createTest.test(this.params);
-  readTest.test(this.params);
-  updateTest.test(this.params);
-  deleteTest.test(this.params);
+  var self = this;
+  describe('CRUD API Tester for endpoint: "' + this.params.endpoint + '"', function () {
+    createTest.test(self.params);
+    readTest.test(self.params);
+    updateTest.test(self.params);
+    deleteTest.test(self.params);
+  });
 };
 
+/**
+ * Run the tests
+ *
+ * @return {Promise} When tests are done.
+ */
 Test.prototype.run = function() {
-  this.setup();
-  var mocha = new Mocha();
+  var self = this;
+  return new Promise(function(resolve, reject) {
+    self.setup();
+    var mocha = new Mocha();
 
-  mocha.run(function(failures) {
-    console.log('FAILURES:', failures);
-    process.on('exit', function () {
-      process.exit(failures);
+    mocha.run(function(failures) {
+      if (failures) {
+        reject('Total Errors found:', failures);
+      } else {
+        resolve();
+      }
     });
   });
 };
