@@ -25,7 +25,7 @@ var noopCb = function(res, cb) {cb(null);};
  *    @param {string} uniqueAttr An attribute that acts as a unique identifier
  *           of the record, e.g. the email if the model is a user, in an empty
  *           db this can be any field, not neccessarily an actually unique one.
- *    @param {Entity} entity The entity instance of the model to be tested.
+ *    @param {Entity} Entity The entity instance of the model to be tested.
  *    @param {Object} create Create OP related parameters:
  *          @param {Function} response A node.js style callback with the tests res.
  *    @param {Object} readList Read List OP related parameters:
@@ -68,7 +68,7 @@ var Test = module.exports = function(optParams) {
 
     uniqueAttr: params.uniqueAttr || null,
 
-    entity: params.entity || null,
+    Entity: params.Entity || null,
 
     create: {
       response: params.create.response || noopCb,
@@ -112,6 +112,9 @@ Test.prototype.setup = function() {
   this.hasSetup = true;
   var self = this;
   describe('CRUD API Tester for endpoint: "' + this.params.endpoint + '"', function () {
+    beforeEach(function () {
+      this.entity = self.params.Entity.getInstance();
+    });
     createTest.test(self.params);
     readTest.test(self.params);
     updateTest.test(self.params);

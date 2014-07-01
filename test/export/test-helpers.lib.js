@@ -26,7 +26,7 @@ helpers.createItem = function(params) {
 
   beforeEach(function (done) {
     var self = this;
-    params.entity.create(params.fixture)
+    this.entity.create(params.fixture)
       .then(function(item) {
         self.item = item;
         done();
@@ -47,7 +47,7 @@ helpers.deleteItem = function(params, isBefore) {
   function deleteHook(done) {
     var queryObj = {};
     queryObj[params.uniqueAttr] = params.fixture[params.uniqueAttr];
-    params.entity.delete(queryObj).then(done.bind(null, null), done);
+    this.entity.delete(queryObj).then(done.bind(null, null), done);
   }
 
   if (isBefore) {

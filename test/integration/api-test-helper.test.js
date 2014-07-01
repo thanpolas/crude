@@ -25,7 +25,7 @@ describe('Test the exposed API Test Helper', function () {
         stringAttr: 'firstName',
         idAttr: '_id',
         uniqueAttr: 'email',
-        entity: UserEnt.getInstance(),
+        Entity: UserEnt,
       });
 
       testCrud.run().then(done, done);
