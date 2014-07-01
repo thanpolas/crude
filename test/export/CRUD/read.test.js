@@ -56,7 +56,7 @@ read.test = function(params) {
     });
 
     describe('Read filtered records', function() {
-      it('Email filter :: should have right results count', function(done) {
+      it('query filter :: should have right results count', function(done) {
         var filterObj = {};
         filterObj[params.stringAttr] = params.fixture[params.stringAttr];
 
