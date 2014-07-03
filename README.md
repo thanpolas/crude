@@ -30,6 +30,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.5.3**, *03 Jul 2014*
+    - Remove debug logging.
 - **v0.5.2**, *01 Jul 2014*
     - Create and expose API Test Helper for easily testing API endpoints.
 - **v0.5.1**, *26 Jun 2014*
