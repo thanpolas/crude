@@ -31,7 +31,7 @@ This package assumes you have the following stack:
 ## Release History
 
 - **v0.5.5**, *03 Jul 2014*
-    - mocha is a dependency now that Test helper is exposed.
+    - Don't expose the API Test Helper, it requires the whole testing stack, make a different package instead.
 - **v0.5.3**, *03 Jul 2014*
     - Remove debug logging.
 - **v0.5.2**, *01 Jul 2014*
