@@ -33,7 +33,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
-
+- **v0.5.7**, *04 Jul 2014*
+    - Exclude `page` and `limit` query variables.
 - **v0.5.6**, *04 Jul 2014*
     - Moved test facilities to their own repository.
 - **v0.5.5**, *03 Jul 2014*
