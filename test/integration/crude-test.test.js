@@ -5,16 +5,18 @@ var chai = require('chai');
 var expect = chai.expect;
 
 var testlib = require('crude-test-case');
+var CrudeTest = require('crude-test');
 
 var crude = require('../..');
-var userFix = require('../fixtures/user.fix');
+testlib.setCrude(crude);
+var userFix = testlib.fixUser;
 
 describe('Test the exposed API Test Helper', function () {
   this.timeout(5000);
 
   it('should execute...', function (done) {
     testlib.tester.initActual().then(function () {
-      var testCrud = new crude.Test({
+      var testCrud = new CrudeTest({
         endpoint: '/user',
         fixture: userFix.one,
         stringAttr: 'firstName',

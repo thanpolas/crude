@@ -5,6 +5,7 @@ var chai = require('chai');
 var expect = chai.expect;
 
 var testlib = require('crude-test-case');
+testlib.setCrude(require('../../'));
 
 var setupUsers = testlib.libUser;
 var tester = testlib.tester;
