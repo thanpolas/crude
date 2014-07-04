@@ -33,6 +33,9 @@ This package assumes you have the following stack:
 
 ## Release History
 
+
+- **v0.5.6**, *04 Jul 2014*
+    - Moved test facilities to their own repository.
 - **v0.5.5**, *03 Jul 2014*
     - Don't expose the API Test Helper, it requires the whole testing stack, make a different package instead.
 - **v0.5.3**, *03 Jul 2014*
