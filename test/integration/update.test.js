@@ -4,8 +4,10 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var tester = require('../lib/tester.lib');
-var setupUsers = require('../lib/fixture-user.lib');
+var testlib = require('crude-test-case');
+
+var setupUsers = testlib.libUser;
+var tester = testlib.tester;
 
 describe('Update OPs', function() {
   this.timeout(5000);

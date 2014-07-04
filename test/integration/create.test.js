@@ -4,10 +4,12 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var tester = require('../lib/tester.lib');
-var Web = require('../lib/web.lib');
-var userFix = require('../fixtures/user.fix');
-var db = require('../lib/db.lib');
+var testlib = require('crude-test-case');
+
+var tester = testlib.tester;
+var Web = testlib.Web;
+var userFix = testlib.fixUser;
+var db = testlib.db;
 
 describe('Create OPs', function() {
   this.timeout(5000);
