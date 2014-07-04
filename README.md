@@ -4,6 +4,9 @@ Seamless CRUD control operations for node.
 
 Currently works with Express and [Mongoose or Sequelize].
 
+[![Build Status](https://secure.travis-ci.org/thanpolas/crude.png?branch=master)](http://travis-ci.org/thanpolas/crude)
+
+
 ## Install
 
 ```shell
