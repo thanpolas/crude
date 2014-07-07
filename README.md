@@ -33,6 +33,9 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.5.8**, *07 Jul 2014*
+    - if ownUser flag is on then auth is required.
+    - upgrade `req.host` to `req.hostname` in par with express 4.x
 - **v0.5.7**, *04 Jul 2014*
     - Exclude `page` and `limit` query variables.
 - **v0.5.6**, *04 Jul 2014*
