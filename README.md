@@ -33,6 +33,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.5.10**, *TBD*
+    - Invoke the right methods when performing an update
 - **v0.5.9**, *07 Jul 2014*
     - Pagination limit is now configurable via `opts.paginateLimit`.
 - **v0.5.8**, *07 Jul 2014*
