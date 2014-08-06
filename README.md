@@ -33,7 +33,7 @@ This package assumes you have the following stack:
 
 ## Release History
 
-- **v0.5.10**, *06 Aug 2014*
+- **v0.5.12**, *06 Aug 2014*
     - No longer assume that `readLimit` OP result is an array.
     - Invoke the right methods when performing an update
 - **v0.5.9**, *07 Jul 2014*
