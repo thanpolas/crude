@@ -15,16 +15,98 @@ npm install crude --save
 
 ## Documentation
 
-Still in alpha
+### <a name='TOC'>Table of Contents</a>
+
+1. [API](#api)
+    1. [Set a salt string](#setSalt)
+
+```js
+var crude = require('crude');
+
+var domainCtrl = {
+    create: function(data) { return Promise(response); }),
+    read: function(query) { return Promise(response); }),
+    readLimit: function(query, skip, limit) { return Promise(response); }),
+    readOne: function(query) { return Promise(response); }),
+    update: function(query, data) { return Promise(response); }),
+    count: function(query) { return Promise(response); }),
+};
+
+var domainCrude = crude('/domain', domainCtrl);
+
+// pass the express app to add routes.
+domainCrude.addRoutes(app);
+
+// returns the same instance.
+var sameDomainCrude = crude('/domain');
+
+// Middleware on each OP
+domainCrude.readList.use(function(req, res) { return Promise();});
+
+// Master Middleware, applies to all OPs
+domainCrude.use(function(req, res) { return Promise();});
+
+// Configure Crude, default values
+domainCrude.config({
+    idField: 'id',
+    urlField: 'localUrl',
+
+    // Define this key so 'from' & 'to' params query the right attribute
+    dateField: 'createdAt',
+
+    // show the item id
+    showId: true,
+
+    // show full path for netsted paths
+    expandPaths: false,
+
+    // Callback that sanitizes produced result, trumps built-in sanitizer.
+    sanitizeResult: null,
+
+    // Set to true to check if user owns the item.
+    ownUser: false,
+
+    // required by "ownUser" the property in the request object that represents
+    // the user id.
+    ownUserRequestProperty: null,
+    
+    // required by "ownUser" the schema attribute that represents the user id.
+    ownUserSchemaProperty: null,
+
+    // Set to false to not paginate.
+    pagination: true,
+    
+    // Callback to set the pagination query.
+    paginateQuery: null,
+    
+    // Default item to limit to on pagination.
+    paginateLimit: 6,
+
+    // Key value pairs matching attributes to labels
+    labels: {},
+
+});
+
+```
+
+### <a name='hashVerify'>Verify a hashed string match</a>
+
+> ### helpers.hashVerify(hash, text, done)
+>
+>    * **hash** `string` The hashed string.
+>    * **text** `string` The string to test.
+>    * **done** `Function(boolean)` Callback with a single argument, boolean.
+>
+
+Tests if the given string matches the provided hash.
+
+**[[⬆]](#TOC)**
 
 ### Stack
 
 This package assumes you have the following stack:
 
-* Mongoose
 * Express
-* connect-flash
-* Jade
 
 ## Authors
 
