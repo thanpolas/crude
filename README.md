@@ -40,8 +40,12 @@ domainCrude.addRoutes(app);
 // returns the same instance.
 var sameDomainCrude = crude('/domain');
 
-// Middleware on each OP
-domainCrude.readList.use(function(req, res) { return Promise();});
+// Middleware on each CRUD OP
+domainCrude.create.use(function(req, res) { return Promise(); });
+domainCrude.readOne.use(function(req, res) { return Promise(); });
+domainCrude.readList.use(function(req, res) { return Promise(); });
+domainCrude.update.use(function(req, res) { return Promise(); });
+domainCrude.delete.use(function(req, res) { return Promise(); });
 
 // Master Middleware, applies to all OPs
 domainCrude.use(function(req, res) { return Promise();});
