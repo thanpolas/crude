@@ -26,7 +26,6 @@ This package assumes you have the following stack:
 * connect-flash
 * Jade
 
-
 ## Authors
 
 * [@thanpolas][thanpolas]
