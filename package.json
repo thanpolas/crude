@@ -40,7 +40,8 @@
     "middlewarify": "~0.4.0",
     "cip": "~0.2.5",
     "bluebird": "~2.2.2",
-    "httplink": "0.0.1"
+    "httplink": "0.0.1",
+    "nodeon-error": "^0.1.0"
   },
   "devDependencies": {
     "crude-test": "^0.0.1",
