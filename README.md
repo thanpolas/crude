@@ -75,19 +75,6 @@ domainCrude.config({
     paginateLimit: 6,
 });
 
-```
-
-### <a name='hashVerify'>Verify a hashed string match</a>
-
-> ### helpers.hashVerify(hash, text, done)
->
->    * **hash** `string` The hashed string.
->    * **text** `string` The string to test.
->    * **done** `Function(boolean)` Callback with a single argument, boolean.
->
-
-Tests if the given string matches the provided hash.
-
 **[[⬆]](#TOC)**
 
 ### Stack
