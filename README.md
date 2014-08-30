@@ -49,20 +49,11 @@ domainCrude.use(function(req, res) { return Promise();});
 
 // Configure Crude, default values
 domainCrude.config({
+    // Map the ID visible in URLs to a DB attribute.
     idField: 'id',
-    urlField: 'localUrl',
 
     // Define this key so 'from' & 'to' params query the right attribute
     dateField: 'createdAt',
-
-    // show the item id
-    showId: true,
-
-    // show full path for netsted paths
-    expandPaths: false,
-
-    // Callback that sanitizes produced result, trumps built-in sanitizer.
-    sanitizeResult: null,
 
     // Set to true to check if user owns the item.
     ownUser: false,
@@ -70,22 +61,18 @@ domainCrude.config({
     // required by "ownUser" the property in the request object that represents
     // the user id.
     ownUserRequestProperty: null,
-    
+
     // required by "ownUser" the schema attribute that represents the user id.
     ownUserSchemaProperty: null,
 
     // Set to false to not paginate.
     pagination: true,
-    
+
     // Callback to set the pagination query.
     paginateQuery: null,
-    
+
     // Default item to limit to on pagination.
     paginateLimit: 6,
-
-    // Key value pairs matching attributes to labels
-    labels: {},
-
 });
 
 ```
