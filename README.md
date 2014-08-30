@@ -2,8 +2,6 @@
 
 Seamless CRUD control operations for node.
 
-Currently works with Express and [Mongoose or Sequelize].
-
 [![Build Status](https://secure.travis-ci.org/thanpolas/crude.png?branch=master)](http://travis-ci.org/thanpolas/crude)
 
 
@@ -18,7 +16,6 @@ npm install crude --save
 ### <a name='TOC'>Table of Contents</a>
 
 1. [API](#api)
-    1. [Set a salt string](#setSalt)
 
 ```js
 var crude = require('crude');
