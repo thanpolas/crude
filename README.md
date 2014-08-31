@@ -2,8 +2,6 @@
 
 Seamless CRUD control operations for node.
 
-Currently works with Express and [Mongoose or Sequelize].
-
 [![Build Status](https://secure.travis-ci.org/thanpolas/crude.png?branch=master)](http://travis-ci.org/thanpolas/crude)
 
 
@@ -15,16 +13,75 @@ npm install crude --save
 
 ## Documentation
 
-Still in alpha
+### <a name='TOC'>Table of Contents</a>
+
+1. [API](#api)
+
+```js
+var crude = require('crude');
+
+var domainCtrl = {
+    create: function(data) { return Promise(response); }),
+    read: function(query) { return Promise(response); }),
+    readLimit: function(query, skip, limit) { return Promise(response); }),
+    readOne: function(query) { return Promise(response); }),
+    update: function(query, data) { return Promise(response); }),
+    count: function(query) { return Promise(response); }),
+};
+
+var domainCrude = crude('/domain', domainCtrl);
+
+// pass the express app to add routes.
+domainCrude.addRoutes(app);
+
+// returns the same instance.
+var sameDomainCrude = crude('/domain');
+
+// Middleware on each CRUD OP
+domainCrude.create.use(function(req, res) { return Promise(); });
+domainCrude.readOne.use(function(req, res) { return Promise(); });
+domainCrude.readList.use(function(req, res) { return Promise(); });
+domainCrude.update.use(function(req, res) { return Promise(); });
+domainCrude.delete.use(function(req, res) { return Promise(); });
+
+// Master Middleware, applies to all OPs
+domainCrude.use(function(req, res) { return Promise();});
+
+// Configure Crude, default values
+domainCrude.config({
+    // Map the ID visible in URLs to a DB attribute.
+    idField: 'id',
+
+    // Define this key so 'from' & 'to' params query the right attribute
+    dateField: 'createdAt',
+
+    // Set to true to check if user owns the item.
+    ownUser: false,
+
+    // required by "ownUser" the property in the request object that represents
+    // the user id.
+    ownUserRequestProperty: null,
+
+    // required by "ownUser" the schema attribute that represents the user id.
+    ownUserSchemaProperty: null,
+
+    // Set to false to not paginate.
+    pagination: true,
+
+    // Callback to set the pagination query.
+    paginateQuery: null,
+
+    // Default item to limit to on pagination.
+    paginateLimit: 6,
+});
+
+**[[⬆]](#TOC)**
 
 ### Stack
 
 This package assumes you have the following stack:
 
-* Mongoose
 * Express
-* connect-flash
-* Jade
 
 ## Authors
 

@@ -26,7 +26,7 @@
   "engines": {
     "node": ">= 0.8.0"
   },
-  "main": "./",
+  "main": "./lib/crude",
   "scripts": {
     "test": "node_modules/.bin/mocha -u tdd -R spec test/unit && node_modules/.bin/mocha -u bdd -R spec test/integration"
   },
@@ -35,12 +35,11 @@
     "validator": "~3.16.1",
     "lodash": "~2.4.1",
     "jade": "^1.5.0",
-    "mime": "~1.2.11",
-    "node-entity": "^0.3.0",
     "middlewarify": "~0.4.0",
     "cip": "~0.2.5",
     "bluebird": "~2.2.2",
-    "httplink": "0.0.1"
+    "httplink": "0.0.1",
+    "nodeon-error": "^0.1.0"
   },
   "devDependencies": {
     "crude-test": "^0.0.1",
