@@ -9,6 +9,8 @@ chai.use(sinonChai);
 
 var tester = module.exports = {};
 
+function noop () {}
+
 /**
  * Returns A stub controller for crude.
  *
@@ -31,8 +33,16 @@ tester.controller = function() {
  * @return {Object} Req Res mocks.
  */
 tester.reqres = function() {
-  return {
-    req: {},
-    res: {},
+  var reqres = {
+    req: {
+      query: {},
+      body: {},
+    },
+    res: {
+      status: function() {return reqres.res;},
+      json: noop,
+    },
   };
+
+  return reqres;
 };
