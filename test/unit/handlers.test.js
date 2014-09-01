@@ -65,6 +65,7 @@ describe('Error and Success Handlers', function () {
       });
       it('should work on update', function (done) {
         this.ctrl.readOne.throws(this.err);
+        this.reqres.req.params.id = 'one';
         return this.crude.update(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('update'))
@@ -72,6 +73,7 @@ describe('Error and Success Handlers', function () {
       });
       it('should work on delete', function (done) {
         this.ctrl.delete.throws(this.err);
+        this.reqres.req.params.id = 'one';
         return this.crude.delete(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('delete'))
