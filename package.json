@@ -52,7 +52,8 @@
     "mongoose": "^3.8.14",
     "express": "^4.8.0",
     "body-parser": "^1.6.0",
-    "supertest": "^0.13.0"
+    "supertest": "^0.13.0",
+    "sinon-chai": "^2.5.0"
   },
   "peerDependencies": {},
   "keywords": [

@@ -3,6 +3,9 @@
  */
 
 var sinon = require('sinon');
+var sinonChai = require('sinon-chai');
+var chai = require('chai');
+chai.use(sinonChai);
 
 var tester = module.exports = {};
 
