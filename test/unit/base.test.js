@@ -19,7 +19,7 @@ describe('API Surface', function() {
         'CREATE',
         'READ',
         'READ_ONE',
-        'PAGINAGE',
+        'PAGINATE',
         'UPDATE',
         'DELETE',
       ]);
