@@ -9,23 +9,25 @@ chai.use(sinonChai);
 
 var tester = module.exports = {};
 
-function noop () {}
-
 /**
  * Returns A stub controller for crude.
  *
  * @return {Object} A stub controller for crude.
  */
 tester.controller = function() {
-  return {
-    create: sinon.mock(),
-    read: sinon.mock(),
-    readLimit: sinon.mock(),
-    readOne: sinon.mock(),
-    update: sinon.mock(),
-    count: sinon.mock(),
+  var item = {a: 1};
+  var ctrl = {
+    __item: item,
+    create: sinon.mock().returns(item),
+    read: sinon.mock().returns([item]),
+    readLimit: sinon.mock().returns([item]),
+    readOne: sinon.mock().returns(item),
+    update: sinon.mock().returns(item),
+    count: sinon.mock().returns(1),
     delete: sinon.mock(),
   };
+
+  return ctrl;
 };
 
 /**
@@ -39,12 +41,21 @@ tester.reqres = function() {
       query: {},
       body: {},
       params: {},
+      url: 'http://localhost/',
+      app: {
+        settings: {
+          port: 80,
+        },
+      },
     },
     res: {
-      status: function() {return reqres.res;},
-      json: noop,
+      status: sinon.mock(),
+      set: sinon.mock(),
+      json: sinon.mock(),
     },
   };
+
+  reqres.res.status.returns(reqres.res);
 
   return reqres;
 };
