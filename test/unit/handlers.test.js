@@ -19,26 +19,75 @@ describe('Error and Success Handlers', function () {
   describe('Error Handler', function () {
     beforeEach(function () {
       this.err = new Error('yum');
-      this.ctrl.readLimit.throws(this.err);
+    });
+    afterEach(function () {
     });
 
-    it('should call the built-in error handler', function () {
-      var handleStub = sinon.stub(this.crude.opts, 'onError');
-      return this.crude.readList(this.reqres.req, this.reqres.res)
-        .bind(this)
-        .then(function() {
-          expect(handleStub).to.have.been.calledOnce;
-          expect(handleStub.args[0][0]).to.equal(this.reqres.req);
-          expect(handleStub.args[0][1]).to.equal(this.reqres.res);
-          expect(handleStub.args[0][2]).to.equal('paginate');
-          expect(handleStub.args[0][3]).to.equal(500);
-          expect(handleStub.args[0][4]).to.equal(this.err);
-          handleStub.restore();
-        });
+    describe('Built-in Handler', function () {
+      beforeEach(function () {
+        this.handleStub = sinon.stub(this.crude.opts, 'onError');
+      });
+      afterEach(function () {
+        this.handleStub.restore();
+      });
+
+      function runAssert(operation) {
+        return function () {
+          expect(this.handleStub).to.have.been.calledOnce;
+          expect(this.handleStub).to.have.been.calledWith(this.reqres.req,
+            this.reqres.res, operation, 500, this.err);
+        };
+      }
+
+      it('should work on pagination', function (done) {
+        this.ctrl.readLimit.throws(this.err);
+        return this.crude.readList(this.reqres.req, this.reqres.res)
+          .bind(this)
+          .then(runAssert('paginate'))
+          .then(done, done);
+
+      });
+      it('should work on read all', function (done) {
+        this.ctrl.read.throws(this.err);
+        this.crude.config({pagination: false});
+        return this.crude.readList(this.reqres.req, this.reqres.res)
+          .bind(this)
+          .then(runAssert('read'))
+          .then(done, done);
+      });
+      it('should work on read one', function (done) {
+        this.ctrl.readOne.throws(this.err);
+        return this.crude.readOne(this.reqres.req, this.reqres.res)
+          .bind(this)
+          .then(runAssert('readOne'))
+          .then(done, done);
+      });
+      it('should work on update', function (done) {
+        this.ctrl.readOne.throws(this.err);
+        return this.crude.update(this.reqres.req, this.reqres.res)
+          .bind(this)
+          .then(runAssert('update'))
+          .then(done, done);
+      });
+      it('should work on delete', function (done) {
+        this.ctrl.delete.throws(this.err);
+        return this.crude.delete(this.reqres.req, this.reqres.res)
+          .bind(this)
+          .then(runAssert('delete'))
+          .then(done, done);
+      });
+      it('should work on create', function (done) {
+        this.ctrl.create.throws(this.err);
+        return this.crude.create(this.reqres.req, this.reqres.res)
+          .bind(this)
+          .then(runAssert('create'))
+          .then(done, done);
+      });
+
     });
 
     it('should call the custom error handler', function (done) {
-      this.spy = sinon.mock();
+      this.spy = sinon.spy();
       this.crude.onError(this.spy);
       return this.crude.readList(this.reqres.req, this.reqres.res)
         .bind(this)
