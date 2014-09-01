@@ -33,6 +33,9 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.5.13**, *01 Sep 2014*
+    - Populates total item count for pagination query.
+    - Express 4.0 compatible.
 - **v0.5.12**, *06 Aug 2014*
     - No longer assume that `readLimit` OP result is an array.
     - Invoke the right methods when performing an update
