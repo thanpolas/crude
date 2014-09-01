@@ -14,7 +14,7 @@ describe('API Surface', function() {
       expect(crude).to.be.a('function');
     });
     it('should expose CRUD enum', function() {
-      expect(crude.CrudOps).to.be.a('function');
+      expect(crude.CrudOps).to.be.an('object');
       expect(crude.CrudOps).to.have.keys([
         'CREATE',
         'READ',
