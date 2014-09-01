@@ -153,6 +153,21 @@ describe('Error and Success Handlers', function () {
   });
 
   describe('Success Handlers', function () {
+    function runAssert(operation, optHttpCode, optArr) {
+      var httpCode = optHttpCode || 200;
+
+      return function () {
+        var result = this.ctrl.__item;
+        if (optArr) {
+          result = [this.ctrl.__item];
+        }
+
+        expect(this.handleStub).to.have.been.calledOnce;
+        expect(this.handleStub).to.have.been.calledWith(this.reqres.req,
+          this.reqres.res, operation, httpCode, result);
+      };
+    }
+
     describe('Built-in Success Handler', function () {
       beforeEach(function () {
         this.handleStub = sinon.stub(this.crude.opts, 'onSuccess');
@@ -161,21 +176,6 @@ describe('Error and Success Handlers', function () {
       afterEach(function () {
         this.handleStub.restore();
       });
-
-      function runAssert(operation, optHttpCode, optArr) {
-        var httpCode = optHttpCode || 200;
-
-        return function () {
-          var result = this.ctrl.__item;
-          if (optArr) {
-            result = [this.ctrl.__item];
-          }
-
-          expect(this.handleStub).to.have.been.calledOnce;
-          expect(this.handleStub).to.have.been.calledWith(this.reqres.req,
-            this.reqres.res, operation, httpCode, result);
-        };
-      }
 
       it('should work on pagination', function (done) {
         return this.crude.readList(this.reqres.req, this.reqres.res)
@@ -222,22 +222,15 @@ describe('Error and Success Handlers', function () {
     });
 
     describe('Custom Success Handler', function () {
-      function runAssert (operation) {
-        return function () {
-          expect(this.spy).to.have.been.calledOnce;
-          expect(this.spy).to.have.been.calledWith(this.reqres.req, this.reqres.res,
-            operation, 500, this.err);
-        };
-      }
       beforeEach(function () {
-        this.spy = sinon.spy();
-        this.crude.onSuccess(this.spy);
+        this.handleStub = sinon.spy();
+        this.crude.onSuccess(this.handleStub);
       });
 
       it('should work on pagination', function (done) {
         return this.crude.readList(this.reqres.req, this.reqres.res)
           .bind(this)
-          .then(runAssert('paginate'))
+          .then(runAssert('paginate', null, true))
           .then(done, done);
 
       });
@@ -245,7 +238,7 @@ describe('Error and Success Handlers', function () {
         this.crude.config({pagination: false});
         return this.crude.readList(this.reqres.req, this.reqres.res)
           .bind(this)
-          .then(runAssert('read'))
+          .then(runAssert('read', null, true))
           .then(done, done);
       });
       it('should work on read one', function (done) {

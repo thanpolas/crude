@@ -24,7 +24,7 @@ tester.controller = function() {
     readOne: sinon.mock().returns(item),
     update: sinon.mock().returns(item),
     count: sinon.mock().returns(1),
-    delete: sinon.mock(),
+    delete: sinon.mock().returns(item),
   };
 
   return ctrl;
