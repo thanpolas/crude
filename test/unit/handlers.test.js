@@ -57,6 +57,7 @@ describe('Error and Success Handlers', function () {
       });
       it('should work on read one', function (done) {
         this.ctrl.readOne.throws(this.err);
+        this.reqres.req.params.id = 'one';
         return this.crude.readOne(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('readOne'))
