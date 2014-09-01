@@ -18,7 +18,7 @@ describe('Error and Success Handlers', function () {
 
   describe('Error Handler', function () {
     beforeEach(function () {
-      this.err = 'yum';
+      this.err = new Error('yum');
       this.ctrl.readLimit.throws(this.err);
     });
 
@@ -37,13 +37,16 @@ describe('Error and Success Handlers', function () {
         });
     });
 
-    it('should call the custom error handler', function () {
-      this.spy = sinon.spy();
+    it('should call the custom error handler', function (done) {
+      this.spy = sinon.mock();
       this.crude.onError(this.spy);
-      this.crude.readList(this.reqres.req, this.reqres.res);
-      expect(this.spy).to.have.been.calledOnce;
-      expect(this.spy).to.have.been.calledWith(this.reqres.req, this.reqres.res,
-        'read', 500, this.err);
+      return this.crude.readList(this.reqres.req, this.reqres.res)
+        .bind(this)
+        .then(function() {
+          expect(this.spy).to.have.been.calledOnce;
+          expect(this.spy).to.have.been.calledWith(this.reqres.req, this.reqres.res,
+            'paginate', 500, this.err);
+        }).then(done, done);
     });
   });
 });
