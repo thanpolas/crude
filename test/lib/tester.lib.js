@@ -37,6 +37,7 @@ tester.reqres = function() {
     req: {
       query: {},
       body: {},
+      params: {},
     },
     res: {
       status: function() {return reqres.res;},
