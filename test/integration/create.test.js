@@ -4,37 +4,39 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var testlib = require('crude-test-case');
-testlib.setCrude(require('../../'));
+var crude = require('../../');
 
-var tester = testlib.tester;
-var Web = testlib.Web;
-var userFix = testlib.fixUser;
-var db = testlib.db;
+var testCase = require('crude-test-case');
+testCase.setCrude(crude);
 
-describe('Create OPs', function() {
+var testerLocal = require('../lib/tester.lib');
+
+var tester = testCase.tester;
+var Web = testCase.Web;
+var userFix = testCase.fixUser;
+
+describe.only('Create OPs', function() {
   this.timeout(5000);
 
-  tester.init();
+  tester.init(false);
 
   beforeEach(function() {
     var web = new Web();
     this.req = web.req;
   });
 
-  beforeEach(function(done) {
-    db.nuke().then(done, done);
-  });
-  afterEach(function(done) {
-    db.nuke().then(done, done);
+  beforeEach(function () {
+    // Setup crude
+    this.ctrl = testerLocal.controller();
+    this.crude = crude('/mock', this.ctrl, testCase.expressApp.app);
   });
 
   describe('Create a record', function () {
     beforeEach(function(done) {
       var self = this;
-      this.req.post('/user')
+      this.req.post('/mock')
         .send(userFix.one)
-        .expect(200)
+        .expect(201)
         .end(function(err, res) {
           if (err) {
             console.error('ERROR. Body:', res.body);
@@ -47,28 +49,11 @@ describe('Create OPs', function() {
     });
     it('Should have proper keys', function () {
       expect(this.body).to.have.keys([
-        '_id',
-        'firstName',
-        'lastName',
-        'companyName',
-        'email',
-        'password',
-        'createdOn',
-        'isVerified',
-        'isDisabled',
-        'isAdmin',
+        'a',
       ]);
     });
     it('Should have proper values', function () {
-      expect(this.body.firstName).to.equal('John');
-      expect(this.body.lastName).to.equal('Doe');
-      expect(this.body.companyName).to.equal('');
-      expect(this.body.email).to.equal('pleasant@hq.com');
-      expect(this.body.password).to.equal('123456');
-      expect(this.body.createdOn).to.match(tester.reIso8601);
-      expect(this.body.isVerified).to.equal(false);
-      expect(this.body.isDisabled).to.equal(false);
-      expect(this.body.isAdmin).to.equal(false);
+      expect(this.body.a).to.equal(1);
     });
   });
 });
