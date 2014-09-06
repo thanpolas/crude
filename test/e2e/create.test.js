@@ -11,14 +11,16 @@ testCase.setCrude(crude);
 
 var testerLocal = require('../lib/tester.lib');
 
-var tester = testCase.tester;
 var Web = testCase.Web;
 var userFix = testCase.fixUser;
 
 describe.only('Create OPs', function() {
   this.timeout(5000);
 
-  tester.init(false);
+  beforeEach(function (done) {
+    testCase.expressApp.init()
+      .then(done, done);
+  });
 
   beforeEach(function() {
     var web = new Web();
@@ -39,7 +41,7 @@ describe.only('Create OPs', function() {
         .expect(201)
         .end(function(err, res) {
           if (err) {
-            console.error('ERROR. Body:', res.body);
+            console.error('ERROR. Body:', err, (res && res.body));
             done(err);
             return;
           }
@@ -54,6 +56,12 @@ describe.only('Create OPs', function() {
     });
     it('Should have proper values', function () {
       expect(this.body.a).to.equal(1);
+    });
+    it('should invoke controller.create', function() {
+      expect(this.ctrl.create).to.have.been.calledOnce;
+    });
+    it('Should invoke controller.create() with proper params', function () {
+      expect(this.ctrl.create).to.have.been.calledWith(userFix.one);
     });
   });
 });
