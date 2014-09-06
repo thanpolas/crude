@@ -1,5 +1,5 @@
 /**
- * @fileOverview UPDATE OP tests.
+ * @fileOverview Read One OP tests.
  */
 var chai = require('chai');
 var expect = chai.expect;
@@ -12,7 +12,7 @@ var Web = testCase.Web;
 
 var testerLocal = require('../lib/tester.lib');
 
-describe('Update OPs', function() {
+describe('Read One OP', function() {
   this.timeout(5000);
 
   beforeEach(function (done) {
@@ -31,15 +31,12 @@ describe('Update OPs', function() {
     this.crude = crude('/mock', this.ctrl, testCase.expressApp.app);
   });
 
-  describe('Update records', function () {
+  describe('Read a single record', function () {
     beforeEach(function(done) {
       var self = this;
-      this.req.post('/mock/a_unique_id')
-        .send({
-          firstName: 'newFirst',
-          lastName: 'newLast',
-        })
+      this.req.get('/mock/a_unique_id')
         .expect(200)
+        .expect('Content-type', /application\/json/)
         .end(function(err, res) {
           if (err) {
             console.error('ERROR. Body:', res.body);
@@ -60,12 +57,11 @@ describe('Update OPs', function() {
     it('Should have proper values', function () {
       expect(this.body.a).to.equal(1);
     });
-    it('Should invoke ctrl update', function () {
-      expect(this.ctrl.update).to.have.been.calledOnce;
+    it('Should invoke ctrl readOne', function () {
+      expect(this.ctrl.readOne).to.have.been.calledOnce;
     });
-    it('Should invoke ctrl update with expected args', function () {
-      expect(this.ctrl.update).to.have.been.calledWith({id: 'a_unique_id'},
-        {firstName: 'newFirst', lastName: 'newLast'});
+    it('Should invoke ctrl readOne with expected args', function () {
+      expect(this.ctrl.readOne).to.have.been.calledWith({id: 'a_unique_id'});
     });
   });
 });

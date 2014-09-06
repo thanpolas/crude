@@ -11,7 +11,7 @@ var crude = require('../..');
 testlib.setCrude(crude);
 var userFix = testlib.fixUser;
 
-describe('Test the exposed API Test Helper', function () {
+describe.skip('Test the exposed API Test Helper', function () {
   this.timeout(5000);
 
   it('should execute...', function (done) {

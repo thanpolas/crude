@@ -1,5 +1,5 @@
 /**
- * @fileOverview Read Limit OP tests.
+ * @fileOverview Read All OP tests.
  */
 var chai = require('chai');
 var expect = chai.expect;
@@ -12,7 +12,7 @@ var Web = testCase.Web;
 
 var testerLocal = require('../lib/tester.lib');
 
-describe('Read Limit OP', function() {
+describe('Read All OP', function() {
   this.timeout(5000);
 
   beforeEach(function (done) {
@@ -29,9 +29,10 @@ describe('Read Limit OP', function() {
     // Setup crude
     this.ctrl = testerLocal.controller();
     this.crude = crude('/mock', this.ctrl, testCase.expressApp.app);
+    this.crude.config({pagination: false});
   });
 
-  describe('Standard Read Limit', function () {
+  describe('Standard Read All', function () {
     beforeEach(function(done) {
       var self = this;
       this.req.get('/mock')
@@ -60,11 +61,11 @@ describe('Read Limit OP', function() {
     it('Should have proper values', function () {
       expect(this.body[0].a).to.equal(1);
     });
-    it('Should invoke ctrl readLimit', function () {
-      expect(this.ctrl.readLimit).to.have.been.calledOnce;
+    it('Should invoke ctrl read', function () {
+      expect(this.ctrl.read).to.have.been.calledOnce;
     });
-    it('Should invoke ctrl readLimit with expected args', function () {
-      expect(this.ctrl.readLimit).to.have.been.calledWith({}, 0, 6);
+    it('Should invoke ctrl read with expected args', function () {
+      expect(this.ctrl.read).to.have.been.calledWith({});
     });
   });
 
@@ -90,10 +91,9 @@ describe('Read Limit OP', function() {
         });
     });
 
-    it('Should invoke readLimit with proper arguments', function() {
-      expect(this.ctrl.readLimit).to.have.been.calledWith(
-        {b: '2', createdAt: {between: ['1182850582748', '1182850582749']}},
-        0, 6);
+    it('Should invoke read with proper arguments', function() {
+      expect(this.ctrl.read).to.have.been.calledWith(
+        {b: '2', createdAt: {between: ['1182850582748', '1182850582749']}});
     });
   });
 });
