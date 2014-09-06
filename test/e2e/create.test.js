@@ -14,7 +14,7 @@ var testerLocal = require('../lib/tester.lib');
 var Web = testCase.Web;
 var userFix = testCase.fixUser;
 
-describe.only('Create OPs', function() {
+describe('Create OPs', function() {
   this.timeout(5000);
 
   beforeEach(function (done) {
