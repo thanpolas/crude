@@ -53,7 +53,8 @@
     "supertest": "^0.13.0",
     "sinon-chai": "^2.5.0",
     "grunt-contrib-jshint": "^0.10.0",
-    "load-grunt-tasks": "^0.6.0"
+    "load-grunt-tasks": "^0.6.0",
+    "grunt-cli": "^0.1.13"
   },
   "peerDependencies": {},
   "keywords": [
