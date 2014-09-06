@@ -28,7 +28,7 @@
   },
   "main": "./lib/crude",
   "scripts": {
-    "test": "node_modules/.bin/mocha -u tdd -R spec test/unit && node_modules/.bin/mocha -u bdd -R spec test/integration"
+    "test": "node_modules/.bin/mocha -u tdd -R spec test/unit && node_modules/.bin/mocha -u bdd -R spec test/e2e && node_modules/.bin/grunt jshint"
   },
   "dependencies": {
     "pagination": "~0.4.3",
