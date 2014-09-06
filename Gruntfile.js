@@ -5,7 +5,6 @@
  */
 
 module.exports = function( grunt ) {
-
   var pkg = grunt.file.readJSON('package.json');
 
   grunt.loadNpmTasks('grunt-release');
@@ -21,6 +20,12 @@ module.exports = function( grunt ) {
 
     pkg: pkg,
 
+    jshint: {
+      options: {
+        jshintrc: true,
+      },
+      lib: ['lib/**/*.js'],
+    },
 
     release: {
       options: {
