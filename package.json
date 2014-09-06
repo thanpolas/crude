@@ -28,31 +28,33 @@
   },
   "main": "./lib/crude",
   "scripts": {
-    "test": "node_modules/.bin/mocha -u tdd -R spec test/unit && node_modules/.bin/mocha -u bdd -R spec test/integration"
+    "test": "node_modules/.bin/mocha -u tdd -R spec test/unit && node_modules/.bin/mocha -u bdd -R spec test/e2e && node_modules/.bin/grunt jshint"
   },
   "dependencies": {
-    "pagination": "~0.4.2",
-    "validator": "~3.16.1",
+    "pagination": "~0.4.3",
+    "validator": "~3.17.1",
     "lodash": "~2.4.1",
-    "jade": "^1.5.0",
+    "jade": "^1.6.0",
     "middlewarify": "~0.4.0",
     "cip": "~0.2.5",
-    "bluebird": "~2.2.2",
+    "bluebird": "~2.3.2",
     "httplink": "0.0.1",
     "nodeon-error": "^0.1.0"
   },
   "devDependencies": {
     "crude-test": "^0.0.1",
-    "crude-test-case": "^0.0.2",
+    "crude-test-case": "^0.0.4",
     "sinon": "~1.10.3",
-    "mocha": "~1.21.3",
+    "mocha": "~1.21.4",
     "chai": "~1.9.1",
     "grunt": "~0.4.5",
     "grunt-release": "~0.7.0",
-    "mongoose": "^3.8.14",
-    "express": "^4.8.0",
-    "body-parser": "^1.6.0",
-    "supertest": "^0.13.0"
+    "mongoose": "^3.8.15",
+    "supertest": "^0.13.0",
+    "sinon-chai": "^2.5.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "load-grunt-tasks": "^0.6.0",
+    "grunt-cli": "^0.1.13"
   },
   "peerDependencies": {},
   "keywords": [

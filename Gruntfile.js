@@ -1,15 +1,13 @@
 /*jshint camelcase:false */
-/*
+/**
  * crude
  *
  */
 
 module.exports = function( grunt ) {
-  'use strict';
-
   var pkg = grunt.file.readJSON('package.json');
 
-  grunt.loadNpmTasks('grunt-release');
+  require('load-grunt-tasks')(grunt);
 
   //
   // Grunt configuration:
@@ -22,6 +20,12 @@ module.exports = function( grunt ) {
 
     pkg: pkg,
 
+    jshint: {
+      options: {
+        jshintrc: true,
+      },
+      lib: ['lib/**/*.js'],
+    },
 
     release: {
       options: {
