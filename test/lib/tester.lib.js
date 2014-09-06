@@ -18,13 +18,13 @@ tester.controller = function() {
   var item = {a: 1};
   var ctrl = {
     __item: item,
-    create: sinon.mock().returns(item),
-    read: sinon.mock().returns([item]),
-    readLimit: sinon.mock().returns([item]),
-    readOne: sinon.mock().returns(item),
-    update: sinon.mock().returns(item),
-    count: sinon.mock().returns(1),
-    delete: sinon.mock().returns(item),
+    create: sinon.stub().returns(item),
+    read: sinon.stub().returns([item]),
+    readLimit: sinon.stub().returns([item]),
+    readOne: sinon.stub().returns(item),
+    update: sinon.stub().returns(item),
+    count: sinon.stub().returns(1),
+    delete: sinon.stub().returns(item),
   };
 
   return ctrl;
