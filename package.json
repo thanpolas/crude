@@ -52,7 +52,8 @@
     "mongoose": "^3.8.15",
     "supertest": "^0.13.0",
     "sinon-chai": "^2.5.0",
-    "grunt-contrib-jshint": "^0.10.0"
+    "grunt-contrib-jshint": "^0.10.0",
+    "load-grunt-tasks": "^0.6.0"
   },
   "peerDependencies": {},
   "keywords": [

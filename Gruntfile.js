@@ -7,7 +7,7 @@
 module.exports = function( grunt ) {
   var pkg = grunt.file.readJSON('package.json');
 
-  grunt.loadNpmTasks('grunt-release');
+  require('load-grunt-tasks')(grunt);
 
   //
   // Grunt configuration:
