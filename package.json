@@ -51,7 +51,8 @@
     "grunt-release": "~0.7.0",
     "mongoose": "^3.8.15",
     "supertest": "^0.13.0",
-    "sinon-chai": "^2.5.0"
+    "sinon-chai": "^2.5.0",
+    "grunt-contrib-jshint": "^0.10.0"
   },
   "peerDependencies": {},
   "keywords": [

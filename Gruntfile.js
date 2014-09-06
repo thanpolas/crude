@@ -1,11 +1,10 @@
 /*jshint camelcase:false */
-/*
+/**
  * crude
  *
  */
 
 module.exports = function( grunt ) {
-  'use strict';
 
   var pkg = grunt.file.readJSON('package.json');
 
