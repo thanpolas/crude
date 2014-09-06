@@ -47,11 +47,11 @@ That was it, you now have a RESTfull CRUD API under the route `/user`.
 
 Crude exposes a constructor, otherwise known as a *Class*.
 
-### <a name="instantiation">Crude Instantiation</a>
+#### <a name="instantiation">Crude Instantiation</a>
 
 The Crude constructor requires two arguments with an optional third, it returns a new instance of Crude.
 
-> ### crude(route, controller, optExpressApp)
+> #### crude(route, controller, optExpressApp)
 >
 >    * **route** `string` The route we want the CRUD routes to apply on.
 >    * **controller** `Object` An Object containng the controlling methods as described in the [Crude Controller](#crude-controller).
@@ -59,16 +59,25 @@ The Crude constructor requires two arguments with an optional third, it returns 
 >
 > *Returns* `Object` A new Crude instance.
 
+Example:
+
+```js
+var crude = require('crude');
+
+
+var userCrude = crude('/user', controller);
+```
+
 **[[⬆]](#TOC)**
 
-### <a name="crude-controller">The Crude Controller</a>
+#### <a name="crude-controller">The Crude Controller</a>
 
 The Crude constructor requires a controller to use for invoking the right method based on the incoming request. A constroller is nothing but a plain Javascript Object, the following functions are expected to be defined in the object:
 
-* `create(data)` Gets invoked on a Create request, the data provided should be used to create the record.
-    * **data** `Object` An object with the data to create the record.
-* `read(query)` Gets invoked on a Read request expecting all the records of the specific resource.
-    * **query** `Object` An object containing query parameters for fetching the records.
+* **`create(data)`** Gets invoked on a Create request, the data provided should be used to create the record.
+    * *data* `Object` An object with the data to create the record.
+* **`read(query)`** Gets invoked on a Read request expecting all the records of the specific resource.
+    * *query* `Object` An object containing query parameters for fetching the records.
 * `readLimit(query, skip, limit)` Gets invoked on a Paginated Read request, expecting a limited set of records for the specific resource.
     * **query** `Object` An object containing query parameters for fetching the records.
     * **skip** `number` How many records to skip.
