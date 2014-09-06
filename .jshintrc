@@ -121,6 +121,8 @@
    *
    */
 
+  /** Fucking disco https://github.com/petkaantonov/bluebird/issues/301 */
+  "predef": [ "-Promise" ],
 
   /**
    * PROJECT GLOBALS
