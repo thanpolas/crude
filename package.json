@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "crude-test": "^0.0.1",
-    "crude-test-case": "^0.0.3",
+    "crude-test-case": "^0.0.4",
     "sinon": "~1.10.3",
     "mocha": "~1.21.4",
     "chai": "~1.9.1",
