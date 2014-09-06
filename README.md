@@ -43,10 +43,6 @@ This package assumes you have the following stack:
 
 * Express
 
-## Authors
-
-* [@thanpolas][thanpolas]
-
 ## Release History
 
 - **v0.5.12**, *06 Aug 2014*
@@ -138,13 +134,8 @@ This package assumes you have the following stack:
 
 ## License
 
-Copyright 2014 Thanasis Polychronakis
+Copyright 2014 [Thanasis Polychronakis][thanpolas]
 
 Licensed under the [MIT License](LICENSE-MIT)
 
-[grunt]: http://gruntjs.com/
-[Getting Started]: https://github.com/gruntjs/grunt/wiki/Getting-started
-[Gruntfile]: https://github.com/gruntjs/grunt/wiki/Sample-Gruntfile "Grunt's Gruntfile.js"
-[grunt-replace]: https://github.com/erickrdch/grunt-string-replace "Grunt string replace"
-[grunt-S3]: https://github.com/pifantastic/grunt-s3 "grunt-s3 task"
 [thanpolas]: https://github.com/thanpolas "Thanasis Polychronakis"
