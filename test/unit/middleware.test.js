@@ -10,7 +10,7 @@ var tester = require('../lib/tester.lib');
 
 var crude = require('../../');
 
-describe.only('Middleware tests', function () {
+describe('Middleware tests', function () {
   beforeEach(function () {
     this.ctrl = tester.controller();
     this.crude = crude('/middleware', this.ctrl);
