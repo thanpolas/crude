@@ -1,9 +1,8 @@
-# node-crude
+# Crude
 
-Seamless CRUD control operations for node.
+Creates CRUD RESTfull endpoints for a given route.
 
 [![Build Status](https://secure.travis-ci.org/thanpolas/crude.png?branch=master)](http://travis-ci.org/thanpolas/crude)
-
 
 ## Install
 
@@ -45,6 +44,9 @@ This package assumes you have the following stack:
 
 ## Release History
 
+
+- **v0.6.0**, *07 Sep 2014*
+    - A complete refactor of the codebase and API has happened, documentation ready, time to hit the spotlight.
 - **v0.5.12**, *06 Aug 2014*
     - No longer assume that `readLimit` OP result is an array.
     - Invoke the right methods when performing an update

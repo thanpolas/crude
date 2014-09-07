@@ -1,6 +1,6 @@
 {
   "name": "crude",
-  "description": "Seamless CRUD control operations for node.",
+  "description": "Creates CRUD RESTfull endpoints for a given route",
   "version": "0.5.12",
   "homepage": "https://github.com/thanpolas/crude",
   "author": {
