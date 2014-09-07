@@ -55,7 +55,6 @@ describe.only('Configuration tests', function () {
       it('delete OP', function () {
         expect(this.ctrl.delete).to.have.been.calledWith({_id: 'one'});
       });
-
     });
   });
 });
