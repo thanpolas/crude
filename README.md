@@ -44,8 +44,7 @@ This package assumes you have the following stack:
 
 ## Release History
 
-
-- **v0.6.0**, *07 Sep 2014*
+- **v0.6.0**, *08 Sep 2014*
     - A complete refactor of the codebase and API has happened, documentation ready, time to hit the spotlight.
 - **v0.5.13**, *01 Sep 2014*
     - Populates total item count for pagination query.
