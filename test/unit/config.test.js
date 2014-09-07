@@ -10,7 +10,7 @@ var expect = chai.expect;
 
 var crude = require('../../');
 
-describe.only('Configuration tests', function () {
+describe('Configuration tests', function () {
   beforeEach(function () {
     this.ctrl = tester.controller();
     this.crude = crude('/middleware', this.ctrl);
