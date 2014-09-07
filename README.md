@@ -30,7 +30,13 @@ var controller = {
 var userCrude = crude('/user', controller, expressApp);
 ```
 
-That was it, you now have a RESTfull CRUD API under the route `/user`.
+That was it, you now have a RESTfull CRUD API under the route `/user`:
+
+* POST `/user` Create a new user.
+* GET `/user` Get a list of all the users paginated.
+* GET `/user/:id` Get a single user item.
+* POST `/user/:id` Update the user item.
+* DELETE `/user/:id` Delete the user item.
 
 ## Documentation
 
