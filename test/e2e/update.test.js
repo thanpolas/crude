@@ -31,10 +31,10 @@ describe('Update OPs', function() {
     this.crude = crude('/mock', this.ctrl, testCase.expressApp.app);
   });
 
-  describe('Update records', function () {
+  describe('Update records using PUT', function () {
     beforeEach(function(done) {
       var self = this;
-      this.req.post('/mock/a_unique_id')
+      this.req.put('/mock/a_unique_id')
         .send({
           firstName: 'newFirst',
           lastName: 'newLast',
@@ -68,4 +68,43 @@ describe('Update OPs', function() {
         {firstName: 'newFirst', lastName: 'newLast'});
     });
   });
+
+  describe('Update records using PATCH', function () {
+    beforeEach(function(done) {
+      var self = this;
+      this.req.patch('/mock/a_unique_id')
+        .send({
+          firstName: 'newFirst',
+          lastName: 'newLast',
+        })
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            console.error('ERROR. Body:', res.body);
+            done(err);
+            return;
+          }
+
+          self.body = res.body;
+          done();
+        });
+    });
+
+    it('Should have proper keys', function () {
+      expect(this.body).to.have.keys([
+        'a',
+      ]);
+    });
+    it('Should have proper values', function () {
+      expect(this.body.a).to.equal(1);
+    });
+    it('Should invoke ctrl update', function () {
+      expect(this.ctrl.update).to.have.been.calledOnce;
+    });
+    it('Should invoke ctrl update with expected args', function () {
+      expect(this.ctrl.update).to.have.been.calledWith({id: 'a_unique_id'},
+        {firstName: 'newFirst', lastName: 'newLast'});
+    });
+  });
+
 });
