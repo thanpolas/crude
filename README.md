@@ -53,6 +53,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.6.1**, *10 Sep 2014*
+    - Changed HTTP Verbs for update to `PUT` and `PATCH`, thank you [@dmtrs](https://github.com/dmtrs).
 - **v0.6.0**, *08 Sep 2014*
     - A complete refactor of the codebase and API has happened, documentation ready, time to hit the spotlight.
 - **v0.5.13**, *01 Sep 2014*
