@@ -35,8 +35,11 @@ That was it, you now have a RESTfull CRUD API under the route `/user`:
 * POST `/user` Create a new user.
 * GET `/user` Get a list of all the users paginated.
 * GET `/user/:id` Get a single user item.
-* POST `/user/:id` Update the user item.
+* PUT `/user/:id` Update the user item, expects the entirety of the resource to be updated.
+* PATCH `/user/:id` Update the user item, expects a part of the resource to be updated.
 * DELETE `/user/:id` Delete the user item.
+
+HTTP methods were mapped based on [RFC7231 Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content: HTTP Method Definitions](http://tools.ietf.org/html/rfc7231#section-4.3).
 
 ## Documentation
 
