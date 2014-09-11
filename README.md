@@ -53,6 +53,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.6.3**, *11 Sep 2014*
+    - Issue a HTTP Bad Request error code (400) by default vs Internal Error (500).
 - **v0.6.2**, *11 Sep 2014*
     - Make config a synch method returning self.
 - **v0.6.1**, *10 Sep 2014*
