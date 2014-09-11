@@ -19,12 +19,8 @@ describe('Configuration tests', function () {
   });
 
   describe('Surface tests', function () {
-    it('config returns a promise', function () {
-      expect(this.crude.config().then).to.be.a('function');
-    });
-
-    it('returns null when promise resolves', function () {
-      return expect(this.crude.config()).to.eventually.be.null;
+    it('config returns self', function () {
+      expect(this.crude.config()).to.equal(this.crude);
     });
   });
 
