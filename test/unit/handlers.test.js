@@ -35,7 +35,7 @@ describe('Error and Success Handlers', function () {
         return function () {
           expect(this.handleStub).to.have.been.calledOnce;
           expect(this.handleStub).to.have.been.calledWith(this.reqres.req,
-            this.reqres.res, operation, 500, this.err);
+            this.reqres.res, operation, 400, this.err);
         };
       }
 
@@ -94,7 +94,7 @@ describe('Error and Success Handlers', function () {
         return function () {
           expect(this.spy).to.have.been.calledOnce;
           expect(this.spy).to.have.been.calledWith(this.reqres.req, this.reqres.res,
-            operation, 500, this.err);
+            operation, 400, this.err);
         };
       }
       beforeEach(function () {
