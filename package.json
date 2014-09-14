@@ -1,7 +1,7 @@
 {
   "name": "crude",
   "description": "Creates CRUD RESTfull endpoints for a given route",
-  "version": "0.6.3",
+  "version": "0.7.0",
   "homepage": "https://github.com/thanpolas/crude",
   "author": {
     "name": "Thanasis Polychronakis",
