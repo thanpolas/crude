@@ -41,7 +41,7 @@ describe('Error and Success Handlers', function () {
 
       it('should work on pagination', function (done) {
         this.ctrl.readLimit.throws(this.err);
-        return this.crude.readList(this.reqres.req, this.reqres.res)
+        return this.crude._readList(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('paginate'))
           .then(done, done);
@@ -50,7 +50,7 @@ describe('Error and Success Handlers', function () {
       it('should work on read all', function (done) {
         this.ctrl.read.throws(this.err);
         this.crude.config({pagination: false});
-        return this.crude.readList(this.reqres.req, this.reqres.res)
+        return this.crude._readList(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('read'))
           .then(done, done);
@@ -58,7 +58,7 @@ describe('Error and Success Handlers', function () {
       it('should work on read one', function (done) {
         this.ctrl.readOne.throws(this.err);
         this.reqres.req.params.id = 'one';
-        return this.crude.readOne(this.reqres.req, this.reqres.res)
+        return this.crude._readOne(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('readOne'))
           .then(done, done);
@@ -66,7 +66,7 @@ describe('Error and Success Handlers', function () {
       it('should work on update', function (done) {
         this.ctrl.readOne.throws(this.err);
         this.reqres.req.params.id = 'one';
-        return this.crude.update(this.reqres.req, this.reqres.res)
+        return this.crude._update(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('update'))
           .then(done, done);
@@ -74,14 +74,14 @@ describe('Error and Success Handlers', function () {
       it('should work on delete', function (done) {
         this.ctrl.delete.throws(this.err);
         this.reqres.req.params.id = 'one';
-        return this.crude.delete(this.reqres.req, this.reqres.res)
+        return this.crude._delete(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('delete'))
           .then(done, done);
       });
       it('should work on create', function (done) {
         this.ctrl.create.throws(this.err);
-        return this.crude.create(this.reqres.req, this.reqres.res)
+        return this.crude._create(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('create'))
           .then(done, done);
@@ -104,7 +104,7 @@ describe('Error and Success Handlers', function () {
 
       it('should work on pagination', function (done) {
         this.ctrl.readLimit.throws(this.err);
-        return this.crude.readList(this.reqres.req, this.reqres.res)
+        return this.crude._readList(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('paginate'))
           .then(done, done);
@@ -113,7 +113,7 @@ describe('Error and Success Handlers', function () {
       it('should work on read all', function (done) {
         this.ctrl.read.throws(this.err);
         this.crude.config({pagination: false});
-        return this.crude.readList(this.reqres.req, this.reqres.res)
+        return this.crude._readList(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('read'))
           .then(done, done);
@@ -121,7 +121,7 @@ describe('Error and Success Handlers', function () {
       it('should work on read one', function (done) {
         this.ctrl.readOne.throws(this.err);
         this.reqres.req.params.id = 'one';
-        return this.crude.readOne(this.reqres.req, this.reqres.res)
+        return this.crude._readOne(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('readOne'))
           .then(done, done);
@@ -129,7 +129,7 @@ describe('Error and Success Handlers', function () {
       it('should work on update', function (done) {
         this.ctrl.readOne.throws(this.err);
         this.reqres.req.params.id = 'one';
-        return this.crude.update(this.reqres.req, this.reqres.res)
+        return this.crude._update(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('update'))
           .then(done, done);
@@ -137,14 +137,14 @@ describe('Error and Success Handlers', function () {
       it('should work on delete', function (done) {
         this.ctrl.delete.throws(this.err);
         this.reqres.req.params.id = 'one';
-        return this.crude.delete(this.reqres.req, this.reqres.res)
+        return this.crude._delete(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('delete'))
           .then(done, done);
       });
       it('should work on create', function (done) {
         this.ctrl.create.throws(this.err);
-        return this.crude.create(this.reqres.req, this.reqres.res)
+        return this.crude._create(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('create'))
           .then(done, done);
@@ -178,7 +178,7 @@ describe('Error and Success Handlers', function () {
       });
 
       it('should work on pagination', function (done) {
-        return this.crude.readList(this.reqres.req, this.reqres.res)
+        return this.crude._readList(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('paginate', null, true))
           .then(done, done);
@@ -186,34 +186,34 @@ describe('Error and Success Handlers', function () {
       });
       it('should work on read all', function (done) {
         this.crude.config({pagination: false});
-        return this.crude.readList(this.reqres.req, this.reqres.res)
+        return this.crude._readList(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('read', null, true))
           .then(done, done);
       });
       it('should work on read one', function (done) {
         this.reqres.req.params.id = 'one';
-        return this.crude.readOne(this.reqres.req, this.reqres.res)
+        return this.crude._readOne(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('readOne'))
           .then(done, done);
       });
       it('should work on update', function (done) {
         this.reqres.req.params.id = 'one';
-        return this.crude.update(this.reqres.req, this.reqres.res)
+        return this.crude._update(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('update'))
           .then(done, done);
       });
       it('should work on delete', function (done) {
         this.reqres.req.params.id = 'one';
-        return this.crude.delete(this.reqres.req, this.reqres.res)
+        return this.crude._delete(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('delete'))
           .then(done, done);
       });
       it('should work on create', function (done) {
-        return this.crude.create(this.reqres.req, this.reqres.res)
+        return this.crude._create(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('create', 201))
           .then(done, done);
@@ -228,7 +228,7 @@ describe('Error and Success Handlers', function () {
       });
 
       it('should work on pagination', function (done) {
-        return this.crude.readList(this.reqres.req, this.reqres.res)
+        return this.crude._readList(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('paginate', null, true))
           .then(done, done);
@@ -236,34 +236,34 @@ describe('Error and Success Handlers', function () {
       });
       it('should work on read all', function (done) {
         this.crude.config({pagination: false});
-        return this.crude.readList(this.reqres.req, this.reqres.res)
+        return this.crude._readList(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('read', null, true))
           .then(done, done);
       });
       it('should work on read one', function (done) {
         this.reqres.req.params.id = 'one';
-        return this.crude.readOne(this.reqres.req, this.reqres.res)
+        return this.crude._readOne(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('readOne'))
           .then(done, done);
       });
       it('should work on update', function (done) {
         this.reqres.req.params.id = 'one';
-        return this.crude.update(this.reqres.req, this.reqres.res)
+        return this.crude._update(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('update'))
           .then(done, done);
       });
       it('should work on delete', function (done) {
         this.reqres.req.params.id = 'one';
-        return this.crude.delete(this.reqres.req, this.reqres.res)
+        return this.crude._delete(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('delete'))
           .then(done, done);
       });
       it('should work on create', function (done) {
-        return this.crude.create(this.reqres.req, this.reqres.res)
+        return this.crude._create(this.reqres.req, this.reqres.res)
           .bind(this)
           .then(runAssert('create', 201))
           .then(done, done);

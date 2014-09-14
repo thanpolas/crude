@@ -1,7 +1,6 @@
 /**
  * @fileOverview Middleware tests.
  */
-var Promise = require('bluebird');
 var chai = require('chai');
 var expect = chai.expect;
 var sinon = require('sinon');
@@ -18,6 +17,12 @@ describe('Middleware tests', function () {
     this.stub = sinon.stub();
   });
 
+  function runMiddleware(op) {
+    op.forEach(function (midd) {
+      midd(this.reqres.req, this.reqres.res);
+    }, this);
+  }
+
   function runAssert () {
     expect(this.stub).to.have.been.calledOnce;
     expect(this.stub).to.have.been.calledWith(this.reqres.req, this.reqres.res);
@@ -30,61 +35,11 @@ describe('Middleware tests', function () {
       } else {
         this.crude.use(this.stub);
       }
-      this.crude[operation](this.reqres.req, this.reqres.res)
-        .bind(this)
-        .then(runAssert)
-        .then(done, done);
-    });
-
-    it('should accept a promise and be async. OP: ' + operation + ' single: ' + isSingle, function (done) {
-      var defer = Promise.defer();
-      var asyncOk = false;
-      this.stub.returns(defer.promise);
-
-      if (isSingle) {
-        this.crude[operation].use(this.stub);
-      } else {
-        this.crude.use(this.stub);
-      }
-      this.crude[operation](this.reqres.req, this.reqres.res)
-        .bind(this)
-        .then(runAssert)
-        .then(function () {
-          expect(asyncOk).to.be.true;
-        })
-        .then(done, done);
-
-      setTimeout(function () {
-        asyncOk = true;
-        defer.resolve();
-      }, 30);
-    });
-
-    it('should not invoke CRUD OP if error thrown for OP: ' + operation + ' single:' + isSingle, function (done) {
-      this.stub.throws(new Error());
-
-      if (isSingle) {
-        this.crude[operation].use(this.stub);
-      } else {
-        this.crude.use(this.stub);
-      }
-
-      var crudeOp = operation;
-      if (operation === 'readList') {
-        crudeOp = 'readLimit';
-      }
-
-      this.crude[operation](this.reqres.req, this.reqres.res)
-        .bind(this)
-        .catch(runAssert)
-        .bind(this)
-        .then(function () {
-          expect(this.ctrl[crudeOp]).to.not.have.been.called;
-        })
-        .then(done, done);
+      runMiddleware.call(this, this.crude[operation]);
+      runAssert.call(this);
+      done();
     });
   }
-
 
   describe('Per CRUD OP', function () {
     // create tests

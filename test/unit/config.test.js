@@ -36,9 +36,9 @@ describe('Configuration tests', function () {
       beforeEach(function () {
         this.reqres.req.params.id = 'one';
         return Promise.all([
-          this.crude.readOne(this.reqres.req, this.reqres.res),
-          this.crude.update(this.reqres.req, this.reqres.res),
-          this.crude.delete(this.reqres.req, this.reqres.res),
+          this.crude._readOne(this.reqres.req, this.reqres.res),
+          this.crude._update(this.reqres.req, this.reqres.res),
+          this.crude._delete(this.reqres.req, this.reqres.res),
         ]);
       });
 
