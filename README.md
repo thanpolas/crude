@@ -55,6 +55,7 @@ This package assumes you have the following stack:
 
 - **v0.7.1**, *16 Sep 2014*
     - Switched CRUD middleware to FIFO.
+    - Added [Query Middleware](https://github.com/thanpolas/crude/wiki/Api#query-middleware) on all CRUD OPs.
 - **v0.7.0**, *14 Sep 2014*
     - Middleware are now of express type vs being Promises.
 - **v0.6.3**, *11 Sep 2014*
