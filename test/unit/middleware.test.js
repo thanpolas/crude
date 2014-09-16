@@ -29,7 +29,11 @@ describe('Middleware tests', function () {
 
     function runAssert () {
       expect(this.stub).to.have.been.calledOnce;
+      expect(this.stubTwo).to.have.been.calledOnce;
+      expect(this.stubThree).to.have.been.calledOnce;
       expect(this.stub).to.have.been.calledWith(this.reqres.req, this.reqres.res);
+      expect(this.stubTwo).to.have.been.calledWith(this.reqres.req, this.reqres.res);
+      expect(this.stubThree).to.have.been.calledWith(this.reqres.req, this.reqres.res);
       expect(this.stub).to.have.been.calledBefore(this.stubTwo);
       expect(this.stubTwo).to.have.been.calledBefore(this.stubThree);
     }
@@ -74,15 +78,39 @@ describe('Middleware tests', function () {
   });
 
   describe('Query type middleware', function () {
-    function runAssert () {
-      expect(this.stub).to.have.been.calledOnce;
-      expect(this.stub).to.have.been.calledWith(this.query);
-      expect(this.stub).to.have.been.calledBefore(this.stubTwo);
-      expect(this.stubTwo).to.have.been.calledBefore(this.stubThree);
+    function runAsserts () {
+      it('should call stub One once', function () {
+        expect(this.stub).to.have.been.calledOnce;
+      });
+      it('should call stub Two once', function () {
+        expect(this.stubTwo).to.have.been.calledOnce;
+      });
+      it('should call stub Three once', function () {
+        expect(this.stubThree).to.have.been.calledOnce;
+      });
+      it('should call stub One with expected arguments', function () {
+        expect(this.stub).to.have.been.calledWith(this.query);
+      });
+      it('should call stub Two with expected arguments', function () {
+        expect(this.stubTwo).to.have.been.calledWith(this.query);
+      });
+      it('should call stub Three with expected arguments', function () {
+        expect(this.stubThree).to.have.been.calledWith(this.query);
+      });
+      it('should call stub One before stub Two', function () {
+        expect(this.stub).to.have.been.calledBefore(this.stubTwo);
+      });
+      it('should call stub Two before stub Three', function () {
+        expect(this.stubTwo).to.have.been.calledBefore(this.stubThree);
+      });
     }
 
     function createTests (isSingle, operation) {
-      it('should add middleware for ' + operation + ' OP, single: ' + isSingle, function (done) {
+      beforeEach(function () {
+        this.stub = sinon.stub();
+        this.stubTwo = sinon.stub();
+        this.stubThree = sinon.stub();
+
         if (isSingle) {
           this.crude[operation].use(this.stub);
           this.crude[operation].use(this.stubTwo);
@@ -92,9 +120,13 @@ describe('Middleware tests', function () {
           this.crude.useQuery(this.stubTwo);
           this.crude.useQuery(this.stubThree);
         }
-        this.crude[operation](this.query);
-        runAssert.call(this);
-        done();
+
+        // invoke and test
+        return this.crude[operation](this.query);
+      });
+
+      describe('Testing Operation: ' + operation + ', Is Single:' + isSingle, function () {
+        runAsserts();
       });
     }
 
