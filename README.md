@@ -53,6 +53,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.7.1**, *16 Sep 2014*
+    - Switched CRUD middleware to FIFO.
 - **v0.7.0**, *14 Sep 2014*
     - Middleware are now of express type vs being Promises.
 - **v0.6.3**, *11 Sep 2014*
