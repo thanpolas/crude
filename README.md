@@ -53,7 +53,7 @@ This package assumes you have the following stack:
 
 ## Release History
 
-- **v0.7.2**, *24 Nov 2014*
+- **v0.7.3**, *24 Nov 2014*
     - Better heuristics for detected nodeON Error objects
 - **v0.7.1**, *16 Sep 2014*
     - Switched CRUD middleware to FIFO.
