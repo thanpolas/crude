@@ -53,6 +53,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.7.4**, *09 Dec 2014*
+    - Upgrade all dependencies to latest.
 - **v0.7.3**, *24 Nov 2014*
     - Better heuristics for detected nodeON Error objects
 - **v0.7.1**, *16 Sep 2014*
