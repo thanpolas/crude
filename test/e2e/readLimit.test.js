@@ -96,4 +96,31 @@ describe('Read Limit OP', function() {
         0, 6);
     });
   });
+
+  describe('Read filtered records with multiple items', function () {
+    beforeEach(function(done) {
+      var self = this;
+      this.req.get('/mock')
+        .query({
+          b: '2,3',
+        })
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            console.error('ERROR. Body:', res.body);
+            done(err);
+            return;
+          }
+
+          self.body = res.body;
+          done();
+        });
+    });
+
+    it('Should invoke readLimit with proper arguments', function() {
+      expect(this.ctrl.readLimit).to.have.been.calledWith({
+        b: {in: ['2', '3']},
+      }, 0, 6);
+    });
+  });
 });
