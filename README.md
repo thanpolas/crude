@@ -53,6 +53,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.7.5**, *23 Jul 2015*
+    - Will now allow for GET queries with multiple items per attribute.
 - **v0.7.4**, *09 Dec 2014*
     - Upgrade all dependencies to latest.
 - **v0.7.3**, *24 Nov 2014*
