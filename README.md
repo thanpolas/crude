@@ -53,6 +53,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.8.0**, *28 Jul 2015*
+    - Will now return an HTTP Status 200 when no results for reading multiple records (used to return 404).
 - **v0.7.5**, *23 Jul 2015*
     - Will now allow for GET queries with multiple items per attribute.
 - **v0.7.4**, *09 Dec 2014*
