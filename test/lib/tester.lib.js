@@ -34,6 +34,27 @@ tester.controller = function() {
 };
 
 /**
+ * Returns A stub controller for crude with no records.
+ *
+ * @return {Object} A stub controller for crude.
+ */
+tester.controllerEmpty = function() {
+  var item = null;
+  var ctrl = {
+    __item: item,
+    create: sinon.stub().returns(item),
+    read: sinon.stub().returns([]),
+    readLimit: sinon.stub().returns([]),
+    readOne: sinon.stub().returns(item),
+    update: sinon.stub().returns(item),
+    count: sinon.stub().returns(0),
+    delete: sinon.stub().returns(item),
+  };
+
+  return ctrl;
+};
+
+/**
  * Return express Request / Response objects.
  *
  * @return {Object} Req Res mocks.

@@ -28,8 +28,13 @@ describe('Read All OP', function() {
   beforeEach(function () {
     // Setup crude
     this.ctrl = testerLocal.controller();
+    this.ctrlEmpty = testerLocal.controllerEmpty();
+
     this.crude = crude('/mock', this.ctrl, testCase.expressApp.app);
+    this.crudeEmpty = crude('/empty', this.ctrlEmpty, testCase.expressApp.app);
+
     this.crude.config({pagination: false});
+    this.crudeEmpty.config({pagination: false});
   });
 
   describe('Standard Read All', function () {
@@ -94,6 +99,17 @@ describe('Read All OP', function() {
     it('Should invoke read with proper arguments', function() {
       expect(this.ctrl.read).to.have.been.calledWith(
         {b: '2', createdAt: {between: ['1182850582748', '1182850582749']}});
+    });
+  });
+
+  describe('Reading with no records', function () {
+    it('ReadAll should return 200', function (done) {
+      this.req.get('/empty')
+        .expect(200, done);
+    });
+    it('ReadOne should return 404', function (done) {
+      this.req.get('/empty/a')
+        .expect(404, done);
     });
   });
 });
