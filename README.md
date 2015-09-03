@@ -53,6 +53,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.9.0**, *03 Sep 2015*
+    - No longer performs a "readOne" after an update operation, this can potentially be a breaking change for you.
 - **v0.8.0**, *28 Jul 2015*
     - Will now return an HTTP Status 200 when no results for reading multiple records (used to return 404).
 - **v0.7.5**, *23 Jul 2015*
