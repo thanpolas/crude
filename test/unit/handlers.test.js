@@ -64,7 +64,7 @@ describe('Error and Success Handlers', function () {
           .then(done, done);
       });
       it('should work on update', function (done) {
-        this.ctrl.readOne.throws(this.err);
+        this.ctrl.update.throws(this.err);
         this.reqres.req.params.id = 'one';
         return this.crude._update(this.reqres.req, this.reqres.res)
           .bind(this)
@@ -127,7 +127,7 @@ describe('Error and Success Handlers', function () {
           .then(done, done);
       });
       it('should work on update', function (done) {
-        this.ctrl.readOne.throws(this.err);
+        this.ctrl.update.throws(this.err);
         this.reqres.req.params.id = 'one';
         return this.crude._update(this.reqres.req, this.reqres.res)
           .bind(this)
