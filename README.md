@@ -53,6 +53,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v0.9.1**, *07 Sep 2015*
+    - Added the `multiQueryAnd` option to allow for use of the `AND` operator in multiple items filter queries vs the default `OR`.
 - **v0.9.0**, *03 Sep 2015*
     - No longer performs a "readOne" after an update operation, this can potentially be a breaking change for you.
 - **v0.8.0**, *28 Jul 2015*
