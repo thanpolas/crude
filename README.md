@@ -53,6 +53,8 @@ This package assumes you have the following stack:
 
 ## Release History
 
+- **v1.0.0**, *03 Nov 2016*
+    - Added the `maxPaginateLimit` option to cap allowed items per pagination.
 - **v0.9.1**, *07 Sep 2015*
     - Added the `multiQueryAnd` option to allow for use of the `AND` operator in multiple items filter queries vs the default `OR`.
 - **v0.9.0**, *03 Sep 2015*
@@ -96,7 +98,7 @@ This package assumes you have the following stack:
 
 ## License
 
-Copyright 2014 [Thanasis Polychronakis][thanpolas]
+Copyright [Thanasis Polychronakis][thanpolas]
 
 Licensed under the [MIT License](LICENSE-MIT)
 
