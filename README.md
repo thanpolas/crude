@@ -98,7 +98,7 @@ This package assumes you have the following stack:
 
 ## License
 
-Copyright 2014 [Thanasis Polychronakis][thanpolas]
+Copyright [Thanasis Polychronakis][thanpolas]
 
 Licensed under the [MIT License](LICENSE-MIT)
 
