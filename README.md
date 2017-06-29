@@ -2,7 +2,7 @@
 
 Creates CRUD RESTfull endpoints for a given route.
 
-[![Build Status](https://secure.travis-ci.org/thanpolas/crude.png?branch=master)](http://travis-ci.org/thanpolas/crude)
+[![Build Status](https://travis-ci.org/thanpolas/crude.svg?branch=master)](https://travis-ci.org/thanpolas/crude)
 
 ## Install
 
