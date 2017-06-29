@@ -27,7 +27,10 @@ var controller = {
 };
 
 // Create the user CRUD routes
-var userCrude = crude('/user', controller, expressApp);
+var userCrude = crude('/user', controller);
+
+// Add routes as express middleware
+userCrude.addRoutes(expressApp);
 ```
 
 That was it, you now have a RESTfull CRUD API under the route `/user`:
